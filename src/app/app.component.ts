@@ -17,10 +17,15 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }
+      title: 'Wedstrijdschema',
+      url: 'app/tabs/schedule',
+      icon: 'calendar'
+    },
+    {
+      title: 'Standen',
+      url: 'app/tabs/ranking',
+      icon: 'stats'
+    },
   ];
 
   constructor(

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { getISOWeek, lastDayOfWeek, startOfWeek, getDay, subWeeks, addWeeks } from 'date-fns';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { listGames } from '../../graphql/queries';
@@ -24,10 +24,10 @@ interface Data {
 
 @Component({
   selector: 'app-list',
-  templateUrl: 'list.page.html',
-  styleUrls: ['list.page.scss'],
+  templateUrl: 'game-schedule.page.html',
+  styleUrls: ['game-schedule.page.scss'],
 })
-export class ListPage {
+export class GameSchedulePage {
 
   public items = [];
   public data: Data;
@@ -39,10 +39,11 @@ export class ListPage {
 
   public calculationDate;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public router: Router) {
     this.calculationDate = new Date();
     this.week = 'Week ' + getISOWeek(this.calculationDate);
   }
+
 
   ionViewDidEnter() {
     this.listGames();
