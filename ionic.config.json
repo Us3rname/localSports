@@ -1,5 +1,7 @@
 {
   "name": "localSportsAngular",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

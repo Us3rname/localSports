@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "localsportsangular-dev-20190903124735-authRole",
+            "UnauthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190903124735-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190903124735-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "localsportsangular-dev-20190903124735-deployment",
+            "UnauthRoleName": "localsportsangular-dev-20190903124735-unauthRole",
+            "StackName": "localsportsangular-dev-20190903124735",
+            "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-dev-20190903124735/3eb4d680-ce38-11e9-806a-06bc90058f1a"
+        }
+    }
+}
