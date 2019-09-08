@@ -5,8 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs.page';
 import { TabsRoutingModule } from './tabs-routing.module';
 
-import { GameScheduleModule } from '../game-schedule/game-schedule.module';
-import { RankingModule } from '../ranking/ranking.module';
+import { GameScheduleModule } from '../pages/game-schedule/game-schedule.module';
+import { RankingModule } from '../pages/ranking/ranking.module';
 
 @NgModule({
   imports: [

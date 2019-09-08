@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { GameScheduleModule } from '../game-schedule/game-schedule.module';
+import { GameScheduleModule } from '../pages/game-schedule/game-schedule.module';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../game-schedule/game-schedule.module').then(m => m.GameScheduleModule)
+            loadChildren: () => import('../pages/game-schedule/game-schedule.module').then(m => m.GameScheduleModule)
           }
         ]
       },
@@ -23,7 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../ranking/ranking.module').then(m => m.RankingModule)
+            loadChildren: () => import('../pages/ranking/ranking.module').then(m => m.RankingModule)
           }
         ]
       },

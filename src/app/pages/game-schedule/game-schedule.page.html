@@ -1,11 +1,4 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Wedstrijdschema</ion-title>
-  </ion-toolbar>
-</ion-header>
+<menu-header headerTitle="Wedstrijdschema"></menu-header>
 
 
 <ion-toolbar class="toolbar">
@@ -34,8 +27,9 @@
   </ion-grid>
 </ion-toolbar>
 <ion-content>
-  <div *ngIf="!isLoading">
 
+  <!-- Result screen when there are no errors and the loading has been done -->
+  <div *ngIf="!isLoading && !hasError">
     <ion-grid *ngFor="let itema of items;">
       <div *ngFor="let item of itema; let index=index; let odd=odd; let even=even;">
 
@@ -90,8 +84,9 @@
     </ion-grid>
 
   </div>
-  <div *ngIf="isLoading">
 
+  <!-- Loading screen -->
+  <div *ngIf="isLoading">
     <ion-grid>
       <ion-row>
         <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
@@ -130,6 +125,15 @@
         </ion-row>
       </div>
     </ion-grid>
+  </div>
 
+  <!-- Error message -->
+  <div *ngIf="hasError" class="ion-text-center" color="warning">
+    <h3>Het wedstrijdschema kon niet ingeladen worden, probeer het later nog eens.</h3>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!items.length" class="ion-text-center" color="warning">
+    <h3>Er is geen wedstrijdschema bekend voor deze week.</h3>
   </div>
 </ion-content>

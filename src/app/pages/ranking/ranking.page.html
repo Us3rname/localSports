@@ -1,0 +1,47 @@
+<menu-header headerTitle="Klassement"></menu-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row class="ranking-header">
+      <ion-col size=1>
+
+      </ion-col>
+      <ion-col>
+        Team
+      </ion-col>
+      <ion-col size=1>
+        W
+      </ion-col>
+      <ion-col size=1>
+        D
+      </ion-col>
+      <ion-col size=1>
+        L
+      </ion-col>
+      <ion-col size=1>
+        PTS
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let standing of standings;let index=index;">
+      <ion-col size=1 class="ion-padding-vertical">
+        {{ index + 1 }}
+      </ion-col>
+      <ion-col class="ion-padding-vertical">
+        {{ standing.teamName }}
+      </ion-col>
+      <ion-col size=1 class="ion-padding-vertical">
+        {{ standing.wins }}
+      </ion-col>
+      <ion-col size=1 class="ion-padding-vertical">
+        {{ standing.draws}}
+      </ion-col>
+      <ion-col size=1 class="ion-padding-vertical">
+        {{ standing.loses}}
+      </ion-col>
+      <ion-col size=1 class="ion-padding-vertical ion-text-center">
+        {{ standing.points}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
