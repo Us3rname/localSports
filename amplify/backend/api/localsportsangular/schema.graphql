@@ -1,0 +1,72 @@
+type Game @model {
+  id: ID!
+  homeTeam: Team
+  scoreHome: Int
+  scoreAway: Int
+  awayTeam: Team
+  division: String
+  gameDay: AWSDateTime
+  location: String
+  referee: Referee
+}
+
+type Standing @model {
+  id: ID!
+  team: String!
+  matchPlayed: Int
+  win: Int
+  draw: Int
+  loses: Int
+  goalsFor: Int
+  goalsAgainst: Int
+  goalDifference: Int
+  points: Int
+  lastResults: AWSJSON
+}
+
+type League @model {
+  id: ID!
+  name: String! 
+  club: Club! @connection(name: "ClubLeagues")
+}
+
+type Team @model {
+  id: ID!
+  division: String!
+  name: String!
+  contact: String!
+  athletes: [Athlete] @connection(name: "TeamMembers")
+  club: Club @connection(name: "ClubMembers")
+}
+
+type Athlete @model {
+  id: ID!
+  name: String!
+  email: AWSEmail
+  phone: AWSPhone
+  teams: Team @connection(name: "TeamMembers")
+}
+
+type Referee @model {
+  id: ID!
+  name: String!
+  email: AWSEmail
+  phone: AWSPhone
+  club: Club @connection(name: "ClubReferees")
+}
+
+type Club @model {
+  id: ID!
+  name: String!
+  street: String
+  streetNumber: String
+  streetNumberAddition: String
+  zipCode: String
+  country: String!
+  contact: String!
+  email: AWSEmail
+  phone: AWSPhone
+  leagues: [League!] @connection(name: "ClubLeagues")
+  teams: [Team] @connection(name: "ClubMembers")
+  referees: [Referee] @connection(name: "ClubReferees")
+}

@@ -1,14 +1,12 @@
 projects:
-  LocalSports:
+  localsportsangular:
     schemaPath: src\graphql\schema.json
     includes:
-      - src\graphql\**\*.graphql
+      - src\graphql\**\*.ts
     excludes:
       - ./amplify/**
     extensions:
       amplify:
         codeGenTarget: typescript
-        generatedFileName: src\app\API.service.ts
+        generatedFileName: src\API.ts
         docsFilePath: src\graphql
-        region: eu-central-1
-        maxDepth: 2

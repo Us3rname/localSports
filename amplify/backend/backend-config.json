@@ -1,1 +1,19 @@
-{}
+{
+	"api": {
+		"localsportsangular": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "API_KEY"
+			}
+		}
+	},
+	"function": {
+		"localsportsangular4ed054f9PostConfirmation": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"auth": {}
+}
