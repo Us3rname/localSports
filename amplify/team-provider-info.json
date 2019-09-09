@@ -11,7 +11,14 @@
             "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-dev-20190908215638/c6ab71a0-d272-11e9-8ffc-0aa6b80efab2"
         },
         "categories": {
-            "function": {}
+            "function": {
+                "localsportsangular4ca32150PostConfirmation": {
+                    "GROUP": "users"
+                }
+            },
+            "auth": {
+                "localsportsangular4ca32150": {}
+            }
         }
     }
 }
