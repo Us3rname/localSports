@@ -28,6 +28,8 @@ export class AppComponent {
     },
   ];
 
+  public usernameAttributes = 'email';
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

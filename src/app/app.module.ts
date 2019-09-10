@@ -13,6 +13,7 @@ import { ComponentsModule } from './components/components.module';
 
 // custom components
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
+import { AuthGuardService } from './services/auth-route-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { MenuHeaderComponent } from './components/menu-header/menu-header.compon
   providers: [
     StatusBar,
     SplashScreen,
+    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

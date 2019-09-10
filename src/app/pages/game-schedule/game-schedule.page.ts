@@ -46,7 +46,6 @@ export class GameSchedulePage {
     this.week = 'Week ' + getISOWeek(this.calculationDate);
   }
 
-
   ionViewDidEnter() {
     this.listGames();
   }

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { GameScheduleModule } from '../pages/game-schedule/game-schedule.module';
-
 
 const routes: Routes = [
   {
