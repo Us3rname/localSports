@@ -14,6 +14,8 @@ import { ComponentsModule } from './components/components.module';
 // custom components
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
 import { AuthGuardService } from './services/auth-route-guard.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +25,14 @@ import { AuthGuardService } from './services/auth-route-guard.service';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    })
   ],
   providers: [
     StatusBar,

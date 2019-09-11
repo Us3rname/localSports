@@ -34,6 +34,11 @@ export class AppComponent {
       url: '/login',
       icon: 'log-in'
     },
+    {
+      title: 'Profiel',
+      url: '/profile',
+      icon: 'contact'
+    }
   ];
 
   public usernameAttributes = 'email';
