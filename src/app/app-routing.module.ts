@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
-  }
+  },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' }
 ];
 
 @NgModule({

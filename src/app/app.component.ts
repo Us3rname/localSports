@@ -28,6 +28,14 @@ export class AppComponent {
     },
   ];
 
+  public accountPages = [
+    {
+      title: 'Login',
+      url: '/login',
+      icon: 'log-in'
+    },
+  ];
+
   public usernameAttributes = 'email';
 
   constructor(
