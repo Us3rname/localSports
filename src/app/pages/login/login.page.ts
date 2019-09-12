@@ -1,11 +1,6 @@
 import { Component, AfterContentInit, OnInit } from '@angular/core';
-import { Events } from '@ionic/angular';
-import { AuthGuardService } from '../../services/auth-route-guard.service';
 import { AmplifyService } from 'aws-amplify-angular';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { State } from '../../reducers';
-import * as AuthActions from '../../actions/auth.actions';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -50,11 +45,8 @@ export class LoginPage implements OnInit {
   user: { id: string; username: string; email: string, name: string };
 
   constructor(
-    public events: Events,
-    public guard: AuthGuardService,
     public amplify: AmplifyService,
     private router: Router,
-    private store: Store<State>,
     private authService: AuthService
   ) {
 
@@ -76,5 +68,4 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/profile']);
     }
   }
-
 }

@@ -13,7 +13,6 @@ import { ComponentsModule } from './components/components.module';
 
 // custom components
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
-import { AuthGuardService } from './services/auth-route-guard.service';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 
@@ -37,7 +36,6 @@ import { reducers, metaReducers } from './reducers';
   providers: [
     StatusBar,
     SplashScreen,
-    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
