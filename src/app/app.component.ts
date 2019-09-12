@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -28,25 +29,35 @@ export class AppComponent {
     },
   ];
 
-  public accountPages = [
+  public unAuthAccountPages = [
     {
       title: 'Login',
       url: '/login',
       icon: 'log-in'
-    },
+    }
+  ];
+
+  public authPages = [
     {
       title: 'Profiel',
       url: '/profile',
       icon: 'contact'
+    },
+    {
+      title: 'Logout',
+      url: '/logout',
+      icon: 'log-out'
     }
   ];
 
   public usernameAttributes = 'email';
+  isLoggedIn = false;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -55,6 +66,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.authService.isLoggedIn$.subscribe(
+        isLoggedIn => (this.isLoggedIn = isLoggedIn)
+      );
     });
   }
 }

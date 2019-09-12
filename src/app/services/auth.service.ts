@@ -9,13 +9,15 @@ export interface AuthState {
   username: string | null;
   id: string | null;
   email: string | null;
+  name: string | null;
 }
 
 const initialAuthState = {
   isLoggedIn: false,
   username: null,
   id: null,
-  email: null
+  email: null,
+  name: null
 };
 
 @Injectable({
@@ -56,10 +58,11 @@ export class AuthService {
     }
 
     const {
-      attributes: { sub: id, email },
+      attributes: { sub: id, email, name },
       username
     } = user;
 
-    this.authState.next({ isLoggedIn: true, id, username, email });
+
+    this.authState.next({ isLoggedIn: true, id, username, email, name });
   }
 }

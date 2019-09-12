@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { User } from '../../interfaces/user';
-import { State, getUser, isLoggedIn } from '../../reducers';
-import { Observable } from 'rxjs';
-import * as AuthActions from '../../actions/auth.actions';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,24 +9,28 @@ import * as AuthActions from '../../actions/auth.actions';
 })
 export class ProfilePage implements OnInit {
 
-  user: User;
-  constructor(private store: Store<State>) {
+  isLoggedIn = false;
+  user: { id: string; username: string; email: string, name: string } = {
+    username: null,
+    id: null,
+    email: null,
+    name: null
+  };
+
+  constructor(private authService: AuthService, private router: Router) {
+
+    this.authService.isLoggedIn$.subscribe(
+      isLoggedIn => (this.isLoggedIn = isLoggedIn)
+    );
+
+    this.authService.auth$.subscribe(({ id, username, email, name }) => {
+      this.user = { id, username, email, name };
+    });
   }
 
   ngOnInit() {
-    // Use AWS Amplify to get user data when creating items
-    // const blaUser = {
-    // uuid: 'test',
-    // name: 'Test name'
-    // };
-    // this.store.dispatch(new AuthActions.Login({ isLoggedIn: true, user: blaUser }));
-
-    this.getUser();
-  }
-
-  getUser() {
-    return this.store.select(getUser).subscribe(user => {
-      this.user = user;
-    });
+    if (!this.isLoggedIn) {
+      return this.router.navigate(['/login']);
+    }
   }
 }

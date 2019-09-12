@@ -18,11 +18,12 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-item-group>
-          <ion-item-divider>
-            <ion-label>Account</ion-label>
-          </ion-item-divider>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of accountPages">
+        <ion-item-divider>
+          <ion-label>Account</ion-label>
+        </ion-item-divider>
+
+        <ion-item-group *ngIf="!isLoggedIn">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of unAuthAccountPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
@@ -31,6 +32,18 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-item-group>
+
+        <ion-item-group *ngIf="isLoggedIn">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of authPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-item-group>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

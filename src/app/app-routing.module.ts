@@ -16,7 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' }
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
+  { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' }
 ];
 
 @NgModule({
