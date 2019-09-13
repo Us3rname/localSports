@@ -50,6 +50,14 @@ export class AppComponent {
     }
   ];
 
+  public clubPages = [
+    {
+      title: 'Teams',
+      url: '/team',
+      icon: 'people'
+    }
+  ];
+
   public usernameAttributes = 'email';
   isLoggedIn = false;
 

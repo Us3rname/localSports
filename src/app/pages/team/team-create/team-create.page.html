@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nieuw team</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form (ngSubmit)="processForm($event)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Team naam <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" (ionChange)="handleTeamNameValue($event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contactpersoon <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" (ionChange)="handleContactValue($event)"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Create account</ion-button>
+    </div>
+  </form>
+</ion-content>

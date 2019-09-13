@@ -1,0 +1,31 @@
+<menu-header headerTitle="Teams"></menu-header>
+
+<ion-content>
+
+  <ion-button expand="block" (click)="presentActionSheet()">Show Action Sheet</ion-button>
+
+
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='goToTeamCreatePage($event)'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-list>
+    <ion-list-header>
+      Recent Conversations
+    </ion-list-header>
+
+    <ion-item *ngFor="let team of teams;">
+      <ion-avatar slot="start">
+        <ion-text-avatar>{{ team.name.charAt(0) }}</ion-text-avatar>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ team.name }}</h2>
+        <h3>Contactpersoon: {{ team.contact }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

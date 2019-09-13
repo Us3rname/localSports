@@ -76,6 +76,7 @@ export type CreateTeamInput = {
   division: string,
   name: string,
   contact: string,
+  owner?: string | null,
   teamClubId?: string | null,
 };
 
@@ -84,6 +85,7 @@ export type UpdateTeamInput = {
   division?: string | null,
   name?: string | null,
   contact?: string | null,
+  owner?: string | null,
   teamClubId?: string | null,
 };
 
@@ -241,6 +243,7 @@ export type ModelTeamFilterInput = {
   division?: ModelStringFilterInput | null,
   name?: ModelStringFilterInput | null,
   contact?: ModelStringFilterInput | null,
+  owner?: ModelStringFilterInput | null,
   and?: Array< ModelTeamFilterInput | null > | null,
   or?: Array< ModelTeamFilterInput | null > | null,
   not?: ModelTeamFilterInput | null,

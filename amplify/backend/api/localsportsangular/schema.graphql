@@ -30,13 +30,14 @@ type League @model {
   club: Club! @connection(name: "ClubLeagues")
 }
 
-type Team @model {
+type Team @model @auth(rules: [{allow: owner}]) {
   id: ID!
   division: String!
   name: String!
   contact: String!
   athletes: [Athlete] @connection(name: "TeamMembers")
   club: Club @connection(name: "ClubMembers")
+  owner: String
 }
 
 type Athlete @model {

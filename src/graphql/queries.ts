@@ -24,6 +24,7 @@ export const getGame = `query GetGame($id: ID!) {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -47,6 +48,7 @@ export const getGame = `query GetGame($id: ID!) {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -85,6 +87,7 @@ export const listGames = `query ListGames(
         division
         name
         contact
+        owner
       }
       scoreHome
       scoreAway
@@ -93,6 +96,7 @@ export const listGames = `query ListGames(
         division
         name
         contact
+        owner
       }
       division
       gameDay
@@ -237,6 +241,7 @@ export const getTeam = `query GetTeam($id: ID!) {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -266,6 +271,7 @@ export const listTeams = `query ListTeams(
         email
         phone
       }
+      owner
     }
     nextToken
   }
@@ -297,6 +303,7 @@ export const getAthlete = `query GetAthlete($id: ID!) {
         email
         phone
       }
+      owner
     }
   }
 }
@@ -317,6 +324,7 @@ export const listAthletes = `query ListAthletes(
         division
         name
         contact
+        owner
       }
     }
     nextToken
@@ -406,6 +414,7 @@ export const getClub = `query GetClub($id: ID!) {
         division
         name
         contact
+        owner
       }
       nextToken
     }

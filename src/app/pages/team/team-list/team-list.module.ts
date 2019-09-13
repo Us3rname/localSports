@@ -5,14 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePage } from './profile.page';
-import { ComponentsModule, } from '../../components/components.module';
-import { AmplifyService } from 'aws-amplify-angular';
+import { TeamListPage } from './team-list.page';
+import { ComponentsModule } from '../../../components/components.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
+    component: TeamListPage
   }
 ];
 
@@ -24,7 +23,6 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfilePage],
-  providers: [AmplifyService]
+  declarations: [TeamListPage]
 })
-export class ProfilePageModule { }
+export class TeamListPageModule { }

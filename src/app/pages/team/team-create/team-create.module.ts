@@ -4,15 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
-import { ProfilePage } from './profile.page';
-import { ComponentsModule, } from '../../components/components.module';
-import { AmplifyService } from 'aws-amplify-angular';
+import { ComponentsModule } from '../../../components/components.module';
+import { TeamCreatePage } from './team-create.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
+    component: TeamCreatePage
   }
 ];
 
@@ -24,7 +22,6 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfilePage],
-  providers: [AmplifyService]
+  declarations: [TeamCreatePage]
 })
-export class ProfilePageModule { }
+export class TeamCreatePageModule { }

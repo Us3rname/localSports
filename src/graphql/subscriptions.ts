@@ -24,6 +24,7 @@ export const onCreateGame = `subscription OnCreateGame {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -47,6 +48,7 @@ export const onCreateGame = `subscription OnCreateGame {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -95,6 +97,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -118,6 +121,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -166,6 +170,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -189,6 +194,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -382,6 +388,7 @@ export const onCreateTeam = `subscription OnCreateTeam {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -421,6 +428,7 @@ export const onUpdateTeam = `subscription OnUpdateTeam {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -460,6 +468,7 @@ export const onDeleteTeam = `subscription OnDeleteTeam {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -489,6 +498,7 @@ export const onCreateAthlete = `subscription OnCreateAthlete {
         email
         phone
       }
+      owner
     }
   }
 }
@@ -519,6 +529,7 @@ export const onUpdateAthlete = `subscription OnUpdateAthlete {
         email
         phone
       }
+      owner
     }
   }
 }
@@ -549,6 +560,7 @@ export const onDeleteAthlete = `subscription OnDeleteAthlete {
         email
         phone
       }
+      owner
     }
   }
 }
@@ -668,6 +680,7 @@ export const onCreateClub = `subscription OnCreateClub {
         division
         name
         contact
+        owner
       }
       nextToken
     }
@@ -708,6 +721,7 @@ export const onUpdateClub = `subscription OnUpdateClub {
         division
         name
         contact
+        owner
       }
       nextToken
     }
@@ -748,6 +762,7 @@ export const onDeleteClub = `subscription OnDeleteClub {
         division
         name
         contact
+        owner
       }
       nextToken
     }

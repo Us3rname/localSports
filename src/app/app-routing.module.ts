@@ -17,7 +17,9 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' }
+  { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' },
+  { path: 'team', loadChildren: './pages/team/team-list/team-list.module#TeamListPageModule' },
+  { path: 'team/create', loadChildren: './pages/team/team-create/team-create.module#TeamCreatePageModule' }
 ];
 
 @NgModule({

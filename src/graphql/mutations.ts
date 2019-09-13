@@ -24,6 +24,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -47,6 +48,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -95,6 +97,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -118,6 +121,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -166,6 +170,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         email
         phone
       }
+      owner
     }
     scoreHome
     scoreAway
@@ -189,6 +194,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         email
         phone
       }
+      owner
     }
     division
     gameDay
@@ -382,6 +388,7 @@ export const createTeam = `mutation CreateTeam($input: CreateTeamInput!) {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -421,6 +428,7 @@ export const updateTeam = `mutation UpdateTeam($input: UpdateTeamInput!) {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -460,6 +468,7 @@ export const deleteTeam = `mutation DeleteTeam($input: DeleteTeamInput!) {
         nextToken
       }
     }
+    owner
   }
 }
 `;
@@ -489,6 +498,7 @@ export const createAthlete = `mutation CreateAthlete($input: CreateAthleteInput!
         email
         phone
       }
+      owner
     }
   }
 }
@@ -519,6 +529,7 @@ export const updateAthlete = `mutation UpdateAthlete($input: UpdateAthleteInput!
         email
         phone
       }
+      owner
     }
   }
 }
@@ -549,6 +560,7 @@ export const deleteAthlete = `mutation DeleteAthlete($input: DeleteAthleteInput!
         email
         phone
       }
+      owner
     }
   }
 }
@@ -668,6 +680,7 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
         division
         name
         contact
+        owner
       }
       nextToken
     }
@@ -708,6 +721,7 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
         division
         name
         contact
+        owner
       }
       nextToken
     }
@@ -748,6 +762,7 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
         division
         name
         contact
+        owner
       }
       nextToken
     }
