@@ -38,6 +38,11 @@ type Team @model @auth(rules: [{allow: owner}]) {
   athletes: [Athlete] @connection(name: "TeamMembers")
   club: Club @connection(name: "ClubMembers")
   owner: String
+  active: Boolean
+  createdAt: AWSDateTime
+  lastUpdated: AWSDateTime
+  deletedAt: AWSDateTime
+  
 }
 
 type Athlete @model {

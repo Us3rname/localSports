@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../../../graphql/mutations';
 import { Router } from '@angular/router';
-
+import { CreateTeamInput } from '../../../../API';
 @Component({
   selector: 'app-team-create',
   templateUrl: './team-create.page.html',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class TeamCreatePage implements OnInit {
 
   defaultHref: '';
-  team: { name: string, contact: string, division: string } = { name: null, contact: null, division: 'Division' };
+  team: CreateTeamInput = { name: null, contact: null, division: 'Division', active: true, lastUpdated: new Date().toJSON() };
   constructor(private router: Router) { }
 
   ngOnInit() {

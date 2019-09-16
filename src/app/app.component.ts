@@ -25,7 +25,7 @@ export class AppComponent {
     {
       title: 'Standen',
       url: 'app/tabs/ranking',
-      icon: 'stats'
+      icon: 'podium'
     },
   ];
 
@@ -51,6 +51,11 @@ export class AppComponent {
   ];
 
   public clubPages = [
+    {
+      title: 'Divisies',
+      url: '/leaque',
+      icon: 'rocket'
+    },
     {
       title: 'Teams',
       url: '/team',

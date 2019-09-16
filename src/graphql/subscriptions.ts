@@ -25,6 +25,10 @@ export const onCreateGame = `subscription OnCreateGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -49,6 +53,10 @@ export const onCreateGame = `subscription OnCreateGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -98,6 +106,10 @@ export const onUpdateGame = `subscription OnUpdateGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -122,6 +134,10 @@ export const onUpdateGame = `subscription OnUpdateGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -171,6 +187,10 @@ export const onDeleteGame = `subscription OnDeleteGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -195,6 +215,10 @@ export const onDeleteGame = `subscription OnDeleteGame {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -389,6 +413,10 @@ export const onCreateTeam = `subscription OnCreateTeam {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -429,6 +457,10 @@ export const onUpdateTeam = `subscription OnUpdateTeam {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -469,6 +501,10 @@ export const onDeleteTeam = `subscription OnDeleteTeam {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -499,6 +535,10 @@ export const onCreateAthlete = `subscription OnCreateAthlete {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -530,6 +570,10 @@ export const onUpdateAthlete = `subscription OnUpdateAthlete {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -561,6 +605,10 @@ export const onDeleteAthlete = `subscription OnDeleteAthlete {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -681,6 +729,10 @@ export const onCreateClub = `subscription OnCreateClub {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -722,6 +774,10 @@ export const onUpdateClub = `subscription OnUpdateClub {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -763,6 +819,10 @@ export const onDeleteClub = `subscription OnDeleteClub {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }

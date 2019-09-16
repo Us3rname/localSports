@@ -18,8 +18,38 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' },
-  { path: 'team', loadChildren: './pages/team/team-list/team-list.module#TeamListPageModule' },
-  { path: 'team/create', loadChildren: './pages/team/team-create/team-create.module#TeamCreatePageModule' }
+  {
+    path: 'team', children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/team/team-list/team-list.module').then(m => m.TeamListPageModule)
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./pages/team/team-create/team-create.module').then(m => m.TeamCreatePageModule)
+      },
+      {
+        path: 'edit/:teamId',
+        loadChildren: () => import('./pages/team/team-detail/team-detail.module').then(m => m.TeamDetailPageModule)
+      },
+    ]
+  },
+  {
+    path: 'leaque', children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/leaque/leaque-list/leaque-list.module').then(m => m.LeaqueListPageModule)
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./pages/leaque/leaque-create/leaque-create.module').then(m => m.LeaqueCreatePageModule)
+      },
+      {
+        path: 'edit/:leaqueId',
+        loadChildren: () => import('./pages/leaque/leaque-detail/leaque-detail.module').then(m => m.LeaqueDetailPageModule)
+      },
+    ]
+  },
 ];
 
 @NgModule({

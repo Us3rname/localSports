@@ -16,12 +16,15 @@ import { MenuHeaderComponent } from './components/menu-header/menu-header.compon
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 
+// Import your AvatarModule
+import { AvatarModule } from 'ngx-avatar';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [MenuHeaderComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    AvatarModule,
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,

@@ -25,6 +25,10 @@ export const getGame = `query GetGame($id: ID!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -49,6 +53,10 @@ export const getGame = `query GetGame($id: ID!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -88,6 +96,10 @@ export const listGames = `query ListGames(
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       scoreHome
       scoreAway
@@ -97,6 +109,10 @@ export const listGames = `query ListGames(
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       division
       gameDay
@@ -242,6 +258,10 @@ export const getTeam = `query GetTeam($id: ID!) {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -272,6 +292,10 @@ export const listTeams = `query ListTeams(
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     nextToken
   }
@@ -304,6 +328,10 @@ export const getAthlete = `query GetAthlete($id: ID!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -325,6 +353,10 @@ export const listAthletes = `query ListAthletes(
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
     }
     nextToken
@@ -415,6 +447,10 @@ export const getClub = `query GetClub($id: ID!) {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }

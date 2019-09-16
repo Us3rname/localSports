@@ -62,7 +62,6 @@ export class AuthService {
       username
     } = user;
 
-
     this.authState.next({ isLoggedIn: true, id, username, email, name });
   }
 }

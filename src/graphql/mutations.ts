@@ -25,6 +25,10 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -49,6 +53,10 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -98,6 +106,10 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -122,6 +134,10 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -171,6 +187,10 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     scoreHome
     scoreAway
@@ -195,6 +215,10 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     division
     gameDay
@@ -389,6 +413,10 @@ export const createTeam = `mutation CreateTeam($input: CreateTeamInput!) {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -429,6 +457,10 @@ export const updateTeam = `mutation UpdateTeam($input: UpdateTeamInput!) {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -469,6 +501,10 @@ export const deleteTeam = `mutation DeleteTeam($input: DeleteTeamInput!) {
       }
     }
     owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -499,6 +535,10 @@ export const createAthlete = `mutation CreateAthlete($input: CreateAthleteInput!
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -530,6 +570,10 @@ export const updateAthlete = `mutation UpdateAthlete($input: UpdateAthleteInput!
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -561,6 +605,10 @@ export const deleteAthlete = `mutation DeleteAthlete($input: DeleteAthleteInput!
         phone
       }
       owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
   }
 }
@@ -681,6 +729,10 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -722,6 +774,10 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -763,6 +819,10 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
         name
         contact
         owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
