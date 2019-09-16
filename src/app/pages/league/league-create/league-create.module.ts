@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LeaqueListPage } from './leaque-list.page';
-import { ComponentsModule } from '../../../components/components.module';
+import { LeagueCreatePage } from './league-create.page';
+
 const routes: Routes = [
   {
     path: '',
-    component: LeaqueListPage
+    component: LeagueCreatePage
   }
 ];
 
@@ -19,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LeaqueListPage]
+  declarations: [LeagueCreatePage]
 })
-export class LeaqueListPageModule { }
+export class LeagueCreatePageModule { }

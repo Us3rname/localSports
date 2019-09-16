@@ -30,23 +30,23 @@ const routes: Routes = [
       },
       {
         path: 'edit/:teamId',
-        loadChildren: () => import('./pages/team/team-detail/team-detail.module').then(m => m.TeamDetailPageModule)
+        loadChildren: () => import('./pages/team/team-edit/team-edit.module').then(m => m.TeamEditPageModule)
       },
     ]
   },
   {
-    path: 'leaque', children: [
+    path: 'league', children: [
       {
         path: '',
-        loadChildren: () => import('./pages/leaque/leaque-list/leaque-list.module').then(m => m.LeaqueListPageModule)
+        loadChildren: () => import('./pages/league/league-list/league-list.module').then(m => m.LeagueListPageModule)
       },
       {
         path: 'create',
-        loadChildren: () => import('./pages/leaque/leaque-create/leaque-create.module').then(m => m.LeaqueCreatePageModule)
+        loadChildren: () => import('./pages/league/league-create/league-create.module').then(m => m.LeagueCreatePageModule)
       },
       {
-        path: 'edit/:leaqueId',
-        loadChildren: () => import('./pages/leaque/leaque-detail/leaque-detail.module').then(m => m.LeaqueDetailPageModule)
+        path: 'edit/:leagueId',
+        loadChildren: () => import('./pages/league/league-edit/league-edit.module').then(m => m.LeagueEditPageModule)
       },
     ]
   },

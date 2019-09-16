@@ -192,6 +192,11 @@ export const getLeague = `query GetLeague($id: ID!) {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -216,6 +221,11 @@ export const listLeagues = `query ListLeagues(
         email
         phone
       }
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
     }
     nextToken
   }
@@ -437,6 +447,11 @@ export const getClub = `query GetClub($id: ID!) {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }

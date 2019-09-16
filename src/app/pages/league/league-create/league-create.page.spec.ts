@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaqueCreatePage } from './leaque-create.page';
+import { LeagueCreatePage } from './league-create.page';
 
-describe('LeaqueCreatePage', () => {
-  let component: LeaqueCreatePage;
-  let fixture: ComponentFixture<LeaqueCreatePage>;
+describe('LeagueCreatePage', () => {
+  let component: LeagueCreatePage;
+  let fixture: ComponentFixture<LeagueCreatePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeaqueCreatePage ],
+      declarations: [LeagueCreatePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeaqueCreatePage);
+    fixture = TestBed.createComponent(LeagueCreatePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

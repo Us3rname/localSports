@@ -58,12 +58,22 @@ export type DeleteStandingInput = {
 export type CreateLeagueInput = {
   id?: string | null,
   name: string,
+  owner?: string | null,
+  active?: boolean | null,
+  createdAt?: string | null,
+  lastUpdated?: string | null,
+  deletedAt?: string | null,
   leagueClubId: string,
 };
 
 export type UpdateLeagueInput = {
   id: string,
   name?: string | null,
+  owner?: string | null,
+  active?: boolean | null,
+  createdAt?: string | null,
+  lastUpdated?: string | null,
+  deletedAt?: string | null,
   leagueClubId?: string | null,
 };
 
@@ -241,9 +251,19 @@ export type ModelStandingFilterInput = {
 export type ModelLeagueFilterInput = {
   id?: ModelIDFilterInput | null,
   name?: ModelStringFilterInput | null,
+  owner?: ModelStringFilterInput | null,
+  active?: ModelBooleanFilterInput | null,
+  createdAt?: ModelStringFilterInput | null,
+  lastUpdated?: ModelStringFilterInput | null,
+  deletedAt?: ModelStringFilterInput | null,
   and?: Array< ModelLeagueFilterInput | null > | null,
   or?: Array< ModelLeagueFilterInput | null > | null,
   not?: ModelLeagueFilterInput | null,
+};
+
+export type ModelBooleanFilterInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
 };
 
 export type ModelTeamFilterInput = {
@@ -259,11 +279,6 @@ export type ModelTeamFilterInput = {
   and?: Array< ModelTeamFilterInput | null > | null,
   or?: Array< ModelTeamFilterInput | null > | null,
   not?: ModelTeamFilterInput | null,
-};
-
-export type ModelBooleanFilterInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
 };
 
 export type ModelAthleteFilterInput = {
@@ -681,6 +696,11 @@ export type CreateLeagueMutation = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -718,6 +738,11 @@ export type UpdateLeagueMutation = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -755,6 +780,11 @@ export type DeleteLeagueMutation = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -1192,6 +1222,11 @@ export type CreateClubMutation = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1248,6 +1283,11 @@ export type UpdateClubMutation = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1304,6 +1344,11 @@ export type DeleteClubMutation = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -1566,6 +1611,11 @@ export type GetLeagueQuery = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -1595,6 +1645,11 @@ export type ListLeaguesQuery = {
         email: string | null,
         phone: string | null,
       },
+      owner: string | null,
+      active: boolean | null,
+      createdAt: string | null,
+      lastUpdated: string | null,
+      deletedAt: string | null,
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -1867,6 +1922,11 @@ export type GetClubQuery = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2289,6 +2349,11 @@ export type OnCreateLeagueSubscription = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -2322,6 +2387,11 @@ export type OnUpdateLeagueSubscription = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -2355,6 +2425,11 @@ export type OnDeleteLeagueSubscription = {
         nextToken: string | null,
       } | null,
     },
+    owner: string | null,
+    active: boolean | null,
+    createdAt: string | null,
+    lastUpdated: string | null,
+    deletedAt: string | null,
   } | null,
 };
 
@@ -2752,6 +2827,11 @@ export type OnCreateClubSubscription = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2804,6 +2884,11 @@ export type OnUpdateClubSubscription = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2856,6 +2941,11 @@ export type OnDeleteClubSubscription = {
         __typename: "League",
         id: string,
         name: string,
+        owner: string | null,
+        active: boolean | null,
+        createdAt: string | null,
+        lastUpdated: string | null,
+        deletedAt: string | null,
       } | null > | null,
       nextToken: string | null,
     } | null,

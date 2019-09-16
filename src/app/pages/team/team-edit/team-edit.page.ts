@@ -4,20 +4,19 @@ import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../../../graphql/queries';
 import * as mutations from '../../../../graphql/mutations';
 import { UpdateTeamInput } from '../../../../API';
-import { ToastController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-team-detail',
-  templateUrl: './team-detail.page.html',
-  styleUrls: ['./team-detail.page.scss'],
+  selector: 'app-team-edit',
+  templateUrl: './team-edit.page.html',
+  styleUrls: ['./team-edit.page.scss'],
 })
-export class TeamDetailPage implements OnInit {
+export class TeamEditPage implements OnInit {
 
   public team = { id: null, name: null, contact: null, division: null, active: true, lastUpdated: null };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public toastController: ToastController,
     public alertController: AlertController
   ) { }
 
@@ -33,7 +32,7 @@ export class TeamDetailPage implements OnInit {
     try {
       const updateTeamInput: UpdateTeamInput = { id: this.team.id, name: this.team.name, contact: this.team.contact };
       console.log(updateTeamInput);
-      const newTeam = await API.graphql(graphqlOperation(mutations.updateTeam, { input: updateTeamInput }));
+      await API.graphql(graphqlOperation(mutations.updateTeam, { input: updateTeamInput }));
       return this.router.navigate(['/team']);
     } catch (err) {
       console.log(err);

@@ -317,6 +317,11 @@ export const onCreateLeague = `subscription OnCreateLeague {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -345,6 +350,11 @@ export const onUpdateLeague = `subscription OnUpdateLeague {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -373,6 +383,11 @@ export const onDeleteLeague = `subscription OnDeleteLeague {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -719,6 +734,11 @@ export const onCreateClub = `subscription OnCreateClub {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -764,6 +784,11 @@ export const onUpdateClub = `subscription OnUpdateClub {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -809,6 +834,11 @@ export const onDeleteClub = `subscription OnDeleteClub {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }

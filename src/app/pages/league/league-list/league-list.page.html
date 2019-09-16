@@ -1,0 +1,28 @@
+<menu-header headerTitle="Divisies"></menu-header>
+
+<ion-content>
+    <!-- fab placed to the (vertical) center and end -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)='goToLeagueCreatePage()'>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <div [hidden]="allLeagues.length > 0">
+        Er zijn geen divisies bekend.
+    </div>
+
+    <ion-grid [hidden]="allLeagues.length == 0">
+        <ion-row class="ranking-header">
+            <ion-col>
+                Divisie naam
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let league of allLeagues;let index=index; let odd=odd; let even=even;"
+            [ngClass]="{ odd: odd, even: even }" (click)="goToLeagueEditPage(league.id)">
+            <ion-col class="ion-padding-vertical">
+                {{ league.name }}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

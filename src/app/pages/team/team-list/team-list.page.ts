@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../../../graphql/queries';
 import * as subscriptions from '../../../../graphql/subscriptions';
-import { ToastController, AlertController } from '@ionic/angular';
-import * as mutations from '../../../../graphql/mutations';
-import { UpdateTeamInput } from '../../../../API';
 
+import { ToastService } from '../../../services/toast.service';
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.page.html',
@@ -18,22 +16,29 @@ export class TeamListPage implements OnInit {
 
   constructor(
     private router: Router,
-    public toastController: ToastController
+    public toastService: ToastService,
   ) { }
 
   ngOnInit() {
     this.loadTeams();
+    this.subscribeOnCreateTeam();
+    this.subscribeOnUpdateTeam();
 
+  }
+
+  subscribeOnCreateTeam() {
     // Subscribe for new teams when they create it through the app.
     API.graphql(
       graphqlOperation(subscriptions.onCreateTeam)
     ).subscribe({
       next: (teamData) => {
         this.teams.push(teamData.value.data.onCreateTeam);
-        this.presentToast('Team is aangemaakt.');
+        this.toastService.presentToast('Team is aangemaakt.');
       }
     });
+  }
 
+  subscribeOnUpdateTeam() {
     API.graphql(
       graphqlOperation(subscriptions.onUpdateTeam)
     ).subscribe({
@@ -49,24 +54,15 @@ export class TeamListPage implements OnInit {
       if (this.teams[i].id === team.id) {
         if (team.active === false) {
           this.teams.splice(i, 1);
-          this.presentToast('Team is verwijderd');
+          this.toastService.presentToast('Team is verwijderd');
           return;
         } else {
           this.teams[i] = team;
-          this.presentToast('Team is bijgewerkt');
+          this.toastService.presentToast('Team is bijgewerkt');
           return;
         }
       }
     }
-  }
-
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      color: 'dark'
-    });
-    toast.present();
   }
 
   async loadTeams() {

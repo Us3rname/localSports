@@ -317,6 +317,11 @@ export const createLeague = `mutation CreateLeague($input: CreateLeagueInput!) {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -345,6 +350,11 @@ export const updateLeague = `mutation UpdateLeague($input: UpdateLeagueInput!) {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -373,6 +383,11 @@ export const deleteLeague = `mutation DeleteLeague($input: DeleteLeagueInput!) {
         nextToken
       }
     }
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
   }
 }
 `;
@@ -719,6 +734,11 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -764,6 +784,11 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }
@@ -809,6 +834,11 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
       items {
         id
         name
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
       }
       nextToken
     }

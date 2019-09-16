@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LeaqueDetailPage } from './leaque-detail.page';
+import { TeamEditPage } from './team-edit.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: LeaqueDetailPage
+    component: TeamEditPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LeaqueDetailPage]
+  declarations: [TeamEditPage]
 })
-export class LeaqueDetailPageModule {}
+export class TeamEditPageModule { }

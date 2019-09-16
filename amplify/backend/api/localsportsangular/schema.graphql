@@ -24,10 +24,15 @@ type Standing @model {
   lastResults: AWSJSON
 }
 
-type League @model {
+type League @model @auth(rules: [{allow: owner}]){
   id: ID!
   name: String! 
   club: Club! @connection(name: "ClubLeagues")
+  owner: String
+  active: Boolean
+  createdAt: AWSDateTime
+  lastUpdated: AWSDateTime
+  deletedAt: AWSDateTime
 }
 
 type Team @model @auth(rules: [{allow: owner}]) {

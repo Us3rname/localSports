@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Divisie bewerken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="processForm()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Divisie naam <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="league.name" name="name"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button color="danger" slot="start" (click)="presentDeleteAlertConfirm(league)">Verwijder
+      </ion-button>
+      <ion-button expand="block" type="submit" class="ion-no-margin">Opslaan</ion-button>
+    </div>
+  </form>
+</ion-content>

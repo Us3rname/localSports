@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackHeaderComponent } from './back-header.component';
+import { TeamEditPage } from './team-edit.page';
 
-describe('BackHeaderComponent', () => {
-  let component: BackHeaderComponent;
-  let fixture: ComponentFixture<BackHeaderComponent>;
+describe('TeamEditPage', () => {
+  let component: TeamEditPage;
+  let fixture: ComponentFixture<TeamEditPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BackHeaderComponent ],
+      declarations: [TeamEditPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BackHeaderComponent);
+    fixture = TestBed.createComponent(TeamEditPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
