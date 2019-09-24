@@ -6,9 +6,23 @@ export const onCreateGame = `subscription OnCreateGame {
     id
     homeTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -24,19 +38,28 @@ export const onCreateGame = `subscription OnCreateGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
     scoreHome
     scoreAway
     awayTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -52,13 +75,7 @@ export const onCreateGame = `subscription OnCreateGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
-    division
     gameDay
     location
     referee {
@@ -87,9 +104,23 @@ export const onUpdateGame = `subscription OnUpdateGame {
     id
     homeTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -105,19 +136,28 @@ export const onUpdateGame = `subscription OnUpdateGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
     scoreHome
     scoreAway
     awayTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -133,13 +173,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
-    division
     gameDay
     location
     referee {
@@ -168,9 +202,23 @@ export const onDeleteGame = `subscription OnDeleteGame {
     id
     homeTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -186,19 +234,28 @@ export const onDeleteGame = `subscription OnDeleteGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
     scoreHome
     scoreAway
     awayTeam {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -214,13 +271,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
-    division
     gameDay
     location
     referee {
@@ -296,6 +347,25 @@ export const onCreateLeague = `subscription OnCreateLeague {
   onCreateLeague {
     id
     name
+    ranking
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    teams {
+      items {
+        id
+        name
+        contact
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -317,11 +387,6 @@ export const onCreateLeague = `subscription OnCreateLeague {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
@@ -329,6 +394,25 @@ export const onUpdateLeague = `subscription OnUpdateLeague {
   onUpdateLeague {
     id
     name
+    ranking
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    teams {
+      items {
+        id
+        name
+        contact
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -350,11 +434,6 @@ export const onUpdateLeague = `subscription OnUpdateLeague {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
@@ -362,6 +441,25 @@ export const onDeleteLeague = `subscription OnDeleteLeague {
   onDeleteLeague {
     id
     name
+    ranking
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    teams {
+      items {
+        id
+        name
+        contact
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -383,20 +481,44 @@ export const onDeleteLeague = `subscription OnDeleteLeague {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
 export const onCreateTeam = `subscription OnCreateTeam {
   onCreateTeam {
     id
-    division
     name
     contact
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    league {
+      id
+      name
+      ranking
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      teams {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
     athletes {
       items {
         id
@@ -427,20 +549,44 @@ export const onCreateTeam = `subscription OnCreateTeam {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
 export const onUpdateTeam = `subscription OnUpdateTeam {
   onUpdateTeam {
     id
-    division
     name
     contact
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    league {
+      id
+      name
+      ranking
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      teams {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
     athletes {
       items {
         id
@@ -471,20 +617,44 @@ export const onUpdateTeam = `subscription OnUpdateTeam {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
 export const onDeleteTeam = `subscription OnDeleteTeam {
   onDeleteTeam {
     id
-    division
     name
     contact
+    owner
+    active
+    createdAt
+    lastUpdated
+    deletedAt
+    league {
+      id
+      name
+      ranking
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      teams {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
     athletes {
       items {
         id
@@ -515,11 +685,6 @@ export const onDeleteTeam = `subscription OnDeleteTeam {
         nextToken
       }
     }
-    owner
-    active
-    createdAt
-    lastUpdated
-    deletedAt
   }
 }
 `;
@@ -531,9 +696,23 @@ export const onCreateAthlete = `subscription OnCreateAthlete {
     phone
     teams {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -549,11 +728,6 @@ export const onCreateAthlete = `subscription OnCreateAthlete {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
   }
 }
@@ -566,9 +740,23 @@ export const onUpdateAthlete = `subscription OnUpdateAthlete {
     phone
     teams {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -584,11 +772,6 @@ export const onUpdateAthlete = `subscription OnUpdateAthlete {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
   }
 }
@@ -601,9 +784,23 @@ export const onDeleteAthlete = `subscription OnDeleteAthlete {
     phone
     teams {
       id
-      division
       name
       contact
+      owner
+      active
+      createdAt
+      lastUpdated
+      deletedAt
+      league {
+        id
+        name
+        ranking
+        owner
+        active
+        createdAt
+        lastUpdated
+        deletedAt
+      }
       athletes {
         nextToken
       }
@@ -619,11 +816,6 @@ export const onDeleteAthlete = `subscription OnDeleteAthlete {
         email
         phone
       }
-      owner
-      active
-      createdAt
-      lastUpdated
-      deletedAt
     }
   }
 }
@@ -734,6 +926,7 @@ export const onCreateClub = `subscription OnCreateClub {
       items {
         id
         name
+        ranking
         owner
         active
         createdAt
@@ -745,7 +938,6 @@ export const onCreateClub = `subscription OnCreateClub {
     teams {
       items {
         id
-        division
         name
         contact
         owner
@@ -784,6 +976,7 @@ export const onUpdateClub = `subscription OnUpdateClub {
       items {
         id
         name
+        ranking
         owner
         active
         createdAt
@@ -795,7 +988,6 @@ export const onUpdateClub = `subscription OnUpdateClub {
     teams {
       items {
         id
-        division
         name
         contact
         owner
@@ -834,6 +1026,7 @@ export const onDeleteClub = `subscription OnDeleteClub {
       items {
         id
         name
+        ranking
         owner
         active
         createdAt
@@ -845,7 +1038,6 @@ export const onDeleteClub = `subscription OnDeleteClub {
     teams {
       items {
         id
-        division
         name
         contact
         owner

@@ -5,6 +5,8 @@ import * as queries from '../../../../graphql/queries';
 import * as mutations from '../../../../graphql/mutations';
 import { UpdateTeamInput } from '../../../../API';
 import { AlertController } from '@ionic/angular';
+import { environment } from '../../../../environments/environment';
+import { LeagueDataService } from '../../../services/league-data.service';
 
 @Component({
   selector: 'app-team-edit',
@@ -13,25 +15,34 @@ import { AlertController } from '@ionic/angular';
 })
 export class TeamEditPage implements OnInit {
 
-  public team = { id: null, name: null, contact: null, division: null, active: true, lastUpdated: null };
+  public team = {
+    id: null, name: null, contact: null, teamLeagueId: null,
+    active: true, lastUpdated: new Date().toJSON(), teamClubId: environment.clubId
+  };
+  leagues = new Array();
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private leagueDataService: LeagueDataService
   ) { }
 
   ngOnInit() {
-
+    this.loadLeagues();
     const teamId = this.route.snapshot.paramMap.get('teamId');
     this.loadTeam(teamId);
+  }
 
+  async loadLeagues() {
+    this.leagues = await this.leagueDataService.getActiveLeagues();
+    console.log(this.leagues);
   }
 
   async processForm() {
-    console.log(this.team);
     try {
-      const updateTeamInput: UpdateTeamInput = { id: this.team.id, name: this.team.name, contact: this.team.contact };
-      console.log(updateTeamInput);
+      const updateTeamInput: UpdateTeamInput = {
+        id: this.team.id, teamLeagueId: this.team.teamLeagueId, name: this.team.name, contact: this.team.contact
+      };
       await API.graphql(graphqlOperation(mutations.updateTeam, { input: updateTeamInput }));
       return this.router.navigate(['/team']);
     } catch (err) {
@@ -44,6 +55,7 @@ export class TeamEditPage implements OnInit {
 
     if (teamData) {
       this.team = teamData.data.getTeam;
+      console.log(this.team);
     }
   }
 

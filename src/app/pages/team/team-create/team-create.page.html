@@ -8,18 +8,26 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form (ngSubmit)="processForm($event)">
+  <form (ngSubmit)="processForm()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+      <ion-item>
+        <ion-label>Divisie</ion-label>
+        <ion-select placeholder="Select One" [(ngModel)]="team.teamLeagueId" name="teamLeagueId">
+          <ion-select-option *ngFor="let league of leagues" value="{{league.id}}">{{ league.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-item>
         <ion-label position="stacked">Team naam <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required type="text" (ionChange)="handleTeamNameValue($event)"></ion-input>
+        <ion-input required type="text" [(ngModel)]="team.name" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Contactpersoon <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required type="text" (ionChange)="handleContactValue($event)"></ion-input>
+        <ion-input required type="text" [(ngModel)]="team.contact" name="contact"></ion-input>
       </ion-item>
     </ion-list>
 

@@ -12,9 +12,12 @@ import { environment } from '../../../../environments/environment';
 })
 export class LeagueCreatePage implements OnInit {
 
-  public league: { name: string } = { name: null };
+  public league: { name: string, ranking: number };
+  private initialLeagueState = { name: null, ranking: null };
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.league = this.initialLeagueState;
+  }
 
   ngOnInit() {
   }
@@ -22,7 +25,9 @@ export class LeagueCreatePage implements OnInit {
   async processForm() {
 
     try {
-      const createLeagueInput: CreateLeagueInput = { name: this.league.name, leagueClubId: environment.clubId, active: true };
+      const createLeagueInput: CreateLeagueInput = {
+        name: this.league.name, leagueClubId: environment.clubId, active: true, ranking: this.league.ranking
+      };
       await API.graphql(graphqlOperation(mutations.createLeague, { input: createLeagueInput }));
       return this.router.navigate(['/league']);
     } catch (err) {

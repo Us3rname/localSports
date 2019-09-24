@@ -8,8 +8,15 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form (ngSubmit)="processForm($event)">
+  <form (ngSubmit)="processForm()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label>Divisie</ion-label>
+        <ion-select placeholder="Select One" [(ngModel)]="team.teamLeagueId" name="teamLeagueId">
+          <ion-select-option *ngFor="let league of leagues" value="{{league.id}}"
+            selected="team.teamLeagueId != league.id">{{ league.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
       <ion-item>
         <ion-label position="stacked">Team naam <ion-text color="danger">*</ion-text>
         </ion-label>

@@ -1,16 +1,15 @@
-type Game @model {
+type Game @model @auth(rules: [{allow: public, operations: [read]}])  {
   id: ID!
   homeTeam: Team
   scoreHome: Int
   scoreAway: Int
   awayTeam: Team
-  division: String
   gameDay: AWSDateTime
   location: String
   referee: Referee
 }
 
-type Standing @model {
+type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   id: ID!
   team: String!
   matchPlayed: Int
@@ -24,10 +23,12 @@ type Standing @model {
   lastResults: AWSJSON
 }
 
-type League @model @auth(rules: [{allow: owner}]){
+type League @model @auth(rules: [{allow: public, operations: [read]}]){
   id: ID!
-  name: String! 
+  name: String!
+  ranking: Int!
   club: Club! @connection(name: "ClubLeagues")
+  teams: [Team!] @connection(name: "TeamLeague")
   owner: String
   active: Boolean
   createdAt: AWSDateTime
@@ -35,9 +36,9 @@ type League @model @auth(rules: [{allow: owner}]){
   deletedAt: AWSDateTime
 }
 
-type Team @model @auth(rules: [{allow: owner}]) {
+type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
   id: ID!
-  division: String!
+  league: League @connection(name: "TeamLeague")
   name: String!
   contact: String!
   athletes: [Athlete] @connection(name: "TeamMembers")
@@ -46,11 +47,10 @@ type Team @model @auth(rules: [{allow: owner}]) {
   active: Boolean
   createdAt: AWSDateTime
   lastUpdated: AWSDateTime
-  deletedAt: AWSDateTime
-  
+  deletedAt: AWSDateTime  
 }
 
-type Athlete @model {
+type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
   id: ID!
   name: String!
   email: AWSEmail
@@ -58,7 +58,7 @@ type Athlete @model {
   teams: Team @connection(name: "TeamMembers")
 }
 
-type Referee @model {
+type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
   id: ID!
   name: String!
   email: AWSEmail
@@ -66,7 +66,7 @@ type Referee @model {
   club: Club @connection(name: "ClubReferees")
 }
 
-type Club @model {
+type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
   id: ID!
   name: String!
   street: String

@@ -9,13 +9,15 @@
     </ion-fab-button>
   </ion-fab>
 
-
   <ion-list>
-    <ion-list-header>
-      Recent Conversations
-    </ion-list-header>
+    <ion-segment (ionChange)="changeTeams($event)">
+      <ion-segment-button *ngFor="let league of leagues;" value="{{league.id}}"
+        checked="{{ selectedLeagueId == league.id }}">
+        <ion-label>{{ league.name }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
 
-    <ion-item-sliding *ngFor="let team of teams;" (click)="goToTeamEditPage(team.id)">
+    <ion-item-sliding *ngFor="let team of shownTeams;" (click)="goToTeamEditPage(team.id)">
       <ion-item>
         <ion-avatar slot="start">
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">

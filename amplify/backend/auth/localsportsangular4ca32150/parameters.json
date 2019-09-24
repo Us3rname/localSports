@@ -1,7 +1,6 @@
 {
-    "identityPoolName": "localsportsangular4ca32150_identitypool_4ca32150",
+    "identityPoolName": "localsportsangularf12db82b_identitypool_f12db82b",
     "allowUnauthenticatedIdentities": false,
-    "openIdLambdaRoleName": "locals4ca32150_openid_lambda_role",
     "resourceNameTruncated": "locals4ca32150",
     "userPoolName": "localsportsangular4ca32150_userpool_4ca32150",
     "autoVerifiedAttributes": [
@@ -22,7 +21,6 @@
         "email",
         "name"
     ],
-    "userpoolClientName": "locals4ca32150_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -31,17 +29,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "locals4ca32150_totp_lambda_role",
     "userpoolClientLambdaRole": "locals4ca32150_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "resourceName": "localsportsangular4ca32150",
     "authSelections": "identityPoolAndUserPool",
-    "authRoleName": {
-        "Ref": "AuthRoleName"
-    },
-    "unauthRoleName": {
-        "Ref": "UnauthRoleName"
-    },
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -54,16 +45,11 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "usernameAttributes": [
         "email"
     ],
-    "additionalQuestions": [
-        "requiredAttributes",
-        "triggers"
-    ],
     "triggers": "{\"PostConfirmation\":[\"add-to-group\"]}",
-    "PostConfirmation": "localsportsangular4ca32150PostConfirmation",
     "parentStack": {
         "Ref": "AWS::StackId"
     },
@@ -80,5 +66,7 @@
                 "Name"
             ]
         }
-    ]
+    ],
+    "hostedUI": false,
+    "thirdPartyAuth": false
 }

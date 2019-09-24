@@ -26,8 +26,17 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'team',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/team/team-list/team-list.module').then(m => m.TeamListPageModule)
+          }
+        ]
+      },
+      {
         path: '',
-        redirectTo: '/tabs/schedule',
+        redirectTo: 'app/tabs/schedule',
         pathMatch: 'full'
       }
     ]

@@ -4,12 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'app/tabs/schedule',
     pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'app',
@@ -47,6 +43,18 @@ const routes: Routes = [
       {
         path: 'edit/:leagueId',
         loadChildren: () => import('./pages/league/league-edit/league-edit.module').then(m => m.LeagueEditPageModule)
+      },
+    ]
+  },
+  {
+    path: 'club', children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/club/club-list/club-list.module').then(m => m.ClubListPageModule)
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./pages/club/club-create/club-create.module').then(m => m.ClubCreatePageModule)
       },
     ]
   },

@@ -13,11 +13,6 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
       title: 'Wedstrijdschema',
       url: 'app/tabs/schedule',
       icon: 'calendar'
@@ -26,6 +21,11 @@ export class AppComponent {
       title: 'Standen',
       url: 'app/tabs/ranking',
       icon: 'podium'
+    },
+    {
+      title: 'Teams',
+      url: 'app/tabs/team',
+      icon: 'people'
     },
   ];
 
