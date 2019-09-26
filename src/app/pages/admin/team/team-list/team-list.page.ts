@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../../../graphql/queries';
-import * as subscriptions from '../../../../graphql/subscriptions';
-import { GRAPHQL_AUTH_MODE } from '../../../../../node_modules/@aws-amplify/api/lib/types/index';
-import { ToastService } from '../../../services/toast.service';
-import { LeagueDataService } from '../../../services/league-data.service';
+import * as queries from '../../../../../graphql/queries';
+import * as subscriptions from '../../../../../graphql/subscriptions';
+import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/api/lib/types/index';
+import { ToastService } from '../../../../services/toast.service';
+import { LeagueDataService } from '../../../../services/league-data.service';
 
 @Component({
   selector: 'app-team-list',

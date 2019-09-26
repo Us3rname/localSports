@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  clubId: '58f128a9-0f78-4739-9e6d-6d0b4cbd4673'
+  clubId: '92838a75-fa03-40bb-993d-192859797852'
 };

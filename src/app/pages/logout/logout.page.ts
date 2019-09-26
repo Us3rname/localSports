@@ -15,7 +15,7 @@ export class LogoutPage implements OnInit {
     Auth.signOut()
       .then(data => console.log(data))
       .catch(err => console.log(err));
-    this.router.navigate(['/home']);
+    this.router.navigate(['/app/tabs/schedule']);
   }
 
 }

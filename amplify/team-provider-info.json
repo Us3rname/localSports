@@ -1,23 +1,23 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "localsportsangular-dev-20190908215638-authRole",
-            "UnauthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190908215638-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190908215638-authRole",
+            "AuthRoleName": "localsportsangular-dev-20190926204541-authRole",
+            "UnauthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190926204541-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-dev-20190926204541-authRole",
             "Region": "eu-central-1",
-            "DeploymentBucketName": "localsportsangular-dev-20190908215638-deployment",
-            "UnauthRoleName": "localsportsangular-dev-20190908215638-unauthRole",
-            "StackName": "localsportsangular-dev-20190908215638",
-            "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-dev-20190908215638/c6ab71a0-d272-11e9-8ffc-0aa6b80efab2"
+            "DeploymentBucketName": "localsportsangular-dev-20190926204541-deployment",
+            "UnauthRoleName": "localsportsangular-dev-20190926204541-unauthRole",
+            "StackName": "localsportsangular-dev-20190926204541",
+            "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-dev-20190926204541/d7e65d80-e08d-11e9-ab3a-0a0ca1a48442"
         },
         "categories": {
             "function": {
-                "localsportsangular4ca32150PostConfirmation": {
+                "localSportsDevPostConfirmation": {
                     "GROUP": "users"
                 }
             },
             "auth": {
-                "localsportsangular4ca32150": {}
+                "localSportsDev": {}
             }
         }
     }

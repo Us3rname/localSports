@@ -23,7 +23,7 @@ type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   lastResults: AWSJSON
 }
 
-type League @model @auth(rules: [{allow: public, operations: [read]}]){
+type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: private }]){
   id: ID!
   name: String!
   ranking: Int!
@@ -36,7 +36,7 @@ type League @model @auth(rules: [{allow: public, operations: [read]}]){
   deletedAt: AWSDateTime
 }
 
-type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
+type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   league: League @connection(name: "TeamLeague")
   name: String!
@@ -50,7 +50,7 @@ type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   deletedAt: AWSDateTime  
 }
 
-type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
+type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   name: String!
   email: AWSEmail
@@ -58,7 +58,7 @@ type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: 
   teams: Team @connection(name: "TeamMembers")
 }
 
-type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
+type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   name: String!
   email: AWSEmail
@@ -66,7 +66,7 @@ type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: 
   club: Club @connection(name: "ClubReferees")
 }
 
-type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["Admin"] }])  {
+type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   name: String!
   street: String

@@ -53,12 +53,12 @@ export class AppComponent {
   public clubPages = [
     {
       title: 'Divisies',
-      url: '/league',
+      url: '/admin/league',
       icon: 'rocket'
     },
     {
       title: 'Team beheer',
-      url: '/team',
+      url: '/admin/team',
       icon: 'people'
     }
   ];

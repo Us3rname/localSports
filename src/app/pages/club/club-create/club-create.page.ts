@@ -3,6 +3,7 @@ import * as mutations from '../../../../graphql/mutations';
 import { CreateLeagueInput, CreateClubInput } from 'src/API';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { Router } from '@angular/router';
+import { GRAPHQL_AUTH_MODE } from '../../../../../node_modules/@aws-amplify/api/lib/types/index';
 
 @Component({
   selector: 'app-club-create',
@@ -27,7 +28,12 @@ export class ClubCreatePage implements OnInit {
       const createClubInput: CreateClubInput = {
         name: this.club.name, contact: this.club.contact, country: this.club.country
       };
-      await API.graphql(graphqlOperation(mutations.createClub, { input: createClubInput }));
+
+      const response = await API.graphql({
+        query: mutations.createClub,
+        variables: { input: createClubInput },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+      });
       return this.router.navigate(['/club']);
     } catch (err) {
       console.log(err);

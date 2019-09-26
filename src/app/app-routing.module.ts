@@ -11,6 +11,48 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
   },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'team', children: [
+          {
+            path: '',
+            loadChildren: () => import('./pages/admin/team/team-list/team-list.module').then(m => m.TeamListPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('./pages/admin/team/team-create/team-create.module').then(m => m.TeamCreatePageModule)
+          },
+          {
+            path: 'edit/:teamId',
+            loadChildren: () => import('./pages/admin/team/team-edit/team-edit.module').then(m => m.TeamEditPageModule)
+          },
+        ]
+      },
+      {
+        path: 'league', children: [
+          {
+            path: '',
+            loadChildren: () => import('./pages/admin/league/league-list/league-list.module').then(m => m.LeagueListPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('./pages/admin/league/league-create/league-create.module').then(m => m.LeagueCreatePageModule)
+          },
+          {
+            path: 'edit/:leagueId',
+            loadChildren: () => import('./pages/admin/league/league-edit/league-edit.module').then(m => m.LeagueEditPageModule)
+          },
+        ]
+      },
+      {
+        path: '',
+        redirectTo: 'app/tabs/schedule',
+        pathMatch: 'full'
+      }
+    ]
+  },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' },
@@ -19,30 +61,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./pages/team/team-list/team-list.module').then(m => m.TeamListPageModule)
-      },
-      {
-        path: 'create',
-        loadChildren: () => import('./pages/team/team-create/team-create.module').then(m => m.TeamCreatePageModule)
-      },
-      {
-        path: 'edit/:teamId',
-        loadChildren: () => import('./pages/team/team-edit/team-edit.module').then(m => m.TeamEditPageModule)
-      },
-    ]
-  },
-  {
-    path: 'league', children: [
-      {
-        path: '',
-        loadChildren: () => import('./pages/league/league-list/league-list.module').then(m => m.LeagueListPageModule)
-      },
-      {
-        path: 'create',
-        loadChildren: () => import('./pages/league/league-create/league-create.module').then(m => m.LeagueCreatePageModule)
-      },
-      {
-        path: 'edit/:leagueId',
-        loadChildren: () => import('./pages/league/league-edit/league-edit.module').then(m => m.LeagueEditPageModule)
       },
     ]
   },

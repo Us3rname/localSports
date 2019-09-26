@@ -1,56 +1,51 @@
 {
-    "api": {
-        "localsportsangular": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [
-                        {
-                            "authenticationType": "API_KEY",
-                            "apiKeyConfig": {
-                                "description": "Public access for read",
-                                "apiKeyExpirationDays": 180
-                            }
-                        }
-                    ],
-                    "defaultAuthentication": {
-                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-                        "userPoolConfig": {
-                            "userPoolId": "authlocalsportsangular4ca32150"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "function": {
-        "localsportsangular4ed054f9PostConfirmation": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true
-        },
-        "localsportsangular4ca32150PostConfirmation": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true
-        }
-    },
-    "auth": {
-        "localsportsangular4ca32150": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "localsportsangular4ca32150PostConfirmation",
-                    "triggerProvider": "Cognito",
-                    "attributes": [
-                        "Arn",
-                        "Name"
-                    ]
-                }
-            ]
-        }
-    }
+	"function": {
+		"localSportsDevPostConfirmation": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"auth": {
+		"localSportsDev": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "localSportsDevPostConfirmation",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			]
+		}
+	},
+	"api": {
+		"localsportsangular": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [
+						{
+							"authenticationType": "API_KEY",
+							"apiKeyConfig": {
+								"description": "Public access",
+								"apiKeyExpirationDays": 180
+							}
+						}
+					],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authlocalSportsDev"
+						}
+					}
+				}
+			}
+		}
+	}
 }

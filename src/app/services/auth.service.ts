@@ -46,6 +46,7 @@ export class AuthService {
       if (event === 'signIn') {
         // On 'signIn' event, the data is a CognitoUser object
         this.setUser(data);
+        console.log(data);
       } else {
         this.authState.next(initialAuthState);
       }
