@@ -3,6 +3,7 @@ import { ToastService } from '../../../../services/toast.service';
 import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateSportsHallInput } from 'src/API';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sports-hall-edit',
@@ -21,7 +22,8 @@ export class SportsHallEditPage implements OnInit {
     private graphqlRequestService: GraphqlRequestService,
     public toastService: ToastService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public alertController: AlertController
   ) {
     this.sportsHall = this.initialSportsHallState;
     this.sportsHallId = this.route.snapshot.paramMap.get('sportsHallId');
@@ -58,6 +60,38 @@ export class SportsHallEditPage implements OnInit {
       return this.router.navigate(['/admin/sports-hall']);
     } else {
 
+    }
+  }
+
+  async presentDeleteAlertConfirm(sportsHall) {
+    const alert = await this.alertController.create({
+      header: 'Waarschuwing!',
+      message: 'Weet u zeker dat u de sporthal wilt verwijderen?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Okay',
+          cssClass: 'danger',
+          handler: () => {
+            this.deleteSportsHall(sportsHall);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async deleteSportsHall(sportsHall) {
+    const id = sportsHall.id;
+    const sportsHallInput: UpdateSportsHallInput = { id, active: false };
+    await this.graphqlRequestService.doPrivateMutation('updateSportsHall', { input: sportsHallInput });
+
+    if (this.graphqlRequestService.isSuccessfull) {
+      return this.router.navigate(['/admin/sports-hall']);
     }
   }
 }

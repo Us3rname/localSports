@@ -43,7 +43,9 @@
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Sporthal aanmaken</ion-button>
+      <ion-button color="danger" slot="start" (click)="presentDeleteAlertConfirm(sportsHall)">Verwijder
+      </ion-button>
+      <ion-button expand="block" type="submit" class="ion-no-margin">Sporthal bijwerken</ion-button>
     </div>
   </form>
 </ion-content>

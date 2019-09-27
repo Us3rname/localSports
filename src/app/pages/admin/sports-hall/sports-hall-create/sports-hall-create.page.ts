@@ -32,7 +32,7 @@ export class SportsHallCreatePage implements OnInit {
     try {
       const createSportsHallInput: CreateSportsHallInput = {
         name: this.sportsHall.name, sportsHallClubId: environment.clubId, active: true, street: this.sportsHall.street,
-        zipCode: this.sportsHall.zipcode, city: this.sportsHall.city, phone: this.sportsHall.phone,
+        zipCode: this.sportsHall.zipCode, city: this.sportsHall.city, phone: this.sportsHall.phone,
         streetNumber: this.sportsHall.streetNumber
       };
 
@@ -47,5 +47,4 @@ export class SportsHallCreatePage implements OnInit {
       console.log(err);
     }
   }
-
 }
