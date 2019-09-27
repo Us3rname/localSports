@@ -5,6 +5,7 @@ import * as mutations from '../../../../../graphql/mutations';
 import { CreateSportsHallInput } from 'src/API';
 import { environment } from '../../../../../environments/environment';
 import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/api/lib/types/index';
+import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 
 @Component({
   selector: 'app-sports-hall-create',
@@ -13,13 +14,13 @@ import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/a
 })
 export class SportsHallCreatePage implements OnInit {
 
-  public sportsHall: { name: string, street: string, zipcode: string, city: string, phone: string, streetNumber: number };
+  public sportsHall: { name: string, street: string, zipCode: string, city: string, phone: string, streetNumber: number };
   private initialSportsHallState = {
     name: 'Sportpunt zeeland', street: 'Zwembadweg',
-    zipcode: '1234 AV', city: 'Goes', phone: '0113-123456', streetNumber: 89
+    zipCode: '1234 AV', city: 'Goes', phone: '0113-123456', streetNumber: 89
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private graphqlRequestService: GraphqlRequestService) {
     this.sportsHall = this.initialSportsHallState;
   }
 
@@ -35,16 +36,12 @@ export class SportsHallCreatePage implements OnInit {
         streetNumber: this.sportsHall.streetNumber
       };
 
-      const response = await API.graphql({
-        query: mutations.createSportsHall,
-        variables: { input: createSportsHallInput },
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      });
+      await this.graphqlRequestService.doPrivateMutation('createSportsHall', { input: createSportsHallInput });
 
-      if (response.errors != null && response.errors.length > 0) {
-
-      } else {
+      if (this.graphqlRequestService.isSuccessfull) {
         return this.router.navigate(['/admin/sports-hall']);
+      } else {
+
       }
     } catch (err) {
       console.log(err);

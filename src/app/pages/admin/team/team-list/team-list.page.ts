@@ -103,10 +103,13 @@ export class TeamListPage implements OnInit {
       if (this.selectedLeagueId == null) {
         this.selectedLeagueId = league.id;
       }
-      this.teamsPerLeague[league.id] = [];
+      this.teamsPerLeague[league.id] = new Array();
     });
 
     this.allTeams.map((team) => {
+      if (!this.teamsPerLeague[team.league.id]) {
+        this.teamsPerLeague[team.league.id] = new Array();
+      }
       this.teamsPerLeague[team.league.id].push(team);
     });
 
@@ -114,6 +117,11 @@ export class TeamListPage implements OnInit {
   }
 
   updateTeamsAfterCreate(team) {
+
+    if (!this.teamsPerLeague[team.league.id]) {
+      this.teamsPerLeague[team.league.id] = new Array();
+    }
+
     this.teamsPerLeague[team.league.id].push(team);
     this.allTeams.push(team);
     this.toastService.presentToast('Team is aangemaakt.');
