@@ -186,12 +186,42 @@ export const getSportsHall = `query GetSportsHall($id: ID!) {
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -206,12 +236,26 @@ export const listSportsHalls = `query ListSportsHalls(
       id
       name
       street
+      streetNumber
+      streetNumberAddition
       zipCode
       city
       phone
+      active
       halls {
+        nextToken
+      }
+      club {
         id
         name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
       }
     }
     nextToken
@@ -222,6 +266,32 @@ export const getHall = `query GetHall($id: ID!) {
   getHall(id: $id) {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -234,6 +304,17 @@ export const listHalls = `query ListHalls(
     items {
       id
       name
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
     }
     nextToken
   }
@@ -273,6 +354,9 @@ export const getLeague = `query GetLeague($id: ID!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -376,6 +460,9 @@ export const getTeam = `query GetTeam($id: ID!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -521,6 +608,9 @@ export const getReferee = `query GetReferee($id: ID!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -579,6 +669,9 @@ export const listClubs = `query ListClubs(
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -605,6 +698,20 @@ export const getClub = `query GetClub($id: ID!) {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id

@@ -23,19 +23,24 @@ type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   lastResults: AWSJSON
 }
 
-type SportsHall @model @auth(rules: [{allow: public, operations: [read]}])  {
+type SportsHall @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   name: String!
   street: String!
+  streetNumber: Int!
+  streetNumberAddition: String
   zipCode: String!
   city: String!
   phone: AWSPhone
-  halls: [Hall!]
+  halls: [Hall!] @connection(name: "SportsHallHalls")
+  club: Club! @connection(name: "ClubSportsHall")
+  active: Boolean
 }
 
-type Hall @model @auth(rules: [{allow: public, operations: [read]}]) {
+type Hall @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
   id: ID!
   name: String!
+  sportsHall: SportsHall! @connection(name: "SportsHallHalls")
 }
 
 type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
@@ -95,4 +100,5 @@ type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   leagues: [League!] @connection(name: "ClubLeagues")
   teams: [Team] @connection(name: "ClubMembers")
   referees: [Referee] @connection(name: "ClubReferees")
+  sportsHalls: [SportsHall!] @connection(name: "ClubSportsHall")
 }

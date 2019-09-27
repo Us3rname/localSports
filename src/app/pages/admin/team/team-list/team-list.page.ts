@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../../../../graphql/queries';
 import * as subscriptions from '../../../../../graphql/subscriptions';
-import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/api/lib/types/index';
 import { ToastService } from '../../../../services/toast.service';
 import { LeagueDataService } from '../../../../services/league-data.service';
+import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 
 @Component({
   selector: 'app-team-list',
@@ -23,7 +22,8 @@ export class TeamListPage implements OnInit {
   constructor(
     private router: Router,
     public toastService: ToastService,
-    private leagueDataService: LeagueDataService
+    private leagueDataService: LeagueDataService,
+    private graphqlRequestService: GraphqlRequestService
   ) {
     this.selectedLeagueId = null;
     this.shownTeams = new Array();
@@ -50,8 +50,7 @@ export class TeamListPage implements OnInit {
       graphqlOperation(subscriptions.onCreateTeam)
     ).subscribe({
       next: (teamData) => {
-        this.allTeams.push(teamData.value.data.onCreateTeam);
-        this.toastService.presentToast('Team is aangemaakt.');
+        this.updateTeamsAfterCreate(teamData.value.data.onCreateTeam);
       }
     });
   }
@@ -68,14 +67,14 @@ export class TeamListPage implements OnInit {
 
   updateLocalTeams(teamData) {
     const team = teamData.value.data.onUpdateTeam;
-    for (let i = 0; i < this.allTeams.length; i++) {
-      if (this.allTeams[i].id === team.id) {
+    for (let i = 0; i < this.teamsPerLeague[this.selectedLeagueId].length; i++) {
+      if (this.teamsPerLeague[this.selectedLeagueId][i].id === team.id) {
         if (team.active === false) {
-          this.allTeams.splice(i, 1);
+          this.teamsPerLeague[this.selectedLeagueId].splice(i, 1);
           this.toastService.presentToast('Team is verwijderd');
           return;
         } else {
-          this.allTeams[i] = team;
+          this.teamsPerLeague[this.selectedLeagueId][i] = team;
           this.toastService.presentToast('Team is bijgewerkt');
           return;
         }
@@ -85,14 +84,12 @@ export class TeamListPage implements OnInit {
 
   async loadTeams() {
 
-    const allTeams = await API.graphql({
-      query: queries.listTeams,
-      variables: { filter: { active: { eq: true } } },
-      authMode: GRAPHQL_AUTH_MODE.API_KEY
-    });
+    await this.graphqlRequestService.doPrivateQuery(
+      'listTeams', { filter: { active: { eq: true } } }
+    );
 
-    if (allTeams) {
-      this.allTeams = allTeams.data.listTeams.items;
+    if (this.graphqlRequestService.isSuccessfull) {
+      this.allTeams = this.graphqlRequestService.data.items;
     }
   }
 
@@ -114,6 +111,12 @@ export class TeamListPage implements OnInit {
     });
 
     this.shownTeams = this.teamsPerLeague[this.selectedLeagueId];
+  }
+
+  updateTeamsAfterCreate(team) {
+    this.teamsPerLeague[team.league.id].push(team);
+    this.allTeams.push(team);
+    this.toastService.presentToast('Team is aangemaakt.');
   }
 
   changeTeams(event) {

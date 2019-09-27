@@ -1,9 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sports-hall-list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<menu-header headerTitle="Sporthallen"></menu-header>
 
 <ion-content>
+
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='goToSportsHallCreatePage()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div [hidden]="sportsHalls.length > 0">
+    Er zijn geen sporthallen bekend.
+  </div>
+
+  <div *ngFor="let sportHall of sportsHalls;" (click)="goToSportsHallEditPage(sportHall.id)">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ sportHall.name }}</h2>
+        <h3>{{ sportHall.street }} {{ sportHall.number }}{{ sportHall.streetNumberAddition }}</h3>
+        <h3>{{ sportHall.zipCode }} {{ sportHall.number }}{{ sportHall.streetNumberAddition }} {{ sportHall.city }}</h3>
+        <h3>Telefoonnummer: {{ sportHall.phone }}</h3>
+      </ion-label>
+    </ion-item>
+  </div>
 
 </ion-content>

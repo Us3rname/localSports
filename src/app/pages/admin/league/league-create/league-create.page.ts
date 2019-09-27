@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as mutations from '../../../../../graphql/mutations';
 import { CreateLeagueInput } from 'src/API';
 import { environment } from '../../../../../environments/environment';
-import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/api/lib/types/index';
+import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 
 @Component({
   selector: 'app-league-create',
@@ -16,7 +16,7 @@ export class LeagueCreatePage implements OnInit {
   public league: { name: string, ranking: number };
   private initialLeagueState = { name: null, ranking: null };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private graphqlRequestService: GraphqlRequestService) {
     this.league = this.initialLeagueState;
   }
 
@@ -30,16 +30,12 @@ export class LeagueCreatePage implements OnInit {
         name: this.league.name, leagueClubId: environment.clubId, active: true, ranking: this.league.ranking
       };
 
-      const response = await API.graphql({
-        query: mutations.createLeague,
-        variables: { input: createLeagueInput },
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      });
+      await this.graphqlRequestService.doPrivateMutation('createLeague', { input: createLeagueInput });
 
-      if (response.errors != null && response.errors.length > 0) {
-
-      } else {
+      if (this.graphqlRequestService.isSuccessfull) {
         return this.router.navigate(['/admin/league']);
+      } else {
+
       }
     } catch (err) {
       console.log(err);

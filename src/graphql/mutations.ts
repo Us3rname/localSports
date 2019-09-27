@@ -348,12 +348,42 @@ export const createSportsHall = `mutation CreateSportsHall($input: CreateSportsH
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -363,12 +393,42 @@ export const updateSportsHall = `mutation UpdateSportsHall($input: UpdateSportsH
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -378,12 +438,42 @@ export const deleteSportsHall = `mutation DeleteSportsHall($input: DeleteSportsH
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -392,6 +482,32 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
   createHall(input: $input) {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -399,6 +515,32 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
   updateHall(input: $input) {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -406,6 +548,32 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
   deleteHall(input: $input) {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -443,6 +611,9 @@ export const createLeague = `mutation CreateLeague($input: CreateLeagueInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -490,6 +661,9 @@ export const updateLeague = `mutation UpdateLeague($input: UpdateLeagueInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -537,6 +711,9 @@ export const deleteLeague = `mutation DeleteLeague($input: DeleteLeagueInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -605,6 +782,9 @@ export const createTeam = `mutation CreateTeam($input: CreateTeamInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -673,6 +853,9 @@ export const updateTeam = `mutation UpdateTeam($input: UpdateTeamInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -741,6 +924,9 @@ export const deleteTeam = `mutation DeleteTeam($input: DeleteTeamInput!) {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -903,6 +1089,9 @@ export const createReferee = `mutation CreateReferee($input: CreateRefereeInput!
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -933,6 +1122,9 @@ export const updateReferee = `mutation UpdateReferee($input: UpdateRefereeInput!
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -963,6 +1155,9 @@ export const deleteReferee = `mutation DeleteReferee($input: DeleteRefereeInput!
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -988,6 +1183,20 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id
@@ -1038,6 +1247,20 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id
@@ -1088,6 +1311,20 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id

@@ -7,6 +7,8 @@ import { UpdateTeamInput } from '../../../../../API';
 import { AlertController } from '@ionic/angular';
 import { environment } from '../../../../../environments/environment';
 import { LeagueDataService } from '../../../../services/league-data.service';
+import { GraphqlRequestService } from '../../../../services/graphql-request.service';
+import { ToastService } from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-team-edit',
@@ -24,7 +26,9 @@ export class TeamEditPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public alertController: AlertController,
-    private leagueDataService: LeagueDataService
+    private leagueDataService: LeagueDataService,
+    private graphqlRequestService: GraphqlRequestService,
+    public toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -35,7 +39,6 @@ export class TeamEditPage implements OnInit {
 
   async loadLeagues() {
     this.leagues = await this.leagueDataService.getActiveLeagues();
-    console.log(this.leagues);
   }
 
   async processForm() {
@@ -43,19 +46,26 @@ export class TeamEditPage implements OnInit {
       const updateTeamInput: UpdateTeamInput = {
         id: this.team.id, teamLeagueId: this.team.teamLeagueId, name: this.team.name, contact: this.team.contact
       };
-      await API.graphql(graphqlOperation(mutations.deleteLeague, { id: this.team.id }));
-      return this.router.navigate(['/team']);
+      await this.graphqlRequestService.doPrivateMutation('updateTeam', { input: updateTeamInput });
+
+      if (this.graphqlRequestService.isSuccessfull) {
+        this.toastService.presentSuccessToast('Team is bijgewerkt.');
+        return this.router.navigate(['/admin/team']);
+      }
+
     } catch (err) {
       console.log(err);
     }
   }
 
   async loadTeam(teamId) {
-    const teamData = await API.graphql(graphqlOperation(queries.getTeam, { id: teamId }));
+    await this.graphqlRequestService.doPrivateQuery('getTeam', { id: teamId });
 
-    if (teamData) {
-      this.team = teamData.data.getTeam;
-      console.log(this.team);
+    if (this.graphqlRequestService.isSuccessfull) {
+      this.team = this.graphqlRequestService.data;
+    } else {
+      this.toastService.presentWarningToast('Team kon niet worden gevonden.');
+      return this.router.navigate(['/admin/team']);
     }
   }
 
@@ -85,6 +95,6 @@ export class TeamEditPage implements OnInit {
     const id = team.id;
     const teamInput: UpdateTeamInput = { id, active: false, deletedAt: new Date().toJSON(), lastUpdated: new Date().toJSON() };
     await API.graphql(graphqlOperation(mutations.updateTeam, { input: teamInput }));
-    return this.router.navigate(['/team']);
+    return this.router.navigate(['/admin/team']);
   }
 }

@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import * as mutations from '../../../../../graphql/mutations';
-import * as queries from '../../../../../graphql/queries';
 import { environment } from '../../../../../environments/environment';
 import { LeagueDataService } from '../../../../services/league-data.service';
-import { GRAPHQL_AUTH_MODE } from '../../../../../../node_modules/@aws-amplify/api/lib/types/index';
-
+import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 import { Router } from '@angular/router';
 import { CreateTeamInput } from '../../../../../API';
+
 @Component({
   selector: 'app-team-create',
   templateUrl: './team-create.page.html',
@@ -22,7 +19,10 @@ export class TeamCreatePage implements OnInit {
   };
   leagues = new Array();
 
-  constructor(private router: Router, private leagueDataService: LeagueDataService) {
+  constructor(
+    private router: Router,
+    private leagueDataService: LeagueDataService,
+    private graphqlRequestService: GraphqlRequestService) {
     this.team = this.initialTeamState;
   }
 
@@ -32,19 +32,17 @@ export class TeamCreatePage implements OnInit {
 
   async loadLeagues() {
     this.leagues = await this.leagueDataService.getActiveLeagues();
-    console.log(this.leagues);
   }
 
   async processForm() {
 
     try {
-      await API.graphql({
-        query: mutations.createTeam,
-        variables: { input: this.team },
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-      });
+      await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
 
-      return this.router.navigate(['/admin/team']);
+      if (this.graphqlRequestService.isSuccessfull) {
+        return this.router.navigate(['/admin/team']);
+      }
+
     } catch (err) {
       console.log(err);
     }

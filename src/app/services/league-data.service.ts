@@ -2,33 +2,31 @@ import { Injectable } from '@angular/core';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import { GRAPHQL_AUTH_MODE } from '../../../node_modules/@aws-amplify/api/lib/types/index';
-
+import { GraphqlRequestService } from './graphql-request.service';
 @Injectable({
   providedIn: 'root'
 })
 export class LeagueDataService {
 
-  constructor() { }
+  constructor(
+    private graphqlRequestService: GraphqlRequestService
+  ) { }
 
 
   async getActiveLeagues() {
 
     let leagues: any[];
 
-    const leagueData = await API.graphql({
-      query: queries.listLeagues,
-      variables: {
-        filter:
-        {
-          active:
-            { eq: true }
-        }
-      },
-      authMode: GRAPHQL_AUTH_MODE.API_KEY
+    await this.graphqlRequestService.doPublicQuery('listLeagues', {
+      filter:
+      {
+        active:
+          { eq: true }
+      }
     });
 
-    if (leagueData) {
-      leagues = leagueData.data.listLeagues.items;
+    if (this.graphqlRequestService.isSuccessfull) {
+      leagues = this.graphqlRequestService.data.items;
     }
 
     return leagues;

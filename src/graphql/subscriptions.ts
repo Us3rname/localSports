@@ -348,12 +348,42 @@ export const onCreateSportsHall = `subscription OnCreateSportsHall {
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -363,12 +393,42 @@ export const onUpdateSportsHall = `subscription OnUpdateSportsHall {
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -378,12 +438,42 @@ export const onDeleteSportsHall = `subscription OnDeleteSportsHall {
     id
     name
     street
+    streetNumber
+    streetNumberAddition
     zipCode
     city
     phone
+    active
     halls {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+    club {
       id
       name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        nextToken
+      }
+      leagues {
+        nextToken
+      }
+      teams {
+        nextToken
+      }
+      referees {
+        nextToken
+      }
     }
   }
 }
@@ -392,6 +482,32 @@ export const onCreateHall = `subscription OnCreateHall {
   onCreateHall {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -399,6 +515,32 @@ export const onUpdateHall = `subscription OnUpdateHall {
   onUpdateHall {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -406,6 +548,32 @@ export const onDeleteHall = `subscription OnDeleteHall {
   onDeleteHall {
     id
     name
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      active
+      halls {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
   }
 }
 `;
@@ -443,6 +611,9 @@ export const onCreateLeague = `subscription OnCreateLeague {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -490,6 +661,9 @@ export const onUpdateLeague = `subscription OnUpdateLeague {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -537,6 +711,9 @@ export const onDeleteLeague = `subscription OnDeleteLeague {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -605,6 +782,9 @@ export const onCreateTeam = `subscription OnCreateTeam {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -673,6 +853,9 @@ export const onUpdateTeam = `subscription OnUpdateTeam {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -741,6 +924,9 @@ export const onDeleteTeam = `subscription OnDeleteTeam {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -903,6 +1089,9 @@ export const onCreateReferee = `subscription OnCreateReferee {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -933,6 +1122,9 @@ export const onUpdateReferee = `subscription OnUpdateReferee {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -963,6 +1155,9 @@ export const onDeleteReferee = `subscription OnDeleteReferee {
       contact
       email
       phone
+      sportsHalls {
+        nextToken
+      }
       leagues {
         nextToken
       }
@@ -988,6 +1183,20 @@ export const onCreateClub = `subscription OnCreateClub {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id
@@ -1038,6 +1247,20 @@ export const onUpdateClub = `subscription OnUpdateClub {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id
@@ -1088,6 +1311,20 @@ export const onDeleteClub = `subscription OnDeleteClub {
     contact
     email
     phone
+    sportsHalls {
+      items {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        active
+      }
+      nextToken
+    }
     leagues {
       items {
         id
