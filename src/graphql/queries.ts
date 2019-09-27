@@ -181,6 +181,64 @@ export const listStandings = `query ListStandings(
   }
 }
 `;
+export const getSportsHall = `query GetSportsHall($id: ID!) {
+  getSportsHall(id: $id) {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const listSportsHalls = `query ListSportsHalls(
+  $filter: ModelSportsHallFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSportsHalls(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      street
+      zipCode
+      city
+      phone
+      halls {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getHall = `query GetHall($id: ID!) {
+  getHall(id: $id) {
+    id
+    name
+  }
+}
+`;
+export const listHalls = `query ListHalls(
+  $filter: ModelHallFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHalls(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+    }
+    nextToken
+  }
+}
+`;
 export const getLeague = `query GetLeague($id: ID!) {
   getLeague(id: $id) {
     id

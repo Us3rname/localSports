@@ -60,6 +60,11 @@ export class AppComponent {
       title: 'Team beheer',
       url: '/admin/team',
       icon: 'people'
+    },
+    {
+      title: 'Sporthallen',
+      url: '/admin/sports-hall',
+      icon: 'pin'
     }
   ];
 

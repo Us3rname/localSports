@@ -53,6 +53,42 @@ export type DeleteStandingInput = {
   id?: string | null,
 };
 
+export type CreateSportsHallInput = {
+  id?: string | null,
+  name: string,
+  street: string,
+  zipCode: string,
+  city: string,
+  phone?: string | null,
+};
+
+export type UpdateSportsHallInput = {
+  id: string,
+  name?: string | null,
+  street?: string | null,
+  zipCode?: string | null,
+  city?: string | null,
+  phone?: string | null,
+};
+
+export type DeleteSportsHallInput = {
+  id?: string | null,
+};
+
+export type CreateHallInput = {
+  id?: string | null,
+  name: string,
+};
+
+export type UpdateHallInput = {
+  id: string,
+  name?: string | null,
+};
+
+export type DeleteHallInput = {
+  id?: string | null,
+};
+
 export type CreateLeagueInput = {
   id?: string | null,
   name: string,
@@ -245,6 +281,26 @@ export type ModelStandingFilterInput = {
   and?: Array< ModelStandingFilterInput | null > | null,
   or?: Array< ModelStandingFilterInput | null > | null,
   not?: ModelStandingFilterInput | null,
+};
+
+export type ModelSportsHallFilterInput = {
+  id?: ModelIDFilterInput | null,
+  name?: ModelStringFilterInput | null,
+  street?: ModelStringFilterInput | null,
+  zipCode?: ModelStringFilterInput | null,
+  city?: ModelStringFilterInput | null,
+  phone?: ModelStringFilterInput | null,
+  and?: Array< ModelSportsHallFilterInput | null > | null,
+  or?: Array< ModelSportsHallFilterInput | null > | null,
+  not?: ModelSportsHallFilterInput | null,
+};
+
+export type ModelHallFilterInput = {
+  id?: ModelIDFilterInput | null,
+  name?: ModelStringFilterInput | null,
+  and?: Array< ModelHallFilterInput | null > | null,
+  or?: Array< ModelHallFilterInput | null > | null,
+  not?: ModelHallFilterInput | null,
 };
 
 export type ModelLeagueFilterInput = {
@@ -715,6 +771,105 @@ export type DeleteStandingMutation = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+  } | null,
+};
+
+export type CreateSportsHallMutationVariables = {
+  input: CreateSportsHallInput,
+};
+
+export type CreateSportsHallMutation = {
+  createSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type UpdateSportsHallMutationVariables = {
+  input: UpdateSportsHallInput,
+};
+
+export type UpdateSportsHallMutation = {
+  updateSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type DeleteSportsHallMutationVariables = {
+  input: DeleteSportsHallInput,
+};
+
+export type DeleteSportsHallMutation = {
+  deleteSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type CreateHallMutationVariables = {
+  input: CreateHallInput,
+};
+
+export type CreateHallMutation = {
+  createHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
+  } | null,
+};
+
+export type UpdateHallMutationVariables = {
+  input: UpdateHallInput,
+};
+
+export type UpdateHallMutation = {
+  updateHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
+  } | null,
+};
+
+export type DeleteHallMutationVariables = {
+  input: DeleteHallInput,
+};
+
+export type DeleteHallMutation = {
+  deleteHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
   } | null,
 };
 
@@ -1808,6 +1963,84 @@ export type ListStandingsQuery = {
   } | null,
 };
 
+export type GetSportsHallQueryVariables = {
+  id: string,
+};
+
+export type GetSportsHallQuery = {
+  getSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type ListSportsHallsQueryVariables = {
+  filter?: ModelSportsHallFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSportsHallsQuery = {
+  listSportsHalls:  {
+    __typename: "ModelSportsHallConnection",
+    items:  Array< {
+      __typename: "SportsHall",
+      id: string,
+      name: string,
+      street: string,
+      zipCode: string,
+      city: string,
+      phone: string | null,
+      halls:  Array< {
+        __typename: "Hall",
+        id: string,
+        name: string,
+      } > | null,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetHallQueryVariables = {
+  id: string,
+};
+
+export type GetHallQuery = {
+  getHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
+  } | null,
+};
+
+export type ListHallsQueryVariables = {
+  filter?: ModelHallFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHallsQuery = {
+  listHalls:  {
+    __typename: "ModelHallConnection",
+    items:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
 export type GetLeagueQueryVariables = {
   id: string,
 };
@@ -2671,6 +2904,81 @@ export type OnDeleteStandingSubscription = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+  } | null,
+};
+
+export type OnCreateSportsHallSubscription = {
+  onCreateSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type OnUpdateSportsHallSubscription = {
+  onUpdateSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type OnDeleteSportsHallSubscription = {
+  onDeleteSportsHall:  {
+    __typename: "SportsHall",
+    id: string,
+    name: string,
+    street: string,
+    zipCode: string,
+    city: string,
+    phone: string | null,
+    halls:  Array< {
+      __typename: "Hall",
+      id: string,
+      name: string,
+    } > | null,
+  } | null,
+};
+
+export type OnCreateHallSubscription = {
+  onCreateHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
+  } | null,
+};
+
+export type OnUpdateHallSubscription = {
+  onUpdateHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
+  } | null,
+};
+
+export type OnDeleteHallSubscription = {
+  onDeleteHall:  {
+    __typename: "Hall",
+    id: string,
+    name: string,
   } | null,
 };
 

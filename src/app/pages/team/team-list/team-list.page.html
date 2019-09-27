@@ -1,14 +1,6 @@
 <menu-header headerTitle="Teams"></menu-header>
 
 <ion-content>
-
-  <!-- fab placed to the (vertical) center and end -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)='goToTeamCreatePage($event)'>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <ion-list>
     <ion-segment (ionChange)="changeTeams($event)">
       <ion-segment-button *ngFor="let league of leagues;" value="{{league.id}}"
@@ -17,7 +9,7 @@
       </ion-segment-button>
     </ion-segment>
 
-    <ion-item-sliding *ngFor="let team of shownTeams;" (click)="goToTeamEditPage(team.id)">
+    <ion-item-sliding *ngFor="let team of shownTeams;">
       <ion-item>
         <ion-avatar slot="start">
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">

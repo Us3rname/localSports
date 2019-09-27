@@ -23,7 +23,22 @@ type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   lastResults: AWSJSON
 }
 
-type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: private }]){
+type SportsHall @model @auth(rules: [{allow: public, operations: [read]}])  {
+  id: ID!
+  name: String!
+  street: String!
+  zipCode: String!
+  city: String!
+  phone: AWSPhone
+  halls: [Hall!]
+}
+
+type Hall @model @auth(rules: [{allow: public, operations: [read]}]) {
+  id: ID!
+  name: String!
+}
+
+type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
   id: ID!
   name: String!
   ranking: Int!

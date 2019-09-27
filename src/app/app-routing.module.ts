@@ -47,6 +47,25 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'sports-hall', children: [
+          {
+            path: '',
+            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-list/sports-hall-list.module')
+              .then(m => m.SportsHallListPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-create/sports-hall-create.module')
+              .then(m => m.SportsHallCreatePageModule)
+          },
+          {
+            path: 'edit/:sportsHallId',
+            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-edit/sports-hall-edit.module')
+              .then(m => m.SportsHallEditPageModule)
+          },
+        ]
+      },
+      {
         path: '',
         redirectTo: 'app/tabs/schedule',
         pathMatch: 'full'

@@ -343,6 +343,72 @@ export const onDeleteStanding = `subscription OnDeleteStanding {
   }
 }
 `;
+export const onCreateSportsHall = `subscription OnCreateSportsHall {
+  onCreateSportsHall {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const onUpdateSportsHall = `subscription OnUpdateSportsHall {
+  onUpdateSportsHall {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const onDeleteSportsHall = `subscription OnDeleteSportsHall {
+  onDeleteSportsHall {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const onCreateHall = `subscription OnCreateHall {
+  onCreateHall {
+    id
+    name
+  }
+}
+`;
+export const onUpdateHall = `subscription OnUpdateHall {
+  onUpdateHall {
+    id
+    name
+  }
+}
+`;
+export const onDeleteHall = `subscription OnDeleteHall {
+  onDeleteHall {
+    id
+    name
+  }
+}
+`;
 export const onCreateLeague = `subscription OnCreateLeague {
   onCreateLeague {
     id

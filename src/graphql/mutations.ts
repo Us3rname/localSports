@@ -343,6 +343,72 @@ export const deleteStanding = `mutation DeleteStanding($input: DeleteStandingInp
   }
 }
 `;
+export const createSportsHall = `mutation CreateSportsHall($input: CreateSportsHallInput!) {
+  createSportsHall(input: $input) {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const updateSportsHall = `mutation UpdateSportsHall($input: UpdateSportsHallInput!) {
+  updateSportsHall(input: $input) {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const deleteSportsHall = `mutation DeleteSportsHall($input: DeleteSportsHallInput!) {
+  deleteSportsHall(input: $input) {
+    id
+    name
+    street
+    zipCode
+    city
+    phone
+    halls {
+      id
+      name
+    }
+  }
+}
+`;
+export const createHall = `mutation CreateHall($input: CreateHallInput!) {
+  createHall(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
+  updateHall(input: $input) {
+    id
+    name
+  }
+}
+`;
+export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
+  deleteHall(input: $input) {
+    id
+    name
+  }
+}
+`;
 export const createLeague = `mutation CreateLeague($input: CreateLeagueInput!) {
   createLeague(input: $input) {
     id
