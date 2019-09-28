@@ -358,6 +358,7 @@ export const onCreateSportsHall = `subscription OnCreateSportsHall {
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -403,6 +404,7 @@ export const onUpdateSportsHall = `subscription OnUpdateSportsHall {
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -448,6 +450,7 @@ export const onDeleteSportsHall = `subscription OnDeleteSportsHall {
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -482,6 +485,7 @@ export const onCreateHall = `subscription OnCreateHall {
   onCreateHall {
     id
     name
+    active
     sportsHall {
       id
       name
@@ -515,6 +519,7 @@ export const onUpdateHall = `subscription OnUpdateHall {
   onUpdateHall {
     id
     name
+    active
     sportsHall {
       id
       name
@@ -548,6 +553,7 @@ export const onDeleteHall = `subscription OnDeleteHall {
   onDeleteHall {
     id
     name
+    active
     sportsHall {
       id
       name

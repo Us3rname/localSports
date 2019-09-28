@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../../../services/toast.service';
 import { GraphqlRequestService } from '../../../../services/graphql-request.service';
+import { SporthallService } from '../../../../services/sporthall.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UpdateSportsHallInput } from 'src/API';
+import { UpdateSportsHallInput, UpdateHallInput, CreateHallInput } from 'src/API';
 import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-sports-hall-edit',
@@ -12,18 +14,23 @@ import { AlertController } from '@ionic/angular';
 })
 export class SportsHallEditPage implements OnInit {
 
-  public sportsHall: { name: string, street: string, zipCode: string, city: string, phone: string, streetNumber: number };
+  public sportsHall: {
+    name: string, street: string, zipCode: string, city: string, phone: string, streetNumber: number,
+    halls: { items: [{ id: string }] }
+  };
   private initialSportsHallState = {
-    name: null, street: null, zipCode: null, city: null, phone: null, streetNumber: null
+    name: null, street: null, zipCode: null, city: null, phone: null, streetNumber: null, halls: null
   };
 
   private sportsHallId;
+
   constructor(
     private graphqlRequestService: GraphqlRequestService,
     public toastService: ToastService,
     private router: Router,
     private route: ActivatedRoute,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public sporthallService: SporthallService
   ) {
     this.sportsHall = this.initialSportsHallState;
     this.sportsHallId = this.route.snapshot.paramMap.get('sportsHallId');
@@ -39,7 +46,11 @@ export class SportsHallEditPage implements OnInit {
 
     if (this.graphqlRequestService.isSuccessfull) {
       this.sportsHall = this.graphqlRequestService.data;
-      console.log(this.sportsHall);
+      this.sporthallService.halls = this.sportsHall.halls.items;
+
+      this.sportsHall.halls.items.map((hall) => {
+        this.sporthallService.existingHalls[hall.id] = hall;
+      });
     } else {
       this.toastService.presentWarningToast('Sporthal kon niet gevonden worden.');
       return this.router.navigate(['/admin/sports-hall']);
@@ -56,12 +67,14 @@ export class SportsHallEditPage implements OnInit {
     await this.graphqlRequestService.doPrivateMutation('updateSportsHall', { input: updateSportsHallInput });
 
     if (this.graphqlRequestService.isSuccessfull) {
+      this.sporthallService.updateHalls(this.sportsHallId);
       this.toastService.presentSuccessToast('Sporthal is bijgewerkt.');
       return this.router.navigate(['/admin/sports-hall']);
     } else {
 
     }
   }
+
 
   async presentDeleteAlertConfirm(sportsHall) {
     const alert = await this.alertController.create({
@@ -93,5 +106,13 @@ export class SportsHallEditPage implements OnInit {
     if (this.graphqlRequestService.isSuccessfull) {
       return this.router.navigate(['/admin/sports-hall']);
     }
+  }
+
+  addEmptyHall() {
+    this.sporthallService.addEmptyHall();
+  }
+
+  removeHall(index, hallId) {
+    this.sporthallService.removeHall(index, hallId);
   }
 }

@@ -196,6 +196,7 @@ export const getSportsHall = `query GetSportsHall($id: ID!) {
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -266,6 +267,7 @@ export const getHall = `query GetHall($id: ID!) {
   getHall(id: $id) {
     id
     name
+    active
     sportsHall {
       id
       name
@@ -304,6 +306,7 @@ export const listHalls = `query ListHalls(
     items {
       id
       name
+      active
       sportsHall {
         id
         name

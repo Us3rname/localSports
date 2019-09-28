@@ -358,6 +358,7 @@ export const createSportsHall = `mutation CreateSportsHall($input: CreateSportsH
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -403,6 +404,7 @@ export const updateSportsHall = `mutation UpdateSportsHall($input: UpdateSportsH
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -448,6 +450,7 @@ export const deleteSportsHall = `mutation DeleteSportsHall($input: DeleteSportsH
       items {
         id
         name
+        active
       }
       nextToken
     }
@@ -482,6 +485,7 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
   createHall(input: $input) {
     id
     name
+    active
     sportsHall {
       id
       name
@@ -515,6 +519,7 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
   updateHall(input: $input) {
     id
     name
+    active
     sportsHall {
       id
       name
@@ -548,6 +553,7 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
   deleteHall(input: $input) {
     id
     name
+    active
     sportsHall {
       id
       name

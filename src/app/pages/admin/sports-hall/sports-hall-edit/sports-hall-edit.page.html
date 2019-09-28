@@ -42,6 +42,26 @@
       </ion-item>
     </ion-list>
 
+    <ion-list>
+      <ion-item-divider>
+        <ion-label>
+          Hallen
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let hall of sporthallService.halls;let i = index;">
+        <ion-label position="stacked">Hal <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sporthallService.halls[i].name" value="{{hall.name}}"
+          name="{{ hall.id}}">
+        </ion-input>
+        <ion-icon name="add-circle" (click)="addEmptyHall()" [hidden]="i+1 != sporthallService.halls.length"></ion-icon>
+        <ion-icon name="remove-circle" (click)="removeHall(i, hall.id)" [hidden]="i == 0">
+        </ion-icon>
+      </ion-item>
+
+    </ion-list>
+
     <div class="ion-padding">
       <ion-button color="danger" slot="start" (click)="presentDeleteAlertConfirm(sportsHall)">Verwijder
       </ion-button>

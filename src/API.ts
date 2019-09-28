@@ -86,12 +86,14 @@ export type DeleteSportsHallInput = {
 export type CreateHallInput = {
   id?: string | null,
   name: string,
+  active?: boolean | null,
   hallSportsHallId: string,
 };
 
 export type UpdateHallInput = {
   id: string,
   name?: string | null,
+  active?: boolean | null,
   hallSportsHallId?: string | null,
 };
 
@@ -316,6 +318,7 @@ export type ModelBooleanFilterInput = {
 export type ModelHallFilterInput = {
   id?: ModelIDFilterInput | null,
   name?: ModelStringFilterInput | null,
+  active?: ModelBooleanFilterInput | null,
   and?: Array< ModelHallFilterInput | null > | null,
   or?: Array< ModelHallFilterInput | null > | null,
   not?: ModelHallFilterInput | null,
@@ -809,6 +812,7 @@ export type CreateSportsHallMutation = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -866,6 +870,7 @@ export type UpdateSportsHallMutation = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -923,6 +928,7 @@ export type DeleteSportsHallMutation = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -967,6 +973,7 @@ export type CreateHallMutation = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -1008,6 +1015,7 @@ export type UpdateHallMutation = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -1049,6 +1057,7 @@ export type DeleteHallMutation = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -2277,6 +2286,7 @@ export type GetSportsHallQuery = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -2363,6 +2373,7 @@ export type GetHallQuery = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -2408,6 +2419,7 @@ export type ListHallsQuery = {
       __typename: "Hall",
       id: string,
       name: string,
+      active: boolean | null,
       sportsHall:  {
         __typename: "SportsHall",
         id: string,
@@ -3341,6 +3353,7 @@ export type OnCreateSportsHallSubscription = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -3394,6 +3407,7 @@ export type OnUpdateSportsHallSubscription = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -3447,6 +3461,7 @@ export type OnDeleteSportsHallSubscription = {
         __typename: "Hall",
         id: string,
         name: string,
+        active: boolean | null,
       } | null > | null,
       nextToken: string | null,
     } | null,
@@ -3487,6 +3502,7 @@ export type OnCreateHallSubscription = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -3524,6 +3540,7 @@ export type OnUpdateHallSubscription = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,
@@ -3561,6 +3578,7 @@ export type OnDeleteHallSubscription = {
     __typename: "Hall",
     id: string,
     name: string,
+    active: boolean | null,
     sportsHall:  {
       __typename: "SportsHall",
       id: string,

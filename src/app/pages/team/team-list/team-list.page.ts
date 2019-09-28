@@ -5,6 +5,7 @@ import * as queries from '../../../../graphql/queries';
 import { GRAPHQL_AUTH_MODE } from '../../../../../node_modules/@aws-amplify/api/lib/types/index';
 import { ToastService } from '../../../services/toast.service';
 import { LeagueDataService } from '../../../services/league-data.service';
+import { GraphqlRequestService } from '../../../services/graphql-request.service';
 
 @Component({
   selector: 'app-team-list',
@@ -22,7 +23,8 @@ export class TeamListPage implements OnInit {
   constructor(
     private router: Router,
     public toastService: ToastService,
-    private leagueDataService: LeagueDataService
+    private leagueDataService: LeagueDataService,
+    private graphqlRequestService: GraphqlRequestService
   ) {
     this.selectedLeagueId = null;
     this.shownTeams = new Array();
@@ -43,14 +45,10 @@ export class TeamListPage implements OnInit {
 
   async loadTeams() {
 
-    const allTeams = await API.graphql({
-      query: queries.listTeams,
-      variables: { filter: { active: { eq: true } } },
-      authMode: GRAPHQL_AUTH_MODE.API_KEY
-    });
+    await this.graphqlRequestService.doPublicQuery('listTeams', { filter: { active: { eq: true } } });
 
-    if (allTeams) {
-      this.allTeams = allTeams.data.listTeams.items;
+    if (this.graphqlRequestService.isSuccessfull) {
+      this.allTeams = this.graphqlRequestService.data.items;
     }
   }
 
@@ -68,7 +66,11 @@ export class TeamListPage implements OnInit {
     });
 
     this.allTeams.map((team) => {
-      this.teamsPerLeague[team.league.id].push(team);
+      if (team.league.active) {
+        this.teamsPerLeague[team.league.id].push(team);
+      } else {
+        console.log('Team has an inactive league.');
+      }
     });
 
     this.shownTeams = this.teamsPerLeague[this.selectedLeagueId];

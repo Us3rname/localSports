@@ -9,6 +9,13 @@
 
 <ion-content fullscreen>
   <form (ngSubmit)="processForm()">
+
+    <ion-item-divider>
+      <ion-label>
+        Sporthal
+      </ion-label>
+    </ion-item-divider>
+
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="stacked">Naam <ion-text color="danger">*</ion-text>
@@ -40,6 +47,22 @@
         </ion-label>
         <ion-input required type="text" [(ngModel)]="sportsHall.phone" name="phone"></ion-input>
       </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item-divider>
+        <ion-label>
+          Hallen
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let hall of sporthallService.halls;let i = index;">
+        <ion-label position="stacked">Hal <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sporthallService.halls[i].name" name="name"></ion-input>
+        <ion-icon name="add-circle" (click)="addEmptyHall()" [hidden]="i+1 != sporthallService.halls.length"></ion-icon>
+        <ion-icon name="remove-circle" (click)="removeHall(i, hall)" [hidden]="i == 0"></ion-icon>
+      </ion-item>
+
     </ion-list>
 
     <div class="ion-padding">

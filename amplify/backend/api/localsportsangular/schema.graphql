@@ -41,6 +41,7 @@ type Hall @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   id: ID!
   name: String!
   sportsHall: SportsHall! @connection(name: "SportsHallHalls")
+  active: Boolean
 }
 
 type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
