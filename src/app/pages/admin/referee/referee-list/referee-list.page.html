@@ -1,0 +1,27 @@
+<menu-header headerTitle="Scheidsrechters"></menu-header>
+
+<ion-content>
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='goToRefereeCreatePage()'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div [hidden]="referees.length > 0">
+    Er zijn geen scheidsrechters ingevoerd.
+  </div>
+
+  <div *ngFor="let referee of referees;" (click)="goToRefereeEditPage(referee.id)">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ referee.firstName }} {{ referee.lastName }} </h2>
+        <h3>Telefoonnummer: {{ referee.phone }}</h3>
+        <h3>E-mail: {{ referee.email }}</h3>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

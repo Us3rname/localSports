@@ -25,6 +25,7 @@ export class SportsHallListPage implements OnInit {
     this.loadSportsHalls();
     this.subscribeOnCreateSportsHall();
     this.subscribeOnUpdateSportsHall();
+    this.subscribeOnDeleteSportsHall();
   }
 
   private subscribeOnCreateSportsHall() {
@@ -48,32 +49,41 @@ export class SportsHallListPage implements OnInit {
     });
   }
 
+  private subscribeOnDeleteSportsHall() {
+    API.graphql(
+      graphqlOperation(subscriptions.onDeleteSportsHall)
+    ).subscribe({
+      next: (sportsHallData) => {
+        this.deleteSportsHall(sportsHallData);
+      }
+    });
+  }
+
   private updateSportsHall(sportsHallData) {
     const sportsHall = sportsHallData.value.data.onUpdateSportsHall;
     for (let i = 0; i < this.sportsHalls.length; i++) {
       if (this.sportsHalls[i].id === sportsHall.id) {
-        if (sportsHall.active === false) {
-          this.sportsHalls.splice(i, 1);
-          this.toastService.presentToast('Sporthal is verwijderd');
-          return;
-        } else {
-          this.sportsHalls[i] = sportsHall;
-          this.toastService.presentToast('Sporthal is bijgewerkt');
-          return;
-        }
+        this.sportsHalls[i] = sportsHall;
+        this.toastService.presentToast('Sporthal is bijgewerkt');
+        return;
+      }
+    }
+  }
+
+  private deleteSportsHall(sportsHallData) {
+    const sportsHall = sportsHallData.value.data.onUpdateSportsHall;
+    for (let i = 0; i < this.sportsHalls.length; i++) {
+      if (this.sportsHalls[i].id === sportsHall.id) {
+        this.sportsHalls.splice(i, 1);
+        this.toastService.presentToast('Sporthal is verwijderd');
+        return;
       }
     }
   }
 
   private async loadSportsHalls() {
 
-    await this.graphqlRequestService.doPrivateQuery('listSportsHalls', {
-      filter:
-      {
-        active:
-          { eq: true }
-      }
-    });
+    await this.graphqlRequestService.doPrivateQuery('listSportsHalls', {});
 
     if (this.graphqlRequestService.isSuccessfull) {
       this.sportsHalls = this.graphqlRequestService.data.items;

@@ -27,7 +27,7 @@ export class LeagueCreatePage implements OnInit {
 
     try {
       const createLeagueInput: CreateLeagueInput = {
-        name: this.league.name, leagueClubId: environment.clubId, active: true, ranking: this.league.ranking
+        name: this.league.name, leagueClubId: environment.clubId, ranking: this.league.ranking
       };
 
       await this.graphqlRequestService.doPrivateMutation('createLeague', { input: createLeagueInput });

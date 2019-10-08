@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../../../../graphql/queries';
 import * as mutations from '../../../../../graphql/mutations';
-import { UpdateTeamInput } from '../../../../../API';
+import { UpdateTeamInput, DeleteTeamInput } from '../../../../../API';
 import { AlertController } from '@ionic/angular';
 import { environment } from '../../../../../environments/environment';
 import { LeagueDataService } from '../../../../services/league-data.service';
@@ -18,8 +18,7 @@ import { ToastService } from '../../../../services/toast.service';
 export class TeamEditPage implements OnInit {
 
   public team = {
-    id: null, name: null, contact: null, teamLeagueId: null,
-    active: true, lastUpdated: new Date().toJSON(), teamClubId: environment.clubId
+    id: null, name: null, contact: null, teamLeagueId: null, teamClubId: environment.clubId
   };
   leagues = new Array();
   constructor(
@@ -38,7 +37,7 @@ export class TeamEditPage implements OnInit {
   }
 
   async loadLeagues() {
-    this.leagues = await this.leagueDataService.getActiveLeagues();
+    this.leagues = await this.leagueDataService.getLeagues();
   }
 
   async processForm() {
@@ -92,9 +91,8 @@ export class TeamEditPage implements OnInit {
   }
 
   async deleteTeam(team) {
-    const id = team.id;
-    const teamInput: UpdateTeamInput = { id, active: false, deletedAt: new Date().toJSON(), lastUpdated: new Date().toJSON() };
-    await API.graphql(graphqlOperation(mutations.updateTeam, { input: teamInput }));
+    const teamInput: DeleteTeamInput = { id: team.id };
+    await API.graphql(graphqlOperation(mutations.deleteTeam, { input: teamInput }));
     return this.router.navigate(['/admin/team']);
   }
 }

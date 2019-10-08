@@ -62,6 +62,11 @@ export class AppComponent {
       icon: 'people'
     },
     {
+      title: 'Scheidsrechters',
+      url: '/admin/referee',
+      icon: 'contacts'
+    },
+    {
       title: 'Sporthallen',
       url: '/admin/sports-hall',
       icon: 'pin'

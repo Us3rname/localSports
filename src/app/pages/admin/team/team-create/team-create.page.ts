@@ -12,35 +12,44 @@ import { CreateTeamInput } from '../../../../../API';
 })
 export class TeamCreatePage implements OnInit {
 
+  i = 2;
   defaultHref: '';
   team: CreateTeamInput;
   initialTeamState = {
-    name: null, contact: null, teamLeagueId: null, active: true, lastUpdated: new Date().toJSON(), teamClubId: environment.clubId
+    name: 'Team ' + this.i++, contact: 'Henkie', teamLeagueId: null, leagueId: null, teamClubId: environment.clubId
   };
   leagues = new Array();
+
 
   constructor(
     private router: Router,
     private leagueDataService: LeagueDataService,
     private graphqlRequestService: GraphqlRequestService) {
-    this.team = this.initialTeamState;
   }
 
   ngOnInit() {
+    this.team = this.initialTeamState;
     this.loadLeagues();
   }
 
   async loadLeagues() {
-    this.leagues = await this.leagueDataService.getActiveLeagues();
+    this.leagues = await this.leagueDataService.getLeagues();
   }
 
   async processForm() {
 
     try {
-      await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
+      // General workaround to be able to filter the teams per league.
+      this.team.leagueId = this.team.teamLeagueId;
+
+      for (let i = 1; i < 21; i++) {
+        this.team.name = '3e klasse - Team ' + i;
+        await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
+      }
+
 
       if (this.graphqlRequestService.isSuccessfull) {
-        return this.router.navigate(['/admin/team']);
+        // return this.router.navigate(['/admin/team']);
       }
 
     } catch (err) {

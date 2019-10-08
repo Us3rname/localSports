@@ -1,24 +1,6 @@
 <menu-header headerTitle="Teams"></menu-header>
 
 <ion-content>
-  <ion-list>
-    <ion-segment (ionChange)="changeTeams($event)">
-      <ion-segment-button *ngFor="let league of leagues;" value="{{league.id}}"
-        checked="{{ selectedLeagueId == league.id }}">
-        <ion-label>{{ league.name }}</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-
-    <div *ngFor="let team of shownTeams;">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ team.name }}</h2>
-          <h3><b>Contactpersoon:</b> {{ team.contact }}</h3>
-        </ion-label>
-      </ion-item>
-    </div>
-  </ion-list>
+  <app-team-list [leagueId]=selectedLeagueId [message]="message" (leagueSelected)="onLeagueSelected($event)">
+  </app-team-list>
 </ion-content>

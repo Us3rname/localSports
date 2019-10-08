@@ -36,7 +36,7 @@ export class SportsHallCreatePage implements OnInit {
 
     try {
       const createSportsHallInput: CreateSportsHallInput = {
-        name: this.sportsHall.name, sportsHallClubId: environment.clubId, active: true, street: this.sportsHall.street,
+        name: this.sportsHall.name, sportsHallClubId: environment.clubId, street: this.sportsHall.street,
         zipCode: this.sportsHall.zipCode, city: this.sportsHall.city, phone: this.sportsHall.phone,
         streetNumber: this.sportsHall.streetNumber
       };

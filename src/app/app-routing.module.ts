@@ -66,6 +66,24 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'referee', children: [
+          {
+            path: 'edit/:refereeId',
+            loadChildren: () => import('./pages/admin/referee/referee-edit/referee-edit.module')
+              .then(m => m.RefereeEditPageModule)
+          },
+          {
+            path: 'create',
+            loadChildren: () => import('./pages/admin/referee/referee-create/referee-create.module')
+              .then(m => m.RefereeCreatePageModule)
+          },
+          {
+            path: '', loadChildren: () => import('./pages/admin/referee/referee-list/referee-list.module')
+              .then(m => m.RefereeListPageModule)
+          },
+        ]
+      },
+      {
         path: '',
         redirectTo: 'app/tabs/schedule',
         pathMatch: 'full'

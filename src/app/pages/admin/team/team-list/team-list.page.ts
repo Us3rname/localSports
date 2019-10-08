@@ -7,7 +7,7 @@ import { LeagueDataService } from '../../../../services/league-data.service';
 import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 
 @Component({
-  selector: 'app-team-list',
+  selector: 'app-admin-team-list',
   templateUrl: './team-list.page.html',
   styleUrls: ['./team-list.page.scss'],
 })
@@ -18,6 +18,9 @@ export class TeamListPage implements OnInit {
   public teamsPerLeague = new Array();
   public selectedLeagueId;
   public shownTeams;
+  isLoading = true;
+  loadingItems = Array(5);
+  message;
 
   constructor(
     private router: Router,
@@ -42,9 +45,11 @@ export class TeamListPage implements OnInit {
 
     this.subscribeOnCreateTeam();
     this.subscribeOnUpdateTeam();
+    this.subscribeOnDeleteTeam();
   }
 
   private subscribeOnCreateTeam() {
+
     // Subscribe for new teams when they create it through the app.
     API.graphql(
       graphqlOperation(subscriptions.onCreateTeam)
@@ -65,19 +70,34 @@ export class TeamListPage implements OnInit {
     });
   }
 
+  private subscribeOnDeleteTeam() {
+    API.graphql(
+      graphqlOperation(subscriptions.onDeleteTeam)
+    ).subscribe({
+      next: (teamData) => {
+        this.deleteTeam(teamData);
+      }
+    });
+  }
+
   updateLocalTeams(teamData) {
     const team = teamData.value.data.onUpdateTeam;
     for (let i = 0; i < this.teamsPerLeague[this.selectedLeagueId].length; i++) {
       if (this.teamsPerLeague[this.selectedLeagueId][i].id === team.id) {
-        if (team.active === false) {
-          this.teamsPerLeague[this.selectedLeagueId].splice(i, 1);
-          this.toastService.presentToast('Team is verwijderd');
-          return;
-        } else {
-          this.teamsPerLeague[this.selectedLeagueId][i] = team;
-          this.toastService.presentToast('Team is bijgewerkt');
-          return;
-        }
+        this.teamsPerLeague[this.selectedLeagueId][i] = team;
+        this.toastService.presentToast('Team is bijgewerkt');
+        return;
+      }
+    }
+  }
+
+  deleteTeam(teamData) {
+    const team = teamData.value.data.onUpdateTeam;
+    for (let i = 0; i < this.teamsPerLeague[this.selectedLeagueId].length; i++) {
+      if (this.teamsPerLeague[this.selectedLeagueId][i].id === team.id) {
+        this.teamsPerLeague[this.selectedLeagueId].splice(i, 1);
+        this.toastService.presentToast('Team is verwijderd');
+        return;
       }
     }
   }
@@ -85,16 +105,17 @@ export class TeamListPage implements OnInit {
   async loadTeams() {
 
     await this.graphqlRequestService.doPrivateQuery(
-      'listTeams', { filter: { active: { eq: true } } }
+      'listTeams', {}
     );
 
     if (this.graphqlRequestService.isSuccessfull) {
       this.allTeams = this.graphqlRequestService.data.items;
+      // this.allTeams.sort(this.sortByTeamName);
     }
   }
 
   async loadAllLeagues() {
-    this.leagues = await this.leagueDataService.getActiveLeagues();
+    this.leagues = await this.leagueDataService.getLeagues();
   }
 
   assignTeamsToLeague() {
@@ -114,6 +135,7 @@ export class TeamListPage implements OnInit {
     });
 
     this.shownTeams = this.teamsPerLeague[this.selectedLeagueId];
+    this.isLoading = false;
   }
 
   updateTeamsAfterCreate(team) {
@@ -127,8 +149,8 @@ export class TeamListPage implements OnInit {
     this.toastService.presentToast('Team is aangemaakt.');
   }
 
-  changeTeams(event) {
-    this.selectedLeagueId = event.detail.value;
+  onLeagueSelected(selectedLeagueId) {
+    this.selectedLeagueId = selectedLeagueId;
     this.shownTeams = this.teamsPerLeague[this.selectedLeagueId];
   }
 
@@ -136,7 +158,7 @@ export class TeamListPage implements OnInit {
     return this.router.navigate(['/admin/team/create']);
   }
 
-  goToTeamEditPage(id) {
-    this.router.navigate(['/admin/team/edit/' + id]);
+  onTeamSelected(team) {
+    this.router.navigate(['/admin/team/edit/' + team.id]);
   }
 }

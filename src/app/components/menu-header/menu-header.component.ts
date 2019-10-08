@@ -8,7 +8,6 @@ import { Component, Input } from '@angular/core';
 export class MenuHeaderComponent {
 
   @Input() headerTitle: string;
-  @Input() buttonType = 'menu';
 
   constructor() {
   }

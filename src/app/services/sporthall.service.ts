@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UpdateSportsHallInput, UpdateHallInput, CreateHallInput } from 'src/API';
+import { UpdateSportsHallInput, UpdateHallInput, CreateHallInput, DeleteHallInput } from 'src/API';
 import { GraphqlRequestService } from './graphql-request.service';
 import * as uuid from 'uuid';
 
@@ -27,8 +27,8 @@ export class SporthallService {
   async updateHalls(sportsHallId) {
 
     for (const hall of this.hallsToDelete) {
-      const updateHallInput: UpdateHallInput = { active: false, id: hall.id };
-      this.graphqlRequestService.doPrivateMutation('updateHall', { input: updateHallInput });
+      const deleteHallInput: DeleteHallInput = { id: hall.id };
+      this.graphqlRequestService.doPrivateMutation('deleteHall', { input: deleteHallInput });
     }
 
     for (const hall of this.existingHalls) {
@@ -43,14 +43,10 @@ export class SporthallService {
   }
 
   addEmptyHall() {
-    console.log(this.halls);
-
-
     // Need to generate an unique id for the frontend. Is not being used as an id for the hall itself.
     const newHall = { id: uuid.v4(), name: '' };
     this.halls.push(newHall);
     this.newHalls[newHall.id] = newHall;
-    console.log(this.halls);
   }
 
   removeHall(index, hallId) {

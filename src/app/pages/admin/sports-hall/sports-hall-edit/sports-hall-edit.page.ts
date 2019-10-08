@@ -99,8 +99,7 @@ export class SportsHallEditPage implements OnInit {
   }
 
   async deleteSportsHall(sportsHall) {
-    const id = sportsHall.id;
-    const sportsHallInput: UpdateSportsHallInput = { id, active: false };
+    const sportsHallInput: UpdateSportsHallInput = { id: sportsHall.id };
     await this.graphqlRequestService.doPrivateMutation('updateSportsHall', { input: sportsHallInput });
 
     if (this.graphqlRequestService.isSuccessfull) {

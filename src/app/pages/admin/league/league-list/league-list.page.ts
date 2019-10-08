@@ -22,6 +22,7 @@ export class LeagueListPage implements OnInit {
     this.loadLeagues();
     this.subscribeOnCreateleague();
     this.subscribeOnUpdateLeague();
+    this.subscribeOnDeleteLeague();
   }
 
   subscribeOnCreateleague() {
@@ -36,7 +37,7 @@ export class LeagueListPage implements OnInit {
   }
 
   async loadLeagues() {
-    const allLeagues = await API.graphql(graphqlOperation(queries.listLeagues, { filter: { active: { eq: true } } }));
+    const allLeagues = await API.graphql(graphqlOperation(queries.listLeagues));
 
     if (allLeagues) {
       this.allLeagues = allLeagues.data.listLeagues.items;
@@ -55,8 +56,18 @@ export class LeagueListPage implements OnInit {
     API.graphql(
       graphqlOperation(subscriptions.onUpdateLeague)
     ).subscribe({
-      next: (teamData) => {
-        this.updateLocalLeagues(teamData);
+      next: (leagueData) => {
+        this.updateLocalLeagues(leagueData);
+      }
+    });
+  }
+
+  subscribeOnDeleteLeague() {
+    API.graphql(
+      graphqlOperation(subscriptions.onDeleteLeague)
+    ).subscribe({
+      next: (leagueData) => {
+        this.deleteLocalLeague(leagueData);
       }
     });
   }
@@ -65,15 +76,20 @@ export class LeagueListPage implements OnInit {
     const league = leagueData.value.data.onUpdateLeague;
     for (let i = 0; i < this.allLeagues.length; i++) {
       if (this.allLeagues[i].id === league.id) {
-        if (league.active === false) {
-          this.allLeagues.splice(i, 1);
-          this.toastService.presentToast('Divisie is verwijderd');
-          return;
-        } else {
-          this.allLeagues[i] = league;
-          this.toastService.presentToast('Divisie is bijgewerkt');
-          return;
-        }
+        this.allLeagues[i] = league;
+        this.toastService.presentToast('Divisie is bijgewerkt');
+        return;
+      }
+    }
+  }
+
+  deleteLocalLeague(leagueData) {
+    const league = leagueData.value.data.onDeleteLeague;
+    for (let i = 0; i < this.allLeagues.length; i++) {
+      if (this.allLeagues[i].id === league.id) {
+        this.allLeagues.splice(i, 1);
+        this.toastService.presentToast('Divisie is verwijderd');
+        return;
       }
     }
   }

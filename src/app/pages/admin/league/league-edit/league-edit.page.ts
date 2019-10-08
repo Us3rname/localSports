@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import { UpdateLeagueInput } from 'src/API';
+import { UpdateLeagueInput, DeleteLeagueInput } from 'src/API';
 import * as mutations from '../../../../../graphql/mutations';
 import * as queries from '../../../../../graphql/queries';
 import { AlertController } from '@ionic/angular';
@@ -46,7 +46,7 @@ export class LeagueEditPage implements OnInit {
 
   async processForm() {
     try {
-      const updateLeagueInput: UpdateLeagueInput = { id: this.league.id, name: this.league.name };
+      const updateLeagueInput: UpdateLeagueInput = { id: this.league.id, name: this.league.name, ranking: this.league.ranking };
       await this.graphqlRequestService.doPrivateMutation('updateLeague', { input: updateLeagueInput });
 
       if (this.graphqlRequestService.isSuccessfull) {
@@ -81,9 +81,8 @@ export class LeagueEditPage implements OnInit {
   }
 
   async deleteLeague(league) {
-    const id = league.id;
-    const leagueInput: UpdateLeagueInput = { id, active: false, deletedAt: new Date().toJSON(), lastUpdated: new Date().toJSON() };
-    await this.graphqlRequestService.doPrivateMutation('updateLeague', { input: leagueInput });
+    const leagueInput: DeleteLeagueInput = { id: league.id };
+    await this.graphqlRequestService.doPrivateMutation('deleteLeague', { input: leagueInput });
 
     if (this.graphqlRequestService.isSuccessfull) {
       return this.router.navigate(['/admin/league']);
