@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../../../../graphql/queries';
 import * as mutations from '../../../../../graphql/mutations';
 import { UpdateTeamInput, DeleteTeamInput } from '../../../../../API';
 import { AlertController } from '@ionic/angular';
@@ -18,7 +17,7 @@ import { ToastService } from '../../../../services/toast.service';
 export class TeamEditPage implements OnInit {
 
   public team = {
-    id: null, name: null, contact: null, teamLeagueId: null, teamClubId: environment.clubId
+    id: null, name: null, contact: null, teamLeagueId: null, teamClubId: environment.clubId, league: { id: null, ranking: null }
   };
   leagues = new Array();
   constructor(
@@ -28,12 +27,15 @@ export class TeamEditPage implements OnInit {
     private leagueDataService: LeagueDataService,
     private graphqlRequestService: GraphqlRequestService,
     public toastService: ToastService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
-    this.loadLeagues();
     const teamId = this.route.snapshot.paramMap.get('teamId');
-    this.loadTeam(teamId);
+    this.loadLeagues().then(() =>
+      this.loadTeam(teamId)
+    );
   }
 
   async loadLeagues() {
@@ -43,8 +45,9 @@ export class TeamEditPage implements OnInit {
   async processForm() {
     try {
       const updateTeamInput: UpdateTeamInput = {
-        id: this.team.id, teamLeagueId: this.team.teamLeagueId, name: this.team.name, contact: this.team.contact
+        id: this.team.id, teamLeagueId: this.team.league.id, name: this.team.name, contact: this.team.contact
       };
+
       await this.graphqlRequestService.doPrivateMutation('updateTeam', { input: updateTeamInput });
 
       if (this.graphqlRequestService.isSuccessfull) {
@@ -62,6 +65,7 @@ export class TeamEditPage implements OnInit {
 
     if (this.graphqlRequestService.isSuccessfull) {
       this.team = this.graphqlRequestService.data;
+      console.log(this.team);
     } else {
       this.toastService.presentWarningToast('Team kon niet worden gevonden.');
       return this.router.navigate(['/admin/team']);

@@ -12,9 +12,10 @@
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label>Divisie</ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="team.teamLeagueId" name="teamLeagueId">
-          <ion-select-option *ngFor="let league of leagues" value="{{league.id}}"
-            selected="team.teamLeagueId != league.id">{{ league.name}}</ion-select-option>
+        <ion-select [(ngModel)]="team.league.id" name="teamLeagueId">
+          <ion-select-option *ngFor="let league of leagues;let i=index;" [value]='league.id'>
+            {{ league.name}}
+          </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
