@@ -4,7 +4,36 @@
 export const createGame = `mutation CreateGame($input: CreateGameInput!) {
   createGame(input: $input) {
     id
+    gameDay
     homeTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+      }
+      athletes {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
+    awayTeam {
       id
       leagueId
       name
@@ -34,19 +63,16 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     }
     scoreHome
     scoreAway
-    awayTeam {
+    sportshall {
       id
-      leagueId
       name
-      contact
-      owner
-      league {
-        id
-        name
-        ranking
-        owner
-      }
-      athletes {
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      halls {
         nextToken
       }
       club {
@@ -62,8 +88,20 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         phone
       }
     }
-    gameDay
-    location
+    hall {
+      id
+      name
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+      }
+    }
     referee {
       id
       firstName
@@ -94,7 +132,36 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
 export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
   updateGame(input: $input) {
     id
+    gameDay
     homeTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+      }
+      athletes {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
+    awayTeam {
       id
       leagueId
       name
@@ -124,19 +191,16 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     }
     scoreHome
     scoreAway
-    awayTeam {
+    sportshall {
       id
-      leagueId
       name
-      contact
-      owner
-      league {
-        id
-        name
-        ranking
-        owner
-      }
-      athletes {
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      halls {
         nextToken
       }
       club {
@@ -152,8 +216,20 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         phone
       }
     }
-    gameDay
-    location
+    hall {
+      id
+      name
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+      }
+    }
     referee {
       id
       firstName
@@ -184,7 +260,36 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
 export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
   deleteGame(input: $input) {
     id
+    gameDay
     homeTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+      }
+      athletes {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
+    awayTeam {
       id
       leagueId
       name
@@ -214,19 +319,16 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     }
     scoreHome
     scoreAway
-    awayTeam {
+    sportshall {
       id
-      leagueId
       name
-      contact
-      owner
-      league {
-        id
-        name
-        ranking
-        owner
-      }
-      athletes {
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      halls {
         nextToken
       }
       club {
@@ -242,8 +344,20 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         phone
       }
     }
-    gameDay
-    location
+    hall {
+      id
+      name
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+      }
+    }
     referee {
       id
       firstName

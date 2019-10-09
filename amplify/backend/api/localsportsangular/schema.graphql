@@ -1,11 +1,12 @@
 type Game @model @auth(rules: [{allow: public, operations: [read]}])  {
   id: ID!
-  homeTeam: Team
+  gameDay: AWSDateTime!
+  homeTeam: Team!
+  awayTeam: Team!
   scoreHome: Int
-  scoreAway: Int
-  awayTeam: Team
-  gameDay: AWSDateTime
-  location: String
+  scoreAway: Int    
+  sportshall: SportsHall!
+  hall: Hall!
   referee: Referee
 }
 

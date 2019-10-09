@@ -41,15 +41,10 @@ export class TeamCreatePage implements OnInit {
     try {
       // General workaround to be able to filter the teams per league.
       this.team.leagueId = this.team.teamLeagueId;
-
-      for (let i = 1; i < 21; i++) {
-        this.team.name = '3e klasse - Team ' + i;
-        await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
-      }
-
+      await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
 
       if (this.graphqlRequestService.isSuccessfull) {
-        // return this.router.navigate(['/admin/team']);
+        return this.router.navigate(['/admin/team']);
       }
 
     } catch (err) {

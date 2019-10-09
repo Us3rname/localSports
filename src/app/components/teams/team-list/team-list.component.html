@@ -1,6 +1,5 @@
 <app-league-header (leagueSelected)="onLeagueSelected($event)"></app-league-header>
 
-<h1>Berichtttt {{ message }}</h1>
 <ion-list [hidden]="isLoading">
   <div *ngFor="let team of shownTeams;" (click)="onTeamSelected(team)">
     <ion-item>

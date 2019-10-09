@@ -4,7 +4,36 @@
 export const getGame = `query GetGame($id: ID!) {
   getGame(id: $id) {
     id
+    gameDay
     homeTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+      }
+      athletes {
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+      }
+    }
+    awayTeam {
       id
       leagueId
       name
@@ -34,19 +63,16 @@ export const getGame = `query GetGame($id: ID!) {
     }
     scoreHome
     scoreAway
-    awayTeam {
+    sportshall {
       id
-      leagueId
       name
-      contact
-      owner
-      league {
-        id
-        name
-        ranking
-        owner
-      }
-      athletes {
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      halls {
         nextToken
       }
       club {
@@ -62,8 +88,20 @@ export const getGame = `query GetGame($id: ID!) {
         phone
       }
     }
-    gameDay
-    location
+    hall {
+      id
+      name
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+      }
+    }
     referee {
       id
       firstName
@@ -99,7 +137,15 @@ export const listGames = `query ListGames(
   listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      gameDay
       homeTeam {
+        id
+        leagueId
+        name
+        contact
+        owner
+      }
+      awayTeam {
         id
         leagueId
         name
@@ -108,15 +154,20 @@ export const listGames = `query ListGames(
       }
       scoreHome
       scoreAway
-      awayTeam {
+      sportshall {
         id
-        leagueId
         name
-        contact
-        owner
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
       }
-      gameDay
-      location
+      hall {
+        id
+        name
+      }
       referee {
         id
         firstName
