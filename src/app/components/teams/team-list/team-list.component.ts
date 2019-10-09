@@ -119,7 +119,12 @@ export class TeamListComponent implements OnInit {
     const team = teamData.value.data.onUpdateTeam;
     for (let i = 0; i < this.allTeams[this.leagueId].items.length; i++) {
       if (this.allTeams[this.leagueId].items[i].id === team.id) {
-        this.allTeams[this.leagueId].items[i] = team;
+
+        // When the team changes league, we need to remove it from the current league & add it to the new league
+        if (this.leagueId !== team.league.id) {
+          this.allTeams[this.leagueId].items.splice(i, 1);
+        }
+        this.allTeams[team.league.id].items[i] = team;
         this.toastService.presentToast('Team is bijgewerkt');
         return;
       }

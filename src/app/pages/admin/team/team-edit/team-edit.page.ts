@@ -45,7 +45,7 @@ export class TeamEditPage implements OnInit {
   async processForm() {
     try {
       const updateTeamInput: UpdateTeamInput = {
-        id: this.team.id, teamLeagueId: this.team.league.id, name: this.team.name, contact: this.team.contact
+        id: this.team.id, leagueId: this.team.league.id, teamLeagueId: this.team.league.id, name: this.team.name, contact: this.team.contact
       };
 
       await this.graphqlRequestService.doPrivateMutation('updateTeam', { input: updateTeamInput });
