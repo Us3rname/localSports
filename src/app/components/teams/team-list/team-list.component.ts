@@ -14,10 +14,9 @@ export class TeamListComponent implements OnInit {
   public allTeams = new Array();
   public teamsPerLeague = new Array();
   public shownTeams;
-  private isLoading;
-  private loadingItems = new Array(5); // Skeleton loader shows 5 items
+  isLoading;
+  loadingItems = new Array(5); // Skeleton loader shows 5 items
   @Input() leagueId: string;
-  @Input() message: string;
 
   @Output() teamSelected = new EventEmitter<object>();
 

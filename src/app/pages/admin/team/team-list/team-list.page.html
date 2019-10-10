@@ -9,7 +9,6 @@
     </ion-fab-button>
   </ion-fab>
 
-  <app-team-list [leagueId]=selectedLeagueId [message]="message" (leagueSelected)="onLeagueSelected($event)"
-    (teamSelected)="onTeamSelected($event)">
+  <app-team-list [leagueId]=selectedLeagueId (teamSelected)="onTeamSelected($event)">
   </app-team-list>
 </ion-content>
