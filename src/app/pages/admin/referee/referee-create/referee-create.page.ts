@@ -31,11 +31,12 @@ export class RefereeCreatePage implements OnInit {
 
   }
 
-  async processForm() {
+  async processForm(referee) {
     try {
-      const createRefereeInput: CreateRefereeInput = this.referee;
-      const referee = await this.refereeService.createReferee(createRefereeInput);
+      // const createRefereeInput: CreateRefereeInput = this.referee;
+      // const referee = await this.refereeService.createReferee(createRefereeInput);
 
+      console.log(referee);
       if (referee !== null) {
         return this.router.navigate(['/admin/referee']);
       } else {

@@ -7,21 +7,23 @@ import { TeamListComponent } from './teams/team-list/team-list.component';
 
 import { RefereeFormComponent } from './referee-form/referee-form.component';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputErrorComponent } from './forms/input-error/input-error.component';
 
 @NgModule({
   declarations: [
     MenuHeaderComponent, RefereeFormComponent, BackHeaderComponent, LeagueHeaderComponent,
-    TeamListComponent
+    TeamListComponent, InputErrorComponent
   ],
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MenuHeaderComponent, RefereeFormComponent, BackHeaderComponent, LeagueHeaderComponent,
-    TeamListComponent
+    TeamListComponent, InputErrorComponent
   ]
 })
 export class ComponentsModule { }

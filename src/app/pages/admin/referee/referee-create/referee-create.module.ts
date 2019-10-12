@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RefereeCreatePage } from './referee-create.page';
-
+import { ComponentsModule } from '../../../../components/components.module';
 const routes: Routes = [
   {
     path: '',
@@ -19,8 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [RefereeCreatePage]
 })
-export class RefereeCreatePageModule {}
+export class RefereeCreatePageModule { }

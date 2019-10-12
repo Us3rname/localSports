@@ -33,10 +33,10 @@
     <ion-grid *ngFor="let itema of items;">
       <div *ngFor="let item of itema; let index=index; let odd=odd; let even=even;">
 
-        <ion-list-header align-self-center class="ion-text-center" [hidden]="index > 0" color="secondary">
-          <ion-col align-self-center class="ion-text-center" size=3>
+        <ion-list-header class="ion-align-self-center" class="ion-text-center" [hidden]="index > 0" color="secondary">
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
           </ion-col>
-          <ion-col align-self-start class="ion-text-center" size="6">
+          <ion-col class="ion-align-self-start" class="ion-text-center" size="6">
             <h6 class="ion-no-margin">
               <h4 class="ion-no-margin">
                 {{item.gameDay | date:'EEEE'}}
@@ -44,35 +44,35 @@
               </h4>
             </h6>
           </ion-col>
-          <ion-col align-self-center class="ion-text-center" size=3>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
           </ion-col>
         </ion-list-header>
 
         <ion-row class="gameRow" [ngClass]="{ odd: odd, even: even }">
-          <ion-col align-self-center class="ion-text-center" size=5>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=5>
             <h5 class="ion-no-margin">{{item.homeTeam.toUpperCase()}}</h5>
           </ion-col>
-          <ion-col align-self-start class="ion-text-center" size="2">
+          <ion-col class="ion-align-self-start" class="ion-text-center" size="2">
             <h6 class="ion-no-margin">vs</h6>
           </ion-col>
-          <ion-col align-self-center class="ion-text-center" size=5>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=5>
             <h5 class="ion-no-margin">{{item.awayTeam.toUpperCase()}}</h5>
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center gameRow" [ngClass]="{ odd: odd, even: even }">
-          <ion-col align-self-center class="ion-text-center" size=4>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=4>
           </ion-col>
-          <ion-col align-self-start class="ion-text-center" size=4>
+          <ion-col class="ion-align-self-start" class="ion-text-center" size=4>
             <h6 class="ion-no-margin">{{item.location}}</h6>
           </ion-col>
-          <ion-col align-self-center class="ion-text-center" size=4>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=4>
           </ion-col>
         </ion-row>
         <ion-row class="gameRow" [ngClass]="{ odd: odd, even: even }">
-          <ion-col align-self-start class="ion-text-end"></ion-col>
-          <ion-col align-self-center size="2" class="starttime">
+          <ion-col class="ion-align-self-start" class="ion-text-end"></ion-col>
+          <ion-col class="ion-align-self-center" size="2" class="starttime">
             {{item.gameDay | date:'HH:mm' }}</ion-col>
-          <ion-col align-self-end></ion-col>
+          <ion-col class="ion-align-self-end"></ion-col>
         </ion-row>
         <ion-row [ngClass]="{ odd: odd, even: even }">
           <ion-col size="6">
@@ -98,26 +98,26 @@
       <div *ngFor="let item of [].constructor(4); let index=index; let odd=odd; let even=even;"
         [ngClass]="{ odd: odd, evenSkeleton: even }">
         <ion-row>
-          <ion-col align-self-start class="ion-text-end">
+          <ion-col class="ion-align-self-start" class="ion-text-end">
             <h4>
               <ion-skeleton-text animated style="height: 30px"></ion-skeleton-text>
             </h4>
           </ion-col>
-          <ion-col align-self-center size="1">
+          <ion-col class="ion-align-self-center" size="1">
           </ion-col>
-          <ion-col align-self-end>
+          <ion-col class="ion-align-self-end">
             <h4>
               <ion-skeleton-text animated style="height: 30px"></ion-skeleton-text>
             </h4>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col align-self-start>
+          <ion-col class="ion-align-self-start">
           </ion-col>
-          <ion-col align-self-center size=2>
+          <ion-col class="ion-align-self-center" size=2>
             <ion-skeleton-text animated style="width: 50px; height: 30px"></ion-skeleton-text>
           </ion-col>
-          <ion-col align-self-end></ion-col>
+          <ion-col class="ion-align-self-end"></ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="6">

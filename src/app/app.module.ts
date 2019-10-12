@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -18,11 +19,14 @@ import { reducers, metaReducers } from './reducers';
 
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [MenuHeaderComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(),
     AvatarModule,
     AppRoutingModule,

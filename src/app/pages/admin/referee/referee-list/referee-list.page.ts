@@ -30,10 +30,10 @@ export class RefereeListPage implements OnInit {
 
   subscribeOnCreateReferee() {
     API.graphql(
-      graphqlOperation(subscriptions.onCreateSportsHall)
+      graphqlOperation(subscriptions.onCreateReferee)
     ).subscribe({
       next: (refereeData) => {
-        this.referees.push(refereeData.value.data.onCreateSportsHall);
+        this.referees.push(refereeData.value.data.onCreateReferee);
         this.toastService.presentToast('Scheidsrechter is aangemaakt.');
       }
     });
@@ -41,7 +41,7 @@ export class RefereeListPage implements OnInit {
 
   private subscribeOnUpdateReferee() {
     API.graphql(
-      graphqlOperation(subscriptions.onUpdateSportsHall)
+      graphqlOperation(subscriptions.onUpdateReferee)
     ).subscribe({
       next: (sportsHallData) => {
         this.updateSportsHall(sportsHallData);
@@ -51,7 +51,7 @@ export class RefereeListPage implements OnInit {
 
   private subscribeOnDeleteReferee() {
     API.graphql(
-      graphqlOperation(subscriptions.onDeleteSportsHall)
+      graphqlOperation(subscriptions.onDeleteReferee)
     ).subscribe({
       next: (sportsHallData) => {
         this.deleteSportsHall(sportsHallData);
@@ -60,7 +60,7 @@ export class RefereeListPage implements OnInit {
   }
 
   private updateSportsHall(sportsHallData) {
-    const sportsHall = sportsHallData.value.data.onUpdateSportsHall;
+    const sportsHall = sportsHallData.value.data.onUpdateReferee;
     for (let i = 0; i < this.referees.length; i++) {
       if (this.referees[i].id === sportsHall.id) {
         this.referees[i] = sportsHall;
@@ -71,7 +71,7 @@ export class RefereeListPage implements OnInit {
   }
 
   private deleteSportsHall(sportsHallData) {
-    const sportsHall = sportsHallData.value.data.onUpdateSportsHall;
+    const sportsHall = sportsHallData.value.data.onUpdateReferee;
     for (let i = 0; i < this.referees.length; i++) {
       if (this.referees[i].id === sportsHall.id) {
         this.referees.splice(i, 1);

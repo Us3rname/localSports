@@ -8,53 +8,6 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form (ngSubmit)="processForm()">
-
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-item>
-        <ion-label position="stacked">Naam <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.firstName" name="firstName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Achternaam <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.lastName" name="lastName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Straat <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.street" name="street"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Huisnummer <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="number" [(ngModel)]="referee.streetNumber" name="streetNumber"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Postcode <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.zipCode" name="zipCode"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Stad <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.city" name="city"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">E-mailadres <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="email" [(ngModel)]="referee.email" name="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Telefoonnummer <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required type="text" [(ngModel)]="referee.phone" name="phone"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Scheidsrechter toevoegen</ion-button>
-    </div>
-  </form>
+  <referee-form [referee]=referee action="create" [refereeId]=refereeId (refereeMutated)="processForm($event)">
+  </referee-form>
 </ion-content>
