@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GraphqlRequestService } from './graphql-request.service';
-import { CreateRefereeInput, UpdateRefereeInput } from 'src/API';
+import { CreateRefereeInput, UpdateRefereeInput, DeleteRefereeInput } from 'src/API';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,14 @@ export class RefereeService {
   async updateReferee(updateRefereeInput: UpdateRefereeInput) {
 
     await this.graphqlRequestService.doPrivateMutation('updateReferee', { input: updateRefereeInput });
+    if (this.graphqlRequestService.isSuccessfull) {
+      return this.graphqlRequestService.data;
+    }
+  }
+
+  async deleteReferee(refereeId) {
+    const deleteInput: DeleteRefereeInput = { id: refereeId };
+    await this.graphqlRequestService.doPrivateMutation('deleteReferee', { input: deleteInput });
     if (this.graphqlRequestService.isSuccessfull) {
       return this.graphqlRequestService.data;
     }

@@ -43,8 +43,8 @@ export class RefereeListPage implements OnInit {
     API.graphql(
       graphqlOperation(subscriptions.onUpdateReferee)
     ).subscribe({
-      next: (sportsHallData) => {
-        this.updateSportsHall(sportsHallData);
+      next: (refereeData) => {
+        this.updateSportsHall(refereeData);
       }
     });
   }
@@ -53,29 +53,29 @@ export class RefereeListPage implements OnInit {
     API.graphql(
       graphqlOperation(subscriptions.onDeleteReferee)
     ).subscribe({
-      next: (sportsHallData) => {
-        this.deleteSportsHall(sportsHallData);
+      next: (refereeData) => {
+        this.deleteSportsHall(refereeData);
       }
     });
   }
 
-  private updateSportsHall(sportsHallData) {
-    const sportsHall = sportsHallData.value.data.onUpdateReferee;
+  private updateSportsHall(refereeData) {
+    const sportsHall = refereeData.value.data.onUpdateReferee;
     for (let i = 0; i < this.referees.length; i++) {
       if (this.referees[i].id === sportsHall.id) {
         this.referees[i] = sportsHall;
-        this.toastService.presentToast('Sporthal is bijgewerkt');
+        this.toastService.presentToast('Scheidsrechter is bijgewerkt');
         return;
       }
     }
   }
 
-  private deleteSportsHall(sportsHallData) {
-    const sportsHall = sportsHallData.value.data.onUpdateReferee;
+  private deleteSportsHall(refereeData) {
+    const sportsHall = refereeData.value.data.onDeleteReferee;
     for (let i = 0; i < this.referees.length; i++) {
       if (this.referees[i].id === sportsHall.id) {
         this.referees.splice(i, 1);
-        this.toastService.presentToast('Sporthal is verwijderd');
+        this.toastService.presentToast('Scheidsrechter is verwijderd');
         return;
       }
     }

@@ -67,7 +67,27 @@
     </app-input-error>
   </ion-list>
 
-  <div class="ion-padding">
+  <div class="ion-padding" [hidden]="action !== 'create'">
     <ion-button expand="block" type="submit" class="ion-no-margin">Scheidsrechter toevoegen</ion-button>
   </div>
+
+  <ion-grid [hidden]="action !== 'edit'">
+    <ion-row>
+      <ion-col>
+        <ion-button color=danger (click)="deleteReferee()">
+          Verwijder
+        </ion-button>
+      </ion-col>
+
+      <ion-col>
+      </ion-col>
+
+      <ion-col>
+        <ion-button type="submit">
+          Scheidsrechter bijwerken
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </form>

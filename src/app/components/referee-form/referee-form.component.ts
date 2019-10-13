@@ -3,7 +3,7 @@ import { RefereeService } from 'src/app/services/referee.service';
 import { CreateRefereeInput, UpdateRefereeInput } from 'src/API';
 import { Referee } from 'src/app/interfaces/referee';
 import { environment } from '../../../environments/environment';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'referee-form',
@@ -77,38 +77,28 @@ export class RefereeFormComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.refereeForm.invalid) {
-      Object.keys(this.refereeForm.controls).forEach(key => {
-
-        const controlErrors: ValidationErrors = this.refereeForm.get(key).errors;
-        if (controlErrors != null) {
-          Object.keys(controlErrors).forEach(keyError => {
-            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-          });
-        }
-      });
       return;
     }
 
-    let referee;
+    let referee = formValues;
     if (this.action === 'create') {
-      referee = formValues;
       // We need to manually set the club id from the environment
       referee.refereeClubId = environment.clubId;
       const createRefereeInput: CreateRefereeInput = referee;
 
       referee = await this.refereeService.createReferee(createRefereeInput);
     } else if (this.action === 'edit') {
-
-      const updateRefereeInput: UpdateRefereeInput = {
-        firstName: this.refereeForm.get('firstName').value, lastName: this.referee.lastName, id: this.refereeId,
-        street: this.referee.street, zipCode: this.referee.zipCode, city: this.referee.city,
-        phone: this.referee.phone, streetNumber: this.referee.streetNumber
-      };
-
+      // assign the referee id to the object.
+      referee.id = this.refereeId;
+      const updateRefereeInput: UpdateRefereeInput = referee;
       referee = await this.refereeService.updateReferee(updateRefereeInput);
     }
 
     this.refereeMutated.emit(referee);
   }
 
+  async deleteReferee() {
+    const referee = this.refereeService.deleteReferee(this.refereeId);
+    this.refereeMutated.emit(referee);
+  }
 }

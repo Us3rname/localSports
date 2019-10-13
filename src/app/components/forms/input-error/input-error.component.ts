@@ -17,7 +17,5 @@ export class InputErrorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.formSubmitted);
   }
-
 }
