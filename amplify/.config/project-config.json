@@ -3,12 +3,12 @@
     "version": "2.0",
     "frontend": "javascript",
     "javascript": {
-        "framework": "angular",
+        "framework": "ionic",
         "config": {
             "SourceDir": "src",
-            "DistributionDir": "dist",
+            "DistributionDir": "www",
             "BuildCommand": "npm.cmd run-script build",
-            "StartCommand": "ng serve"
+            "StartCommand": "ionic serve"
         }
     },
     "providers": [

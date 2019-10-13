@@ -1,0 +1,14 @@
+<menu-header headerTitle="Teams"></menu-header>
+
+<ion-content>
+
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='goToTeamCreatePage($event)'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-team-list [leagueId]=selectedLeagueId (teamSelected)="onTeamSelected($event)">
+  </app-team-list>
+</ion-content>

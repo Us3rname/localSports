@@ -1,0 +1,93 @@
+<form [formGroup]="refereeForm" (ngSubmit)="processForm(refereeForm.value)">
+
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="stacked">Naam <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="firstName" name="firstName"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.firstName
+      inputFieldName="firstName" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Achternaam <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="lastName" name="lastName"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.lastName
+      inputFieldName="lastName" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Straat <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="street" name="street"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.street inputFieldName="street"
+      [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Huisnummer <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="number" formControlName="streetNumber" name="streetNumber"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.streetNumber
+      inputFieldName="streetNumber" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Postcode <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="zipCode" name="zipCode"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.zipCode
+      inputFieldName="zipCode" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Stad <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="city" name="city"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.city inputFieldName="city"
+      [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">E-mailadres <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="email" formControlName="email" name="email"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.email inputFieldName="email"
+      [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Telefoonnummer <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="phone" name="phone"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=refereeForm [validationMessages]=validationMessages.phone inputFieldName="phone"
+      [formSubmitted]=submitted>
+    </app-input-error>
+  </ion-list>
+
+  <div class="ion-padding" [hidden]="action !== 'create'">
+    <ion-button expand="block" type="submit" class="ion-no-margin">Scheidsrechter toevoegen</ion-button>
+  </div>
+
+  <ion-grid [hidden]="action !== 'edit'">
+    <ion-row>
+      <ion-col>
+        <ion-button color=danger (click)="deleteReferee()">
+          Verwijder
+        </ion-button>
+      </ion-col>
+
+      <ion-col>
+      </ion-col>
+
+      <ion-col>
+        <ion-button type="submit">
+          Scheidsrechter bijwerken
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>

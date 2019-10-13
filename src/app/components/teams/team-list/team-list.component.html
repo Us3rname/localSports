@@ -1,0 +1,37 @@
+<app-league-header (leagueSelected)="onLeagueSelected($event)"></app-league-header>
+
+<ion-list [hidden]="isLoading">
+  <div *ngFor="let team of shownTeams;" (click)="onTeamSelected(team)">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ team.name }}</h2>
+        <h3><b>Contactpersoon:</b> {{ team.contact }}</h3>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-list>
+
+<ion-list id="skeleton" [hidden]="!isLoading">
+  <ion-list-header>
+    <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
+  </ion-list-header>
+  <ion-item *ngFor="let loading of loadingItems">
+    <ion-thumbnail slot="start">
+      <ion-skeleton-text></ion-skeleton-text>
+    </ion-thumbnail>
+    <ion-label>
+      <h3>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </h3>
+      <p>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </p>
+      <p>
+        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+      </p>
+    </ion-label>
+  </ion-item>
+</ion-list>

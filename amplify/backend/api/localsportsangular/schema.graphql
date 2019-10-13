@@ -1,0 +1,103 @@
+type Game @model @auth(rules: [{allow: public, operations: [read]}])  {
+  id: ID!
+  gameDay: AWSDateTime!
+  homeTeam: Team!
+  awayTeam: Team!
+  scoreHome: Int
+  scoreAway: Int    
+  sportshall: SportsHall!
+  hall: Hall!
+  referee: Referee
+}
+
+type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
+  id: ID!
+  team: String!
+  matchPlayed: Int
+  win: Int
+  draw: Int
+  loses: Int
+  goalsFor: Int
+  goalsAgainst: Int
+  goalDifference: Int
+  points: Int
+  lastResults: AWSJSON
+}
+
+type SportsHall @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+  id: ID!
+  name: String!
+  street: String!
+  streetNumber: Int!
+  streetNumberAddition: String
+  zipCode: String!
+  city: String!
+  phone: AWSPhone
+  halls: [Hall!] @connection(name: "SportsHallHalls")
+  club: Club! @connection(name: "ClubSportsHall")
+}
+
+type Hall @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
+  id: ID!
+  name: String!
+  sportsHall: SportsHall! @connection(name: "SportsHallHalls")
+}
+
+type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
+  id: ID!
+  name: String!
+  ranking: Int!
+  club: Club! @connection(name: "ClubLeagues")
+  teams: [Team!] @connection(name: "TeamLeague")
+  owner: String
+}
+
+type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+  id: ID!
+  league: League @connection(name: "TeamLeague")
+  leagueId: ID!
+  name: String!
+  contact: String!
+  athletes: [Athlete] @connection(name: "TeamMembers")
+  club: Club @connection(name: "ClubMembers")
+  owner: String
+}
+
+type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+  id: ID!
+  name: String!
+  email: AWSEmail
+  phone: AWSPhone
+  teams: Team @connection(name: "TeamMembers")
+}
+
+type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  street: String
+  streetNumber: Int
+  streetNumberAddition: String
+  zipCode: String
+  city: String!
+  email: AWSEmail
+  phone: AWSPhone
+  club: Club @connection(name: "ClubReferees")
+}
+
+type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+  id: ID!
+  name: String!  
+  street: String
+  streetNumber: String
+  streetNumberAddition: String
+  zipCode: String
+  country: String!
+  contact: String!
+  email: AWSEmail
+  phone: AWSPhone
+  leagues: [League!] @connection(name: "ClubLeagues")
+  teams: [Team] @connection(name: "ClubMembers")
+  referees: [Referee] @connection(name: "ClubReferees")
+  sportsHalls: [SportsHall!] @connection(name: "ClubSportsHall")
+}

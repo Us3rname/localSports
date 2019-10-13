@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "add-to-group"
+    ],
+    "parentResource": "localSportsDev",
+    "functionName": "localSportsDevPostConfirmation",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "PostConfirmation.json.ejs",
+    "roleName": "localSportsDevPostConfirmation",
+    "skipEdit": true,
+    "resourceName": "localSportsDevPostConfirmation"
+}

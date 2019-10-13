@@ -43,6 +43,7 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <preference name="APP_SECRET" value="5d4f7612-1ff5-4e5e-9e30-a66383185903" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Scheidsrechter toevoegen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <referee-form [referee]=referee action="create" [refereeId]=refereeId (refereeMutated)="processForm($event)">
+  </referee-form>
+</ion-content>

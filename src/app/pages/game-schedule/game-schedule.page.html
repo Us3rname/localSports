@@ -1,0 +1,139 @@
+<menu-header headerTitle="Wedstrijdschema"></menu-header>
+
+
+<ion-toolbar class="toolbar">
+  <ion-grid>
+    <ion-row>
+      <ion-col size=1>
+        <ion-buttons>
+          <ion-button slot="icon-only" (click)='loadPreviousWeek()' [hidden]="!showPreviousWeekBtn"
+            [disabled]="isLoading">
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-title>{{ week }}</ion-title>
+      </ion-col>
+      <ion-col size=1>
+        <ion-buttons>
+          <ion-button id="nextWeekBtn" slot="icon-only" (click)='loadNextWeek()' [hidden]="!showNextWeekBtn"
+            [disabled]="isLoading">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+<ion-content>
+
+  <!-- Result screen when there are no errors and the loading has been done -->
+  <div *ngIf="!isLoading && !hasError">
+    <ion-grid *ngFor="let itema of items;">
+      <div *ngFor="let item of itema; let index=index; let odd=odd; let even=even;">
+
+        <ion-list-header class="ion-align-self-center" class="ion-text-center" [hidden]="index > 0" color="secondary">
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
+          </ion-col>
+          <ion-col class="ion-align-self-start" class="ion-text-center" size="6">
+            <h6 class="ion-no-margin">
+              <h4 class="ion-no-margin">
+                {{item.gameDay | date:'EEEE'}}
+                <!-- ({{item.gameDay | date:'dd-LL'}}) -->
+              </h4>
+            </h6>
+          </ion-col>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
+          </ion-col>
+        </ion-list-header>
+
+        <ion-row class="gameRow" [ngClass]="{ odd: odd, even: even }">
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=5>
+            <h5 class="ion-no-margin">{{item.homeTeam.toUpperCase()}}</h5>
+          </ion-col>
+          <ion-col class="ion-align-self-start" class="ion-text-center" size="2">
+            <h6 class="ion-no-margin">vs</h6>
+          </ion-col>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=5>
+            <h5 class="ion-no-margin">{{item.awayTeam.toUpperCase()}}</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center gameRow" [ngClass]="{ odd: odd, even: even }">
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=4>
+          </ion-col>
+          <ion-col class="ion-align-self-start" class="ion-text-center" size=4>
+            <h6 class="ion-no-margin">{{item.location}}</h6>
+          </ion-col>
+          <ion-col class="ion-align-self-center" class="ion-text-center" size=4>
+          </ion-col>
+        </ion-row>
+        <ion-row class="gameRow" [ngClass]="{ odd: odd, even: even }">
+          <ion-col class="ion-align-self-start" class="ion-text-end"></ion-col>
+          <ion-col class="ion-align-self-center" size="2" class="starttime">
+            {{item.gameDay | date:'HH:mm' }}</ion-col>
+          <ion-col class="ion-align-self-end"></ion-col>
+        </ion-row>
+        <ion-row [ngClass]="{ odd: odd, even: even }">
+          <ion-col size="6">
+
+          </ion-col>
+        </ion-row>
+      </div>
+      <ion-row style="height: 10px;"></ion-row>
+    </ion-grid>
+
+  </div>
+
+  <!-- Loading screen -->
+  <div *ngIf="isLoading">
+    <ion-grid>
+      <ion-row>
+        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+        </ion-col>
+      </ion-row>
+      <div *ngFor="let item of [].constructor(4); let index=index; let odd=odd; let even=even;"
+        [ngClass]="{ odd: odd, evenSkeleton: even }">
+        <ion-row>
+          <ion-col class="ion-align-self-start" class="ion-text-end">
+            <h4>
+              <ion-skeleton-text animated style="height: 30px"></ion-skeleton-text>
+            </h4>
+          </ion-col>
+          <ion-col class="ion-align-self-center" size="1">
+          </ion-col>
+          <ion-col class="ion-align-self-end">
+            <h4>
+              <ion-skeleton-text animated style="height: 30px"></ion-skeleton-text>
+            </h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-align-self-start">
+          </ion-col>
+          <ion-col class="ion-align-self-center" size=2>
+            <ion-skeleton-text animated style="width: 50px; height: 30px"></ion-skeleton-text>
+          </ion-col>
+          <ion-col class="ion-align-self-end"></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="hasError" class="ion-text-center" color="warning">
+    <h3>Het wedstrijdschema kon niet ingeladen worden, probeer het later nog eens.</h3>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!items.length" class="ion-text-center" color="warning">
+    <h3>Er is geen wedstrijdschema bekend voor deze week.</h3>
+  </div>
+</ion-content>

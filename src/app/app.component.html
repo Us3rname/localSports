@@ -1,7 +1,7 @@
 <ion-app>
   <ion-split-pane>
     <ion-menu type="overlay">
-      <ion-header>
+      <ion-header color="primary">
         <ion-toolbar>
           <ion-title>Menu</ion-title>
         </ion-toolbar>
@@ -17,6 +17,50 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+
+
+        <ion-item-divider *ngIf="isLoggedIn">
+          <ion-label>Vereniging</ion-label>
+        </ion-item-divider>
+
+        <ion-item-group *ngIf="isLoggedIn">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of clubPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-item-group>
+
+
+        <ion-item-divider>
+          <ion-label>Account</ion-label>
+        </ion-item-divider>
+
+        <ion-item-group *ngIf="!isLoggedIn">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of unAuthAccountPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-item-group>
+
+        <ion-item-group *ngIf="isLoggedIn">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of authPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-item-group>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

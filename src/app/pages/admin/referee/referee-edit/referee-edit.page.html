@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Scheidsrechter bewerken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <referee-form [referee]=referee action="edit" [refereeId]=refereeId (refereeMutated)="onRefereeMutation($event)">
+  </referee-form>
+</ion-content>

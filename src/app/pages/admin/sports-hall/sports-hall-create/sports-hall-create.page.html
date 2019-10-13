@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nieuwe sporthal toevoegen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form (ngSubmit)="processForm()">
+
+    <ion-item-divider>
+      <ion-label>
+        Sporthal
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Naam <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sportsHall.name" name="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Straat <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sportsHall.street" name="street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Huisnummer <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="number" [(ngModel)]="sportsHall.streetNumber" name="streetNumber"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Postcode <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sportsHall.zipCode" name="zipCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Stad <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sportsHall.city" name="city"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Telefoonnummer <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sportsHall.phone" name="phone"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item-divider>
+        <ion-label>
+          Hallen
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let hall of sporthallService.halls;let i = index;">
+        <ion-label position="stacked">Hal <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="sporthallService.halls[i].name" name="name"></ion-input>
+        <ion-icon name="add-circle" (click)="addEmptyHall()" [hidden]="i+1 != sporthallService.halls.length"></ion-icon>
+        <ion-icon name="remove-circle" (click)="removeHall(i, hall)" [hidden]="i == 0"></ion-icon>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Sporthal aanmaken</ion-button>
+    </div>
+  </form>
+</ion-content>

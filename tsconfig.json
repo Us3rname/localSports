@@ -30,7 +30,7 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
+    "fullTemplateTypeCheck": false, // Because of a bug in aws-amplify-angular v3.0.x it's not able to build the application. When that is fixed we can change this to true.
     "strictInjectionParameters": true
   }
 }

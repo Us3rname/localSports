@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Team bewerken</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form (ngSubmit)="processForm()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label>Divisie</ion-label>
+        <ion-select [(ngModel)]="team.league.id" name="teamLeagueId">
+          <ion-select-option *ngFor="let league of leagues;let i=index;" [value]='league.id'>
+            {{ league.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Team naam <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="team.name" name="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contactpersoon <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" [(ngModel)]="team.contact" name="contact"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button color="danger" slot="start" (click)="presentDeleteAlertConfirm(team)">Verwijder
+      </ion-button>
+      <ion-button type="submit" slot="end" class="ion-no-margin">Team bijwerken</ion-button>
+    </div>
+  </form>
+</ion-content>
