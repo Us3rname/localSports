@@ -5,12 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MatchScheduleListPage } from './match-schedule-list.page';
+import { MatchScheduleCreatePage } from './match-schedule-create.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: MatchScheduleListPage
+    component: MatchScheduleCreatePage
   }
 ];
 
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MatchScheduleListPage]
+  declarations: [MatchScheduleCreatePage]
 })
-export class MatchScheduleListPageModule {}
+export class MatchScheduleCreatePageModule { }

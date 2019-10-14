@@ -1,5 +1,4 @@
-<menu-header headerTitle="Wedstrijdschema"></menu-header>
-
+<menu-header headerTitle="Wedstrijden"></menu-header>
 
 <ion-toolbar class="toolbar">
   <ion-grid>
@@ -33,7 +32,7 @@
     <ion-grid *ngFor="let itema of items;">
       <div *ngFor="let item of itema; let index=index; let odd=odd; let even=even;">
 
-        <ion-list-header class="ion-align-self-center" class="ion-text-center" [hidden]="index > 0" color="secondary">
+        <ion-list-header class="ion-align-items-center" class="ion-text-center" [hidden]="index > 0" color="secondary">
           <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
           </ion-col>
           <ion-col class="ion-align-self-start" class="ion-text-center" size="6">
@@ -45,6 +44,7 @@
             </h6>
           </ion-col>
           <ion-col class="ion-align-self-center" class="ion-text-center" size=3>
+
           </ion-col>
         </ion-list-header>
 
@@ -68,11 +68,17 @@
           <ion-col class="ion-align-self-center" class="ion-text-center" size=4>
           </ion-col>
         </ion-row>
-        <ion-row class="gameRow" [ngClass]="{ odd: odd, even: even }">
+        <ion-row class="gameRow ion-align-items-center" [ngClass]="{ odd: odd, even: even }">
           <ion-col class="ion-align-self-start" class="ion-text-end"></ion-col>
           <ion-col class="ion-align-self-center" size="2" class="starttime">
             {{item.gameDay | date:'HH:mm' }}</ion-col>
-          <ion-col class="ion-align-self-end"></ion-col>
+          <ion-col class="ion-align-self-end">
+            <ion-buttons class="ion-align-self-end">
+              <ion-button (click)="presentPopover($event, item)">
+                <ion-icon slot="icon-only" name="more"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
         </ion-row>
         <ion-row [ngClass]="{ odd: odd, even: even }">
           <ion-col size="6">

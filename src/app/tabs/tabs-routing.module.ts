@@ -12,7 +12,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/game-schedule/game-schedule.module').then(m => m.GameScheduleModule)
+            loadChildren: () => import('../pages/match-schedule/match-schedule-list/match-schedule-list.module')
+              .then(m => m.MatchScheduleListPageModule)
           }
         ]
       },

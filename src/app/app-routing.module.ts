@@ -113,6 +113,20 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'match-schedule', children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/match-schedule/match-schedule-list/match-schedule-list.module')
+          .then(m => m.MatchScheduleListPageModule)
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('./pages/match-schedule/match-schedule-create/match-schedule-create.module')
+          .then(m => m.MatchScheduleCreatePageModule)
+      },
+    ]
+  },
 ];
 
 @NgModule({

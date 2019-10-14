@@ -19,7 +19,6 @@ export class GraphqlRequestService {
   public async doPublicQuery(queryName, variables) {
 
     variables.limit = 1000;
-    console.log(variables);
     const response = await API.graphql({
       query: queries[queryName],
       variables,
