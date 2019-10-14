@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { MatchScheduleListPage } from './match-schedule-list.page';
 import { ComponentsModule } from '../../../components/components.module';
+import { GameActionMenuPage } from '../about-popover/game-action-menu.page.';
+import { SubmitScorePage } from '../about-popover/submit-score.page';
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,7 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MatchScheduleListPage]
+  declarations: [MatchScheduleListPage, GameActionMenuPage, SubmitScorePage],
+  entryComponents: [GameActionMenuPage, SubmitScorePage],
 })
 export class MatchScheduleListPageModule { }
