@@ -43,8 +43,7 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
-  },  { path: 'match-schedule-list', loadChildren: './match-schedule/match-schedule-list/match-schedule-list.module#MatchScheduleListPageModule' }
-
+  },
 ];
 
 @NgModule({

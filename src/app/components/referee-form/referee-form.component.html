@@ -74,18 +74,14 @@
   <ion-grid [hidden]="action !== 'edit'">
     <ion-row>
       <ion-col>
-        <ion-button color=danger (click)="deleteReferee()">
-          Verwijder
-        </ion-button>
+        <app-delete-button btnLabel="Verwijder"></app-delete-button>
       </ion-col>
 
       <ion-col>
       </ion-col>
 
       <ion-col>
-        <ion-button type="submit">
-          Scheidsrechter bijwerken
-        </ion-button>
+        <app-submit-button btnLabel="Bijwerken"></app-submit-button>
       </ion-col>
     </ion-row>
   </ion-grid>

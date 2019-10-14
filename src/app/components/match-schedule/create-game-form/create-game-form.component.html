@@ -1,0 +1,151 @@
+<form [formGroup]="matchScheduleForm" (ngSubmit)="processForm(matchScheduleForm.value)">
+
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="stacked">Aanvang wedstrijd <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-datetime displayFormat="D-MM-YYYY H:mm" max="2999" formControlName="gameDay" name="gameDay">
+      </ion-datetime>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.gameDay
+      inputFieldName="gameDay" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Kies divisie <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Kies divisie" (ionChange)="leagueChanged($event)">
+        <ion-select-option *ngFor="let league of leagues" value="{{league.id}}">{{ league.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Thuis team <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Kies team" formControlName="gameHomeTeamId" name="gameHomeTeamId"
+        (ionChange)="onUpdateHomeTeam($event)">
+        <ion-select-option *ngFor="let homeTeam of homeTeams" value="{{homeTeam.id}}">{{ homeTeam.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.gameHomeTeamId
+      inputFieldName="gameHomeTeamId" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Uit team <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Kies uit team" formControlName="gameAwayTeamId" name="gameAwayTeamId">
+        <optgroup label="Swedish Cars">
+          <ion-select-option *ngFor="let awayTeam of awayTeams" value="{{awayTeam.id}}">{{ awayTeam.name}}
+          </ion-select-option>
+        </optgroup>
+
+      </ion-select>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.gameAwayTeamId
+      inputFieldName="gameAwayTeamId" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Scheidsrechter <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Scheidsrechter" formControlName="gameRefereeId" name="gameRefereeId">
+        <ion-select-option *ngFor="let referee of referees" value="{{referee.id}}">{{ referee.firstName}}
+          {{ referee.lastName}} ({{ referee.city }})
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.gameRefereeId
+      inputFieldName="gameRefereeId" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Sporthal <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Kies sporthal" formControlName="sportshall" name="sportshall"
+        (ionChange)="onSportsHallSelected($event)">
+        <ion-select-option *ngFor="let sportshall of sportshalls" value="{{sportshall.id}}">{{ sportshall.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.sportshall
+      inputFieldName="sportshall" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Hal <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Kies hal" formControlName="gameHallId" name="gameHallId">
+        <ion-select-option *ngFor="let hall of halls" value="{{hall.id}}">{{ hall.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.gameHallId
+      inputFieldName="gameHallId" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <!--
+    <ion-item>
+      <ion-label position="stacked">Huisnummer <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="number" formControlName="streetNumber" name="streetNumber"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.streetNumber
+      inputFieldName="streetNumber" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Postcode <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="zipCode" name="zipCode"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.zipCode
+      inputFieldName="zipCode" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Stad <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="city" name="city"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.city
+      inputFieldName="city" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">E-mailadres <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="email" formControlName="email" name="email"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.email
+      inputFieldName="email" [formSubmitted]=submitted>
+    </app-input-error>
+    <ion-item>
+      <ion-label position="stacked">Telefoonnummer <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="phone" name="phone"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=matchScheduleForm [validationMessages]=validationMessages.phone
+      inputFieldName="phone" [formSubmitted]=submitted>
+    </app-input-error> -->
+  </ion-list>
+
+  <div class="ion-padding" [hidden]="action !== 'create'">
+    <ion-button expand="block" type="submit" class="ion-no-margin">Wedstrijd toevoegen</ion-button>
+  </div>
+
+  <ion-grid [hidden]="action !== 'edit'">
+    <ion-row>
+      <ion-col>
+        <app-delete-button btnLabel="Verwijder"></app-delete-button>
+      </ion-col>
+
+      <ion-col>
+      </ion-col>
+
+      <ion-col>
+        <app-submit-button btnLabel="Bijwerken"></app-submit-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>

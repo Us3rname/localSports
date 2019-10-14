@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UpdateSportsHallInput, UpdateHallInput, CreateHallInput, DeleteHallInput } from 'src/API';
 import { GraphqlRequestService } from './graphql-request.service';
 import * as uuid from 'uuid';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,17 @@ export class SporthallService {
     private graphqlRequestService: GraphqlRequestService
   ) { }
 
+
+  async getSportsHalls() {
+    let sportsHalls: any[];
+
+    await this.graphqlRequestService.doPublicQuery('listSportsHalls', {});
+
+    if (this.graphqlRequestService.isSuccessfull) {
+      sportsHalls = this.graphqlRequestService.data.items;
+    }
+    return sportsHalls;
+  }
 
   async updateHalls(sportsHallId) {
 

@@ -1,14 +1,15 @@
-type Game @model @auth(rules: [{allow: public, operations: [read]}])  {
+type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
   id: ID!
   gameDay: AWSDateTime!
-  homeTeam: Team!
-  awayTeam: Team!
+  homeTeam: Team! @connection(name: "HomeGames")
+  awayTeam: Team! @connection(name: "AwayGames")
   scoreHome: Int
   scoreAway: Int    
-  sportshall: SportsHall!
-  hall: Hall!
-  referee: Referee
-}
+  hall: Hall! @connection(name: "HallGames")
+  referee: Referee @connection(name: "RefereeGames")
+  club: Club! @connection(name: "ClubGame")
+  clubId: String!
+} 
 
 type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   id: ID!
@@ -41,6 +42,7 @@ type Hall @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   id: ID!
   name: String!
   sportsHall: SportsHall! @connection(name: "SportsHallHalls")
+  games: [Game!] @connection(name: "HallGames")
 }
 
 type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
@@ -61,6 +63,8 @@ type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   athletes: [Athlete] @connection(name: "TeamMembers")
   club: Club @connection(name: "ClubMembers")
   owner: String
+  homeGames: [Game!] @connection(name: "HomeGames")
+  awayGames: [Game!] @connection(name: "AwayGames")
 }
 
 type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
@@ -83,6 +87,7 @@ type Referee @model @auth(rules: [{allow: public, operations: [read]}, { allow: 
   email: AWSEmail
   phone: AWSPhone
   club: Club @connection(name: "ClubReferees")
+  games: [Game!] @connection(name: "RefereeGames")
 }
 
 type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
@@ -100,4 +105,5 @@ type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   teams: [Team] @connection(name: "ClubMembers")
   referees: [Referee] @connection(name: "ClubReferees")
   sportsHalls: [SportsHall!] @connection(name: "ClubSportsHall")
+  clubGames: [Game!] @connection(name: "ClubGame")
 }
