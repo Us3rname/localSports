@@ -4,11 +4,6 @@
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true
-		},
-		"S3Trigger0a7415e2": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true
 		}
 	},
 	"auth": {
@@ -53,21 +48,5 @@
 			}
 		}
 	},
-	"storage": {
-		"localSportsDev": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "S3Trigger0a7415e2",
-					"attributes": [
-						"Name",
-						"Arn",
-						"LambdaExecutionRole"
-					]
-				}
-			]
-		}
-	}
+	"storage": {}
 }

@@ -1,79 +1,14 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
-export const getGame = `query GetGame($id: ID!) {
-  getGame(id: $id) {
+export const getSeason = `query GetSeason($id: ID!) {
+  getSeason(id: $id) {
     id
-    gameDay
-    scoreHome
-    scoreAway
-    clubId
-    hall {
-      id
-      name
-      games {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      sportsHall {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        city
-        phone
-        halls {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-    }
-    homeTeam {
-      id
-      leagueId
-      name
-      contact
-      owner
-      homeGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      awayGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      league {
+    title
+    beginDate
+    endDate
+    leagues {
+      items {
         id
         name
         ranking
@@ -94,175 +29,7 @@ export const getGame = `query GetGame($id: ID!) {
           phone
         }
       }
-      athletes {
-        items {
-          id
-          name
-          email
-          phone
-        }
-        nextToken
-      }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        clubGames {
-          nextToken
-        }
-        sportsHalls {
-          nextToken
-        }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
-      }
-    }
-    awayTeam {
-      id
-      leagueId
-      name
-      contact
-      owner
-      homeGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      awayGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      league {
-        id
-        name
-        ranking
-        owner
-        teams {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-      athletes {
-        items {
-          id
-          name
-          email
-          phone
-        }
-        nextToken
-      }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        clubGames {
-          nextToken
-        }
-        sportsHalls {
-          nextToken
-        }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
-      }
-    }
-    referee {
-      id
-      firstName
-      lastName
-      street
-      streetNumber
-      streetNumberAddition
-      zipCode
-      city
-      email
-      phone
-      games {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        clubGames {
-          nextToken
-        }
-        sportsHalls {
-          nextToken
-        }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
-      }
+      nextToken
     }
     club {
       id
@@ -275,16 +42,6 @@ export const getGame = `query GetGame($id: ID!) {
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -336,6 +93,323 @@ export const getGame = `query GetGame($id: ID!) {
   }
 }
 `;
+export const listSeasons = `query ListSeasons(
+  $filter: ModelSeasonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSeasons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      beginDate
+      endDate
+      leagues {
+        items {
+          id
+          name
+          ranking
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getGame = `query GetGame($id: ID!) {
+  getGame(id: $id) {
+    id
+    gameDay
+    scoreHome
+    scoreAway
+    hall {
+      id
+      name
+      games {
+        id
+        gameDay
+        scoreHome
+        scoreAway
+        hall {
+          id
+          name
+        }
+        homeTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        awayTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        referee {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
+        }
+      }
+      sportsHall {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        phone
+        halls {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+    }
+    homeTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+        teams {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      athletes {
+        items {
+          id
+          name
+          email
+          phone
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    awayTeam {
+      id
+      leagueId
+      name
+      contact
+      owner
+      league {
+        id
+        name
+        ranking
+        owner
+        teams {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      athletes {
+        items {
+          id
+          name
+          email
+          phone
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    referee {
+      id
+      firstName
+      lastName
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      email
+      phone
+      games {
+        id
+        gameDay
+        scoreHome
+        scoreAway
+        hall {
+          id
+          name
+        }
+        homeTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        awayTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        referee {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
+        }
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+  }
+}
+`;
 export const listGames = `query ListGames(
   $filter: ModelGameFilterInput
   $limit: Int
@@ -347,12 +421,14 @@ export const listGames = `query ListGames(
       gameDay
       scoreHome
       scoreAway
-      clubId
       hall {
         id
         name
         games {
-          nextToken
+          id
+          gameDay
+          scoreHome
+          scoreAway
         }
         sportsHall {
           id
@@ -371,12 +447,6 @@ export const listGames = `query ListGames(
         name
         contact
         owner
-        homeGames {
-          nextToken
-        }
-        awayGames {
-          nextToken
-        }
         league {
           id
           name
@@ -405,12 +475,6 @@ export const listGames = `query ListGames(
         name
         contact
         owner
-        homeGames {
-          nextToken
-        }
-        awayGames {
-          nextToken
-        }
         league {
           id
           name
@@ -445,7 +509,10 @@ export const listGames = `query ListGames(
         email
         phone
         games {
-          nextToken
+          id
+          gameDay
+          scoreHome
+          scoreAway
         }
         club {
           id
@@ -458,33 +525,6 @@ export const listGames = `query ListGames(
           contact
           email
           phone
-        }
-      }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        clubGames {
-          nextToken
-        }
-        sportsHalls {
-          nextToken
-        }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
         }
       }
     }
@@ -546,7 +586,10 @@ export const getSportsHall = `query GetSportsHall($id: ID!) {
         id
         name
         games {
-          nextToken
+          id
+          gameDay
+          scoreHome
+          scoreAway
         }
         sportsHall {
           id
@@ -572,16 +615,6 @@ export const getSportsHall = `query GetSportsHall($id: ID!) {
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -666,9 +699,6 @@ export const listSportsHalls = `query ListSportsHalls(
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -692,12 +722,175 @@ export const getHall = `query GetHall($id: ID!) {
     id
     name
     games {
-      items {
+      id
+      gameDay
+      scoreHome
+      scoreAway
+      hall {
+        id
+        name
+        games {
+          id
+          gameDay
+          scoreHome
+          scoreAway
+        }
+        sportsHall {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          phone
+        }
+      }
+      homeTeam {
+        id
+        leagueId
+        name
+        contact
+        owner
+        league {
+          id
+          name
+          ranking
+          owner
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      awayTeam {
+        id
+        leagueId
+        name
+        contact
+        owner
+        league {
+          id
+          name
+          ranking
+          owner
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      referee {
+        id
+        firstName
+        lastName
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        email
+        phone
+        games {
+          id
+          gameDay
+          scoreHome
+          scoreAway
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+    }
+    sportsHall {
+      id
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      city
+      phone
+      halls {
+        items {
+          id
+          name
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+  }
+}
+`;
+export const listHalls = `query ListHalls(
+  $filter: ModelHallFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHalls(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      games {
         id
         gameDay
         scoreHome
         scoreAway
-        clubId
         hall {
           id
           name
@@ -728,86 +921,6 @@ export const getHall = `query GetHall($id: ID!) {
           email
           phone
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-      nextToken
-    }
-    sportsHall {
-      id
-      name
-      street
-      streetNumber
-      streetNumberAddition
-      zipCode
-      city
-      phone
-      halls {
-        items {
-          id
-          name
-        }
-        nextToken
-      }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        clubGames {
-          nextToken
-        }
-        sportsHalls {
-          nextToken
-        }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
-      }
-    }
-  }
-}
-`;
-export const listHalls = `query ListHalls(
-  $filter: ModelHallFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listHalls(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      games {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
       }
       sportsHall {
         id
@@ -852,12 +965,6 @@ export const getLeague = `query GetLeague($id: ID!) {
         name
         contact
         owner
-        homeGames {
-          nextToken
-        }
-        awayGames {
-          nextToken
-        }
         league {
           id
           name
@@ -893,16 +1000,6 @@ export const getLeague = `query GetLeague($id: ID!) {
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -986,9 +1083,6 @@ export const listLeagues = `query ListLeagues(
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -1014,110 +1108,6 @@ export const getTeam = `query GetTeam($id: ID!) {
     name
     contact
     owner
-    homeGames {
-      items {
-        id
-        gameDay
-        scoreHome
-        scoreAway
-        clubId
-        hall {
-          id
-          name
-        }
-        homeTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        awayTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        referee {
-          id
-          firstName
-          lastName
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          city
-          email
-          phone
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-      nextToken
-    }
-    awayGames {
-      items {
-        id
-        gameDay
-        scoreHome
-        scoreAway
-        clubId
-        hall {
-          id
-          name
-        }
-        homeTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        awayTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        referee {
-          id
-          firstName
-          lastName
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          city
-          email
-          phone
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-      nextToken
-    }
     league {
       id
       name
@@ -1144,9 +1134,6 @@ export const getTeam = `query GetTeam($id: ID!) {
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -1188,16 +1175,6 @@ export const getTeam = `query GetTeam($id: ID!) {
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -1261,26 +1238,6 @@ export const listTeams = `query ListTeams(
       name
       contact
       owner
-      homeGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      awayGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       league {
         id
         name
@@ -1322,9 +1279,6 @@ export const listTeams = `query ListTeams(
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -1355,26 +1309,6 @@ export const getAthlete = `query GetAthlete($id: ID!) {
       name
       contact
       owner
-      homeGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
-      awayGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       league {
         id
         name
@@ -1416,9 +1350,6 @@ export const getAthlete = `query GetAthlete($id: ID!) {
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -1453,12 +1384,6 @@ export const listAthletes = `query ListAthletes(
         name
         contact
         owner
-        homeGames {
-          nextToken
-        }
-        awayGames {
-          nextToken
-        }
         league {
           id
           name
@@ -1499,41 +1424,44 @@ export const getReferee = `query GetReferee($id: ID!) {
     email
     phone
     games {
-      items {
+      id
+      gameDay
+      scoreHome
+      scoreAway
+      hall {
         id
-        gameDay
-        scoreHome
-        scoreAway
-        clubId
-        hall {
+        name
+        games {
+          id
+          gameDay
+          scoreHome
+          scoreAway
+        }
+        sportsHall {
           id
           name
-        }
-        homeTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        awayTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        referee {
-          id
-          firstName
-          lastName
           street
           streetNumber
           streetNumberAddition
           zipCode
           city
-          email
           phone
+        }
+      }
+      homeTeam {
+        id
+        leagueId
+        name
+        contact
+        owner
+        league {
+          id
+          name
+          ranking
+          owner
+        }
+        athletes {
+          nextToken
         }
         club {
           id
@@ -1548,7 +1476,64 @@ export const getReferee = `query GetReferee($id: ID!) {
           phone
         }
       }
-      nextToken
+      awayTeam {
+        id
+        leagueId
+        name
+        contact
+        owner
+        league {
+          id
+          name
+          ranking
+          owner
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      referee {
+        id
+        firstName
+        lastName
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        city
+        email
+        phone
+        games {
+          id
+          gameDay
+          scoreHome
+          scoreAway
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
     }
     club {
       id
@@ -1561,16 +1546,6 @@ export const getReferee = `query GetReferee($id: ID!) {
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -1640,14 +1615,40 @@ export const listReferees = `query ListReferees(
       email
       phone
       games {
-        items {
+        id
+        gameDay
+        scoreHome
+        scoreAway
+        hall {
           id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
+          name
         }
-        nextToken
+        homeTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        awayTeam {
+          id
+          leagueId
+          name
+          contact
+          owner
+        }
+        referee {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
+        }
       }
       club {
         id
@@ -1660,9 +1661,6 @@ export const listReferees = `query ListReferees(
         contact
         email
         phone
-        clubGames {
-          nextToken
-        }
         sportsHalls {
           nextToken
         }
@@ -1698,16 +1696,6 @@ export const listClubs = `query ListClubs(
       contact
       email
       phone
-      clubGames {
-        items {
-          id
-          gameDay
-          scoreHome
-          scoreAway
-          clubId
-        }
-        nextToken
-      }
       sportsHalls {
         items {
           id
@@ -1772,58 +1760,6 @@ export const getClub = `query GetClub($id: ID!) {
     contact
     email
     phone
-    clubGames {
-      items {
-        id
-        gameDay
-        scoreHome
-        scoreAway
-        clubId
-        hall {
-          id
-          name
-        }
-        homeTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        awayTeam {
-          id
-          leagueId
-          name
-          contact
-          owner
-        }
-        referee {
-          id
-          firstName
-          lastName
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          city
-          email
-          phone
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
-      nextToken
-    }
     sportsHalls {
       items {
         id
@@ -1883,12 +1819,6 @@ export const getClub = `query GetClub($id: ID!) {
         name
         contact
         owner
-        homeGames {
-          nextToken
-        }
-        awayGames {
-          nextToken
-        }
         league {
           id
           name
@@ -1926,7 +1856,10 @@ export const getClub = `query GetClub($id: ID!) {
         email
         phone
         games {
-          nextToken
+          id
+          gameDay
+          scoreHome
+          scoreAway
         }
         club {
           id
