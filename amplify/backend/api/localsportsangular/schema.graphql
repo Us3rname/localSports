@@ -16,6 +16,7 @@ type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   scoreAway: Int    
   hall: Hall! @connection
   referee: Referee @connection 
+  season: Season! @connection
 } 
 
 type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {

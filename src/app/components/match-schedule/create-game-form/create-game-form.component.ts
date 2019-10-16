@@ -41,6 +41,9 @@ export class CreateGameFormComponent implements OnInit {
     league: [
       { type: 'required', message: 'Divisie is verplicht.' }
     ],
+    gameSeasonId: [
+      { type: 'required', message: 'Divisie is verplicht.' }
+    ],
   };
 
   homeTeams = new Array();
@@ -73,6 +76,7 @@ export class CreateGameFormComponent implements OnInit {
       sportshall: new FormControl({ value: '3999a502-d199-4903-b028-0befa6db7169' }, Validators.required),
       gameHallId: new FormControl({ value: '29fa4261-5ac5-4730-bbd4-4b102153ef15', disabled: this.halls === null }, Validators.required),
       gameRefereeId: ['5d2f76f7-e326-4c7b-88e8-3585fc5df2e3', Validators.required],
+      gameSeasonId: ['', Validators.required],
     });
 
     this.loadTeams();
@@ -102,9 +106,8 @@ export class CreateGameFormComponent implements OnInit {
     }
 
     const createGameInput: CreateGameInput = {
-      gameDay: formValues.gameDay, gameRefereeId: formValues.gameRefereeId,
-      clubId: environment.clubId, gameClubId: environment.clubId, gameHallId: formValues.gameHallId,
-      gameAwayTeamId: formValues.gameAwayTeamId, gameHomeTeamId: formValues.gameHomeTeamId
+      gameDay: formValues.gameDay, gameRefereeId: formValues.gameRefereeId, gameSeasonId: formValues.gameSeasonId,
+      gameHallId: formValues.gameHallId, gameAwayTeamId: formValues.gameAwayTeamId, gameHomeTeamId: formValues.gameHomeTeamId
     };
     const game = await this.gameService.createGame(createGameInput);
     this.gameCreated.emit(game);

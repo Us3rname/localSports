@@ -283,6 +283,45 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     gameDay
     scoreHome
     scoreAway
+    season {
+      id
+      title
+      beginDate
+      endDate
+      leagues {
+        items {
+          id
+          name
+          ranking
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     hall {
       id
       name
@@ -291,6 +330,12 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -486,6 +531,12 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -551,6 +602,45 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     gameDay
     scoreHome
     scoreAway
+    season {
+      id
+      title
+      beginDate
+      endDate
+      leagues {
+        items {
+          id
+          name
+          ranking
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     hall {
       id
       name
@@ -559,6 +649,12 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -754,6 +850,12 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -819,6 +921,45 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     gameDay
     scoreHome
     scoreAway
+    season {
+      id
+      title
+      beginDate
+      endDate
+      leagues {
+        items {
+          id
+          name
+          ranking
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     hall {
       id
       name
@@ -827,6 +968,12 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -1022,6 +1169,12 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -1423,6 +1576,27 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -1583,6 +1757,27 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -1743,6 +1938,27 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -2793,6 +3009,27 @@ export const createReferee = `mutation CreateReferee($input: CreateRefereeInput!
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -2979,6 +3216,27 @@ export const updateReferee = `mutation UpdateReferee($input: UpdateRefereeInput!
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -3165,6 +3423,27 @@ export const deleteReferee = `mutation DeleteReferee($input: DeleteRefereeInput!
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name

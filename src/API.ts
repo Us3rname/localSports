@@ -30,6 +30,7 @@ export type CreateGameInput = {
   gameAwayTeamId: string,
   gameHallId: string,
   gameRefereeId?: string | null,
+  gameSeasonId: string,
 };
 
 export type UpdateGameInput = {
@@ -41,6 +42,7 @@ export type UpdateGameInput = {
   gameAwayTeamId?: string | null,
   gameHallId?: string | null,
   gameRefereeId?: string | null,
+  gameSeasonId?: string | null,
 };
 
 export type DeleteGameInput = {
@@ -752,6 +754,53 @@ export type CreateGameMutation = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -762,6 +811,13 @@ export type CreateGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -988,6 +1044,13 @@ export type CreateGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -1067,6 +1130,53 @@ export type UpdateGameMutation = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -1077,6 +1187,13 @@ export type UpdateGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -1303,6 +1420,13 @@ export type UpdateGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -1382,6 +1506,53 @@ export type DeleteGameMutation = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -1392,6 +1563,13 @@ export type DeleteGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -1618,6 +1796,13 @@ export type DeleteGameMutation = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -2103,6 +2288,30 @@ export type CreateHallMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -2291,6 +2500,30 @@ export type UpdateHallMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -2479,6 +2712,30 @@ export type DeleteHallMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -3737,6 +3994,30 @@ export type CreateRefereeMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -3952,6 +4233,30 @@ export type UpdateRefereeMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -4167,6 +4472,30 @@ export type DeleteRefereeMutation = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -4818,6 +5147,66 @@ export type DeleteClubMutation = {
   } | null,
 };
 
+export type ListSeasonsQueryVariables = {
+  filter?: ModelSeasonFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSeasonsQuery = {
+  listSeasons:  {
+    __typename: "ModelSeasonConnection",
+    items:  Array< {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
 export type GetSeasonQueryVariables = {
   id: string,
 };
@@ -4928,16 +5317,18 @@ export type GetSeasonQuery = {
   } | null,
 };
 
-export type ListSeasonsQueryVariables = {
-  filter?: ModelSeasonFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type GetGameQueryVariables = {
+  id: string,
 };
 
-export type ListSeasonsQuery = {
-  listSeasons:  {
-    __typename: "ModelSeasonConnection",
-    items:  Array< {
+export type GetGameQuery = {
+  getGame:  {
+    __typename: "Game",
+    id: string,
+    gameDay: string,
+    scoreHome: number | null,
+    scoreAway: number | null,
+    season:  {
       __typename: "Season",
       id: string,
       title: string,
@@ -4983,22 +5374,7 @@ export type ListSeasonsQuery = {
           nextToken: string | null,
         } | null,
       },
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
-};
-
-export type GetGameQueryVariables = {
-  id: string,
-};
-
-export type GetGameQuery = {
-  getGame:  {
-    __typename: "Game",
-    id: string,
-    gameDay: string,
-    scoreHome: number | null,
-    scoreAway: number | null,
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -5009,6 +5385,13 @@ export type GetGameQuery = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -5235,6 +5618,13 @@ export type GetGameQuery = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -5318,6 +5708,30 @@ export type ListGamesQuery = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -5681,6 +6095,30 @@ export type GetHallQuery = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -5873,6 +6311,13 @@ export type ListHallsQuery = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -6516,6 +6961,30 @@ export type GetRefereeQuery = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -6735,6 +7204,13 @@ export type ListRefereesQuery = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -7363,6 +7839,53 @@ export type OnCreateGameSubscription = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -7373,6 +7896,13 @@ export type OnCreateGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -7599,6 +8129,13 @@ export type OnCreateGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -7674,6 +8211,53 @@ export type OnUpdateGameSubscription = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -7684,6 +8268,13 @@ export type OnUpdateGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -7910,6 +8501,13 @@ export type OnUpdateGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -7985,6 +8583,53 @@ export type OnDeleteGameSubscription = {
     gameDay: string,
     scoreHome: number | null,
     scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          name: string,
+          ranking: number,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -7995,6 +8640,13 @@ export type OnDeleteGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -8221,6 +8873,13 @@ export type OnDeleteGameSubscription = {
         gameDay: string,
         scoreHome: number | null,
         scoreAway: number | null,
+        season:  {
+          __typename: "Season",
+          id: string,
+          title: string,
+          beginDate: string,
+          endDate: string,
+        },
         hall:  {
           __typename: "Hall",
           id: string,
@@ -8678,6 +9337,30 @@ export type OnCreateHallSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -8862,6 +9545,30 @@ export type OnUpdateHallSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -9046,6 +9753,30 @@ export type OnDeleteHallSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -10264,6 +10995,30 @@ export type OnCreateRefereeSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -10475,6 +11230,30 @@ export type OnUpdateRefereeSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,
@@ -10686,6 +11465,30 @@ export type OnDeleteRefereeSubscription = {
       gameDay: string,
       scoreHome: number | null,
       scoreAway: number | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
       hall:  {
         __typename: "Hall",
         id: string,

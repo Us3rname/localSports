@@ -1,6 +1,55 @@
 // tslint:disable
 // this is an auto generated file. This will be overwritten
 
+export const listSeasons = `query ListSeasons(
+  $filter: ModelSeasonFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSeasons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      beginDate
+      endDate
+      leagues {
+        items {
+          id
+          name
+          ranking
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    nextToken
+  }
+}
+`;
 export const getSeason = `query GetSeason($id: ID!) {
   getSeason(id: $id) {
     id
@@ -93,13 +142,13 @@ export const getSeason = `query GetSeason($id: ID!) {
   }
 }
 `;
-export const listSeasons = `query ListSeasons(
-  $filter: ModelSeasonFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSeasons(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getGame = `query GetGame($id: ID!) {
+  getGame(id: $id) {
+    id
+    gameDay
+    scoreHome
+    scoreAway
+    season {
       id
       title
       beginDate
@@ -138,16 +187,6 @@ export const listSeasons = `query ListSeasons(
         }
       }
     }
-    nextToken
-  }
-}
-`;
-export const getGame = `query GetGame($id: ID!) {
-  getGame(id: $id) {
-    id
-    gameDay
-    scoreHome
-    scoreAway
     hall {
       id
       name
@@ -156,6 +195,12 @@ export const getGame = `query GetGame($id: ID!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -351,6 +396,12 @@ export const getGame = `query GetGame($id: ID!) {
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -421,6 +472,27 @@ export const listGames = `query ListGames(
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -726,6 +798,27 @@ export const getHall = `query GetHall($id: ID!) {
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -891,6 +984,12 @@ export const listHalls = `query ListHalls(
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
@@ -1428,6 +1527,27 @@ export const getReferee = `query GetReferee($id: ID!) {
       gameDay
       scoreHome
       scoreAway
+      season {
+        id
+        title
+        beginDate
+        endDate
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       hall {
         id
         name
@@ -1619,6 +1739,12 @@ export const listReferees = `query ListReferees(
         gameDay
         scoreHome
         scoreAway
+        season {
+          id
+          title
+          beginDate
+          endDate
+        }
         hall {
           id
           name
