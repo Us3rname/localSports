@@ -10,7 +10,6 @@ import { AdminRoutingModule } from './admin-routing.module';
     IonicModule,
     AdminRoutingModule
   ],
-  declarations: [
-  ]
+  declarations: []
 })
 export class AdminModule { }

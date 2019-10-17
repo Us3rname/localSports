@@ -11,85 +11,6 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
   },
-  {
-    path: 'admin',
-    children: [
-      {
-        path: 'team', children: [
-          {
-            path: '',
-            loadChildren: () => import('./pages/admin/team/team-list/team-list.module').then(m => m.TeamListPageModule)
-          },
-          {
-            path: 'create',
-            loadChildren: () => import('./pages/admin/team/team-create/team-create.module').then(m => m.TeamCreatePageModule)
-          },
-          {
-            path: 'edit/:teamId',
-            loadChildren: () => import('./pages/admin/team/team-edit/team-edit.module').then(m => m.TeamEditPageModule)
-          },
-        ]
-      },
-      {
-        path: 'league', children: [
-          {
-            path: '',
-            loadChildren: () => import('./pages/admin/league/league-list/league-list.module').then(m => m.LeagueListPageModule)
-          },
-          {
-            path: 'create',
-            loadChildren: () => import('./pages/admin/league/league-create/league-create.module').then(m => m.LeagueCreatePageModule)
-          },
-          {
-            path: 'edit/:leagueId',
-            loadChildren: () => import('./pages/admin/league/league-edit/league-edit.module').then(m => m.LeagueEditPageModule)
-          },
-        ]
-      },
-      {
-        path: 'sports-hall', children: [
-          {
-            path: '',
-            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-list/sports-hall-list.module')
-              .then(m => m.SportsHallListPageModule)
-          },
-          {
-            path: 'create',
-            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-create/sports-hall-create.module')
-              .then(m => m.SportsHallCreatePageModule)
-          },
-          {
-            path: 'edit/:sportsHallId',
-            loadChildren: () => import('./pages/admin/sports-hall/sports-hall-edit/sports-hall-edit.module')
-              .then(m => m.SportsHallEditPageModule)
-          },
-        ]
-      },
-      {
-        path: 'referee', children: [
-          {
-            path: 'edit/:refereeId',
-            loadChildren: () => import('./pages/admin/referee/referee-edit/referee-edit.module')
-              .then(m => m.RefereeEditPageModule)
-          },
-          {
-            path: 'create',
-            loadChildren: () => import('./pages/admin/referee/referee-create/referee-create.module')
-              .then(m => m.RefereeCreatePageModule)
-          },
-          {
-            path: '', loadChildren: () => import('./pages/admin/referee/referee-list/referee-list.module')
-              .then(m => m.RefereeListPageModule)
-          },
-        ]
-      },
-      {
-        path: '',
-        redirectTo: 'app/tabs/schedule',
-        pathMatch: 'full'
-      }
-    ]
-  },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'logout', loadChildren: './pages/logout/logout.module#LogoutPageModule' },
@@ -127,6 +48,10 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+  }
 ];
 
 @NgModule({

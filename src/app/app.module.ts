@@ -19,6 +19,7 @@ import { reducers, metaReducers } from './reducers';
 
 // Import your AvatarModule
 import { AvatarModule } from 'ngx-avatar';
+import { AdminModule } from './pages/admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { AvatarModule } from 'ngx-avatar';
     AppRoutingModule,
     HttpClientModule,
     ComponentsModule,
+    AdminModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
