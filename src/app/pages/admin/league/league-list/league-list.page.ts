@@ -4,6 +4,7 @@ import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../../../../graphql/queries';
 import * as subscriptions from '../../../../../graphql/subscriptions';
 import { ToastService } from '../../../../services/toast.service';
+import { LeagueDataService } from 'src/app/services/league-data.service';
 @Component({
   selector: 'app-league-list',
   templateUrl: './league-list.page.html',
@@ -16,6 +17,7 @@ export class LeagueListPage implements OnInit {
   constructor(
     private router: Router,
     public toastService: ToastService,
+    private leagueDataService: LeagueDataService
   ) { }
 
   ngOnInit() {
@@ -37,11 +39,7 @@ export class LeagueListPage implements OnInit {
   }
 
   async loadLeagues() {
-    const allLeagues = await API.graphql(graphqlOperation(queries.listLeagues));
-
-    if (allLeagues) {
-      this.allLeagues = allLeagues.data.listLeagues.items;
-    }
+    this.allLeagues = await this.leagueDataService.getLeagues();
   }
 
   goToLeagueCreatePage() {
