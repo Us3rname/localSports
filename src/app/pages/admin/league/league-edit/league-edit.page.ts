@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import { UpdateLeagueInput, DeleteLeagueInput } from 'src/API';
+import { UpdateLeagueInput, DeleteLeagueInput, UpdateLeagueInfoInput } from 'src/API';
 import * as mutations from '../../../../../graphql/mutations';
 import * as queries from '../../../../../graphql/queries';
 import { AlertController } from '@ionic/angular';
@@ -16,7 +16,7 @@ import { GraphqlRequestService } from '../../../../services/graphql-request.serv
 export class LeagueEditPage implements OnInit {
 
   public league: any;
-  initialStateLeague = { id: null, name: null };
+  initialStateLeague = { leagueInfo: { id: null, name: null, ranking: null } };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,8 +46,13 @@ export class LeagueEditPage implements OnInit {
 
   async processForm() {
     try {
-      const updateLeagueInput: UpdateLeagueInput = { id: this.league.id, name: this.league.name, ranking: this.league.ranking };
-      await this.graphqlRequestService.doPrivateMutation('updateLeague', { input: updateLeagueInput });
+
+      // For now we only update the info and not the settings on the league itself.
+      const updateLeagueInfoInput: UpdateLeagueInfoInput = {
+        id: this.league.leagueInfo.id, name: this.league.leagueInfo.name,
+        ranking: this.league.leagueInfo.ranking
+      };
+      await this.graphqlRequestService.doPrivateMutation('updateLeagueInfo', { input: updateLeagueInfoInput });
 
       if (this.graphqlRequestService.isSuccessfull) {
         return this.router.navigate(['/admin/league']);

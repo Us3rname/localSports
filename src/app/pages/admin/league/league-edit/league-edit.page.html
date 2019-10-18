@@ -13,12 +13,12 @@
       <ion-item>
         <ion-label position="stacked">Divisie naam <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required type="text" [(ngModel)]="league.name" name="name"></ion-input>
+        <ion-input required type="text" [(ngModel)]="league.leagueInfo.name" name="name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Ranking van de divisie <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required type="number" [(ngModel)]="league.ranking" name="ranking"></ion-input>
+        <ion-input required type="number" [(ngModel)]="league.leagueInfo.ranking" name="ranking"></ion-input>
       </ion-item>
     </ion-list>
 

@@ -52,7 +52,7 @@ export class LeagueListPage implements OnInit {
 
   subscribeOnUpdateLeague() {
     API.graphql(
-      graphqlOperation(subscriptions.onUpdateLeague)
+      graphqlOperation(subscriptions.onUpdateLeagueInfo)
     ).subscribe({
       next: (leagueData) => {
         this.updateLocalLeagues(leagueData);
@@ -71,10 +71,10 @@ export class LeagueListPage implements OnInit {
   }
 
   updateLocalLeagues(leagueData) {
-    const league = leagueData.value.data.onUpdateLeague;
+    const leagueInfo = leagueData.value.data.onUpdateLeagueInfo;
     for (let i = 0; i < this.allLeagues.length; i++) {
-      if (this.allLeagues[i].id === league.id) {
-        this.allLeagues[i] = league;
+      if (this.allLeagues[i].leagueInfo.id === leagueInfo.id) {
+        this.allLeagues[i].leagueInfo = leagueInfo;
         this.toastService.presentToast('Divisie is bijgewerkt');
         return;
       }
