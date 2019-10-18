@@ -3,8 +3,7 @@ type Season @model @auth(rules: [{allow: public, operations: [read]}, { allow: g
   title: String!
   beginDate: AWSDateTime!
   endDate: AWSDateTime!
-  leagues: [League!] @connection
-  club: Club! @connection
+  league: League! @connection
 }
 
 type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
@@ -19,7 +18,7 @@ type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   season: Season! @connection
 } 
 
-type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
+type Standing @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
   team: String!
   matchPlayed: Int
@@ -31,6 +30,7 @@ type Standing @model @auth(rules: [{allow: public, operations: [read]}])  {
   goalDifference: Int
   points: Int
   lastResults: AWSJSON
+  season: Season! @connection
 }
 
 type SportsHall @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
@@ -53,19 +53,30 @@ type Hall @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   games: [Game!] 
 }
 
-type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
+type LeagueInfo @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
   id: ID!
   name: String!
   ranking: Int!
+  maxTeams: Int
+}
+
+type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]){
+  id: ID!
+  leagueInfo: LeagueInfo! @connection
   club: Club! @connection(name: "ClubLeagues")
-  teams: [Team!] @connection(name: "TeamLeague")
+  leagueTeams: LeagueTeam @connection(name: "LeagueTeams")
   owner: String
+}
+
+type LeagueTeam @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
+  id: ID!
+  league: League! @connection(name: "LeagueTeams")
+  team: Team! @connection(name: "TeamLeagues")
 }
 
 type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
-  league: League @connection(name: "TeamLeague")
-  leagueId: ID!
+  teamLeague: LeagueTeam @connection(name: "TeamLeagues")
   name: String!
   contact: String!
   athletes: [Athlete] @connection(name: "TeamMembers")
@@ -111,4 +122,17 @@ type Club @model @auth(rules: [{allow: public, operations: [read]}, { allow: gro
   teams: [Team] @connection(name: "ClubMembers")
   referees: [Referee] @connection(name: "ClubReferees")
   sportsHalls: [SportsHall!] @connection(name: "ClubSportsHall")
+}
+
+
+input CreateCompletelyNewLeagueInput {
+  name: String!
+  ranking: Int!
+  maxTeams: Int!
+  clubId: String!
+
+}
+
+type Mutation {
+  createCompleteNewLeague(input: CreateCompletelyNewLeagueInput!) : League!
 }

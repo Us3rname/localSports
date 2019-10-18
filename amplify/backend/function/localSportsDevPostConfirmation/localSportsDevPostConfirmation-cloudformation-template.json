@@ -101,7 +101,7 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "localsportsangular-dev-20190926204541-deployment",
+					"S3Bucket": "localsportsangular-prod-20191018185102-deployment",
 					"S3Key": "amplify-builds/localSportsDevPostConfirmation-616c6477764254564f6a-build.zip"
 				}
 			}

@@ -21,7 +21,7 @@
         <ion-row *ngFor="let league of allLeagues;let index=index; let odd=odd; let even=even;"
             [ngClass]="{ odd: odd, even: even }" (click)="goToLeagueEditPage(league.id)">
             <ion-col class="ion-padding-vertical">
-                {{ league.name }}
+                {{ league.leagueInfo.name }}
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -20,5 +20,44 @@
                 "localSportsDev": {}
             }
         }
+    },
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "localsportsangular-test-20191018180019-authRole",
+            "UnauthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-test-20191018180019-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-test-20191018180019-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "localsportsangular-test-20191018180019-deployment",
+            "UnauthRoleName": "localsportsangular-test-20191018180019-unauthRole",
+            "StackName": "localsportsangular-test-20191018180019",
+            "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-test-20191018180019/623f20f0-f1c0-11e9-98b9-02b8022d5b40"
+        },
+        "categories": {
+            "auth": {
+                "localSportsDev": {}
+            }
+        }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "localsportsangular-prod-20191018185102-authRole",
+            "UnauthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-prod-20191018185102-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::390567366752:role/localsportsangular-prod-20191018185102-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "localsportsangular-prod-20191018185102-deployment",
+            "UnauthRoleName": "localsportsangular-prod-20191018185102-unauthRole",
+            "StackName": "localsportsangular-prod-20191018185102",
+            "StackId": "arn:aws:cloudformation:eu-central-1:390567366752:stack/localsportsangular-prod-20191018185102/782753e0-f1c7-11e9-bc58-0652a290d4c8"
+        },
+        "categories": {
+            "auth": {
+                "localSportsDev": {}
+            },
+            "function": {
+                "localSportsDevPostConfirmation": {
+                    "GROUP": "users"
+                }
+            }
+        }
     }
 }

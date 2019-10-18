@@ -1,12 +1,19 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateCompletelyNewLeagueInput = {
+  name: string,
+  ranking: number,
+  maxTeams: number,
+  clubId: string,
+};
+
 export type CreateSeasonInput = {
   id?: string | null,
   title: string,
   beginDate: string,
   endDate: string,
-  seasonClubId: string,
+  seasonLeagueId: string,
 };
 
 export type UpdateSeasonInput = {
@@ -14,7 +21,7 @@ export type UpdateSeasonInput = {
   title?: string | null,
   beginDate?: string | null,
   endDate?: string | null,
-  seasonClubId?: string | null,
+  seasonLeagueId?: string | null,
 };
 
 export type DeleteSeasonInput = {
@@ -61,6 +68,7 @@ export type CreateStandingInput = {
   goalDifference?: number | null,
   points?: number | null,
   lastResults?: string | null,
+  standingSeasonId: string,
 };
 
 export type UpdateStandingInput = {
@@ -75,6 +83,7 @@ export type UpdateStandingInput = {
   goalDifference?: number | null,
   points?: number | null,
   lastResults?: string | null,
+  standingSeasonId?: string | null,
 };
 
 export type DeleteStandingInput = {
@@ -125,45 +134,75 @@ export type DeleteHallInput = {
   id?: string | null,
 };
 
-export type CreateLeagueInput = {
+export type CreateLeagueInfoInput = {
   id?: string | null,
   name: string,
   ranking: number,
+  maxTeams?: number | null,
+};
+
+export type UpdateLeagueInfoInput = {
+  id: string,
+  name?: string | null,
+  ranking?: number | null,
+  maxTeams?: number | null,
+};
+
+export type DeleteLeagueInfoInput = {
+  id?: string | null,
+};
+
+export type CreateLeagueInput = {
+  id?: string | null,
   owner?: string | null,
-  seasonLeaguesId?: string | null,
+  leagueLeagueInfoId: string,
   leagueClubId: string,
+  leagueLeagueTeamsId?: string | null,
 };
 
 export type UpdateLeagueInput = {
   id: string,
-  name?: string | null,
-  ranking?: number | null,
   owner?: string | null,
-  seasonLeaguesId?: string | null,
+  leagueLeagueInfoId?: string | null,
   leagueClubId?: string | null,
+  leagueLeagueTeamsId?: string | null,
 };
 
 export type DeleteLeagueInput = {
   id?: string | null,
 };
 
+export type CreateLeagueTeamInput = {
+  id?: string | null,
+  leagueTeamLeagueId: string,
+  leagueTeamTeamId: string,
+};
+
+export type UpdateLeagueTeamInput = {
+  id: string,
+  leagueTeamLeagueId?: string | null,
+  leagueTeamTeamId?: string | null,
+};
+
+export type DeleteLeagueTeamInput = {
+  id?: string | null,
+};
+
 export type CreateTeamInput = {
   id?: string | null,
-  leagueId: string,
   name: string,
   contact: string,
   owner?: string | null,
-  teamLeagueId?: string | null,
+  teamTeamLeagueId?: string | null,
   teamClubId?: string | null,
 };
 
 export type UpdateTeamInput = {
   id: string,
-  leagueId?: string | null,
   name?: string | null,
   contact?: string | null,
   owner?: string | null,
-  teamLeagueId?: string | null,
+  teamTeamLeagueId?: string | null,
   teamClubId?: string | null,
 };
 
@@ -350,19 +389,33 @@ export type ModelHallFilterInput = {
   not?: ModelHallFilterInput | null,
 };
 
-export type ModelLeagueFilterInput = {
+export type ModelLeagueInfoFilterInput = {
   id?: ModelIDFilterInput | null,
   name?: ModelStringFilterInput | null,
   ranking?: ModelIntFilterInput | null,
+  maxTeams?: ModelIntFilterInput | null,
+  and?: Array< ModelLeagueInfoFilterInput | null > | null,
+  or?: Array< ModelLeagueInfoFilterInput | null > | null,
+  not?: ModelLeagueInfoFilterInput | null,
+};
+
+export type ModelLeagueFilterInput = {
+  id?: ModelIDFilterInput | null,
   owner?: ModelStringFilterInput | null,
   and?: Array< ModelLeagueFilterInput | null > | null,
   or?: Array< ModelLeagueFilterInput | null > | null,
   not?: ModelLeagueFilterInput | null,
 };
 
+export type ModelLeagueTeamFilterInput = {
+  id?: ModelIDFilterInput | null,
+  and?: Array< ModelLeagueTeamFilterInput | null > | null,
+  or?: Array< ModelLeagueTeamFilterInput | null > | null,
+  not?: ModelLeagueTeamFilterInput | null,
+};
+
 export type ModelTeamFilterInput = {
   id?: ModelIDFilterInput | null,
-  leagueId?: ModelIDFilterInput | null,
   name?: ModelStringFilterInput | null,
   contact?: ModelStringFilterInput | null,
   owner?: ModelStringFilterInput | null,
@@ -413,6 +466,151 @@ export type ModelClubFilterInput = {
   not?: ModelClubFilterInput | null,
 };
 
+export type CreateCompleteNewLeagueMutationVariables = {
+  input: CreateCompletelyNewLeagueInput,
+};
+
+export type CreateCompleteNewLeagueMutation = {
+  createCompleteNewLeague:  {
+    __typename: "League",
+    id: string,
+    owner: string | null,
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        } | null,
+      },
+    } | null,
+    club:  {
+      __typename: "Club",
+      id: string,
+      name: string,
+      street: string | null,
+      streetNumber: string | null,
+      streetNumberAddition: string | null,
+      zipCode: string | null,
+      country: string,
+      contact: string,
+      email: string | null,
+      phone: string | null,
+      sportsHalls:  {
+        __typename: "ModelSportsHallConnection",
+        items:  Array< {
+          __typename: "SportsHall",
+          id: string,
+          name: string,
+          street: string,
+          streetNumber: number,
+          streetNumberAddition: string | null,
+          zipCode: string,
+          city: string,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      leagues:  {
+        __typename: "ModelLeagueConnection",
+        items:  Array< {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      teams:  {
+        __typename: "ModelTeamConnection",
+        items:  Array< {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      referees:  {
+        __typename: "ModelRefereeConnection",
+        items:  Array< {
+          __typename: "Referee",
+          id: string,
+          firstName: string,
+          lastName: string,
+          street: string | null,
+          streetNumber: number | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          city: string,
+          email: string | null,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+    },
+  },
+};
+
 export type CreateSeasonMutationVariables = {
   input: CreateSeasonInput,
 };
@@ -424,352 +622,32 @@ export type CreateSeasonMutation = {
     title: string,
     beginDate: string,
     endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
         id: string,
         name: string,
         ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
-        },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
-          id: string,
-          leagueId: string,
-          name: string,
-          contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type UpdateSeasonMutationVariables = {
-  input: UpdateSeasonInput,
-};
-
-export type UpdateSeasonMutation = {
-  updateSeason:  {
-    __typename: "Season",
-    id: string,
-    title: string,
-    beginDate: string,
-    endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
-        },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
+        league:  {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type DeleteSeasonMutationVariables = {
-  input: DeleteSeasonInput,
-};
-
-export type DeleteSeasonMutation = {
-  deleteSeason:  {
-    __typename: "Season",
-    id: string,
-    title: string,
-    beginDate: string,
-    endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
-        id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
         },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
-          id: string,
-          leagueId: string,
-          name: string,
-          contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type CreateGameMutationVariables = {
-  input: CreateGameInput,
-};
-
-export type CreateGameMutation = {
-  createGame:  {
-    __typename: "Game",
-    id: string,
-    gameDay: string,
-    scoreHome: number | null,
-    scoreAway: number | null,
-    season:  {
-      __typename: "Season",
-      id: string,
-      title: string,
-      beginDate: string,
-      endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
       } | null,
       club:  {
         __typename: "Club",
@@ -801,6 +679,198 @@ export type CreateGameMutation = {
         } | null,
       },
     },
+  } | null,
+};
+
+export type UpdateSeasonMutationVariables = {
+  input: UpdateSeasonInput,
+};
+
+export type UpdateSeasonMutation = {
+  updateSeason:  {
+    __typename: "Season",
+    id: string,
+    title: string,
+    beginDate: string,
+    endDate: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+  } | null,
+};
+
+export type DeleteSeasonMutationVariables = {
+  input: DeleteSeasonInput,
+};
+
+export type DeleteSeasonMutation = {
+  deleteSeason:  {
+    __typename: "Season",
+    id: string,
+    title: string,
+    beginDate: string,
+    endDate: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+  } | null,
+};
+
+export type CreateGameMutationVariables = {
+  input: CreateGameInput,
+};
+
+export type CreateGameMutation = {
+  createGame:  {
+    __typename: "Game",
+    id: string,
+    gameDay: string,
+    scoreHome: number | null,
+    scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -826,7 +896,6 @@ export type CreateGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -834,7 +903,6 @@ export type CreateGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -885,32 +953,23 @@ export type CreateGameMutation = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -957,32 +1016,23 @@ export type CreateGameMutation = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -1059,7 +1109,6 @@ export type CreateGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1067,7 +1116,6 @@ export type CreateGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1136,45 +1184,34 @@ export type UpdateGameMutation = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
-        id: string,
-        name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
-        contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
-          nextToken: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
-        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
       },
     },
     hall:  {
@@ -1202,7 +1239,6 @@ export type UpdateGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1210,7 +1246,6 @@ export type UpdateGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1261,32 +1296,23 @@ export type UpdateGameMutation = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -1333,32 +1359,23 @@ export type UpdateGameMutation = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -1435,7 +1452,6 @@ export type UpdateGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1443,7 +1459,6 @@ export type UpdateGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1512,45 +1527,34 @@ export type DeleteGameMutation = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
-        id: string,
-        name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
-        contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
-          nextToken: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
-        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
       },
     },
     hall:  {
@@ -1578,7 +1582,6 @@ export type DeleteGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1586,7 +1589,6 @@ export type DeleteGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1637,32 +1639,23 @@ export type DeleteGameMutation = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -1709,32 +1702,23 @@ export type DeleteGameMutation = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -1811,7 +1795,6 @@ export type DeleteGameMutation = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1819,7 +1802,6 @@ export type DeleteGameMutation = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -1889,6 +1871,42 @@ export type CreateStandingMutation = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -1910,6 +1928,42 @@ export type UpdateStandingMutation = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -1931,6 +1985,42 @@ export type DeleteStandingMutation = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -2008,8 +2098,6 @@ export type CreateSportsHallMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -2019,7 +2107,6 @@ export type CreateSportsHallMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -2121,8 +2208,6 @@ export type UpdateSportsHallMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -2132,7 +2217,6 @@ export type UpdateSportsHallMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -2234,8 +2318,6 @@ export type DeleteSportsHallMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -2245,7 +2327,6 @@ export type DeleteSportsHallMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -2294,22 +2375,10 @@ export type CreateHallMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -2338,16 +2407,12 @@ export type CreateHallMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2370,16 +2435,12 @@ export type CreateHallMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2506,22 +2567,10 @@ export type UpdateHallMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -2550,16 +2599,12 @@ export type UpdateHallMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2582,16 +2627,12 @@ export type UpdateHallMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2718,22 +2759,10 @@ export type DeleteHallMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -2762,16 +2791,12 @@ export type DeleteHallMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2794,16 +2819,12 @@ export type DeleteHallMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2909,6 +2930,48 @@ export type DeleteHallMutation = {
   } | null,
 };
 
+export type CreateLeagueInfoMutationVariables = {
+  input: CreateLeagueInfoInput,
+};
+
+export type CreateLeagueInfoMutation = {
+  createLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
+export type UpdateLeagueInfoMutationVariables = {
+  input: UpdateLeagueInfoInput,
+};
+
+export type UpdateLeagueInfoMutation = {
+  updateLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
+export type DeleteLeagueInfoMutationVariables = {
+  input: DeleteLeagueInfoInput,
+};
+
+export type DeleteLeagueInfoMutation = {
+  deleteLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
 export type CreateLeagueMutationVariables = {
   input: CreateLeagueInput,
 };
@@ -2917,24 +2980,55 @@ export type CreateLeagueMutation = {
   createLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -2953,8 +3047,7 @@ export type CreateLeagueMutation = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -2988,8 +3081,6 @@ export type CreateLeagueMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -2999,7 +3090,6 @@ export type CreateLeagueMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3035,24 +3125,55 @@ export type UpdateLeagueMutation = {
   updateLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -3071,8 +3192,7 @@ export type UpdateLeagueMutation = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -3106,8 +3226,6 @@ export type UpdateLeagueMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -3117,7 +3235,6 @@ export type UpdateLeagueMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3153,24 +3270,55 @@ export type DeleteLeagueMutation = {
   deleteLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -3189,8 +3337,7 @@ export type DeleteLeagueMutation = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -3224,8 +3371,6 @@ export type DeleteLeagueMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -3235,7 +3380,6 @@ export type DeleteLeagueMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3263,33 +3407,101 @@ export type DeleteLeagueMutation = {
   } | null,
 };
 
-export type CreateTeamMutationVariables = {
-  input: CreateTeamInput,
+export type CreateLeagueTeamMutationVariables = {
+  input: CreateLeagueTeamInput,
 };
 
-export type CreateTeamMutation = {
-  createTeam:  {
-    __typename: "Team",
+export type CreateLeagueTeamMutation = {
+  createLeagueTeam:  {
+    __typename: "LeagueTeam",
     id: string,
-    leagueId: string,
-    name: string,
-    contact: string,
-    owner: string | null,
     league:  {
       __typename: "League",
       id: string,
-      name: string,
-      ranking: number,
       owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -3321,6 +3533,343 @@ export type CreateTeamMutation = {
           __typename: "ModelRefereeConnection",
           nextToken: string | null,
         } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type UpdateLeagueTeamMutationVariables = {
+  input: UpdateLeagueTeamInput,
+};
+
+export type UpdateLeagueTeamMutation = {
+  updateLeagueTeam:  {
+    __typename: "LeagueTeam",
+    id: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type DeleteLeagueTeamMutationVariables = {
+  input: DeleteLeagueTeamInput,
+};
+
+export type DeleteLeagueTeamMutation = {
+  deleteLeagueTeam:  {
+    __typename: "LeagueTeam",
+    id: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type CreateTeamMutationVariables = {
+  input: CreateTeamInput,
+};
+
+export type CreateTeamMutation = {
+  createTeam:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    contact: string,
+    owner: string | null,
+    teamLeague:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        } | null,
       },
     } | null,
     athletes:  {
@@ -3334,7 +3883,6 @@ export type CreateTeamMutation = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3374,8 +3922,6 @@ export type CreateTeamMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -3385,7 +3931,6 @@ export type CreateTeamMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3421,55 +3966,67 @@ export type UpdateTeamMutation = {
   updateTeam:  {
     __typename: "Team",
     id: string,
-    leagueId: string,
     name: string,
     contact: string,
     owner: string | null,
-    league:  {
-      __typename: "League",
+    teamLeague:  {
+      __typename: "LeagueTeam",
       id: string,
-      name: string,
-      ranking: number,
-      owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
-          leagueId: string,
           name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
           contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
         id: string,
         name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
         contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
           nextToken: string | null,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
         } | null,
       },
     } | null,
@@ -3484,7 +4041,6 @@ export type UpdateTeamMutation = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3524,8 +4080,6 @@ export type UpdateTeamMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -3535,7 +4089,6 @@ export type UpdateTeamMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3571,55 +4124,67 @@ export type DeleteTeamMutation = {
   deleteTeam:  {
     __typename: "Team",
     id: string,
-    leagueId: string,
     name: string,
     contact: string,
     owner: string | null,
-    league:  {
-      __typename: "League",
+    teamLeague:  {
+      __typename: "LeagueTeam",
       id: string,
-      name: string,
-      ranking: number,
-      owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
-          leagueId: string,
           name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
           contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
         id: string,
         name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
         contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
           nextToken: string | null,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
         } | null,
       },
     } | null,
@@ -3634,7 +4199,6 @@ export type DeleteTeamMutation = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3674,8 +4238,6 @@ export type DeleteTeamMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -3685,7 +4247,6 @@ export type DeleteTeamMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -3727,32 +4288,23 @@ export type CreateAthleteMutation = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -3813,32 +4365,23 @@ export type UpdateAthleteMutation = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -3899,32 +4442,23 @@ export type DeleteAthleteMutation = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -4000,22 +4534,10 @@ export type CreateRefereeMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -4044,16 +4566,12 @@ export type CreateRefereeMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4076,16 +4594,12 @@ export type CreateRefereeMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4171,8 +4685,6 @@ export type CreateRefereeMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -4182,7 +4694,6 @@ export type CreateRefereeMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -4239,22 +4750,10 @@ export type UpdateRefereeMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -4283,16 +4782,12 @@ export type UpdateRefereeMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4315,16 +4810,12 @@ export type UpdateRefereeMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4410,8 +4901,6 @@ export type UpdateRefereeMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -4421,7 +4910,6 @@ export type UpdateRefereeMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -4478,22 +4966,10 @@ export type DeleteRefereeMutation = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -4522,16 +4998,12 @@ export type DeleteRefereeMutation = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4554,16 +5026,12 @@ export type DeleteRefereeMutation = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4649,8 +5117,6 @@ export type DeleteRefereeMutation = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -4660,7 +5126,6 @@ export type DeleteRefereeMutation = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -4742,12 +5207,17 @@ export type CreateClubMutation = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -4770,16 +5240,12 @@ export type CreateClubMutation = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -4895,12 +5361,17 @@ export type UpdateClubMutation = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -4923,16 +5394,12 @@ export type UpdateClubMutation = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -5048,12 +5515,17 @@ export type DeleteClubMutation = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -5076,16 +5548,12 @@ export type DeleteClubMutation = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -5162,16 +5630,77 @@ export type ListSeasonsQuery = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetSeasonQueryVariables = {
+  id: string,
+};
+
+export type GetSeasonQuery = {
+  getSeason:  {
+    __typename: "Season",
+    id: string,
+    title: string,
+    beginDate: string,
+    endDate: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
       } | null,
       club:  {
         __typename: "Club",
@@ -5202,117 +5731,6 @@ export type ListSeasonsQuery = {
           nextToken: string | null,
         } | null,
       },
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
-};
-
-export type GetSeasonQueryVariables = {
-  id: string,
-};
-
-export type GetSeasonQuery = {
-  getSeason:  {
-    __typename: "Season",
-    id: string,
-    title: string,
-    beginDate: string,
-    endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
-        id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
-        },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
-          id: string,
-          leagueId: string,
-          name: string,
-          contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
     },
   } | null,
 };
@@ -5334,45 +5752,34 @@ export type GetGameQuery = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
-        id: string,
-        name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
-        contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
-          nextToken: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
-        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
       },
     },
     hall:  {
@@ -5400,7 +5807,6 @@ export type GetGameQuery = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -5408,7 +5814,6 @@ export type GetGameQuery = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -5459,32 +5864,23 @@ export type GetGameQuery = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -5531,32 +5927,23 @@ export type GetGameQuery = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -5633,7 +6020,6 @@ export type GetGameQuery = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -5641,7 +6027,6 @@ export type GetGameQuery = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -5714,22 +6099,10 @@ export type ListGamesQuery = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -5758,16 +6131,12 @@ export type ListGamesQuery = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -5790,16 +6159,12 @@ export type ListGamesQuery = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -5875,6 +6240,42 @@ export type GetStandingQuery = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -5900,6 +6301,18 @@ export type ListStandingsQuery = {
       goalDifference: number | null,
       points: number | null,
       lastResults: string | null,
+      season:  {
+        __typename: "Season",
+        id: string,
+        title: string,
+        beginDate: string,
+        endDate: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+      },
     } | null > | null,
     nextToken: string | null,
   } | null,
@@ -5979,8 +6392,6 @@ export type GetSportsHallQuery = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -5990,7 +6401,6 @@ export type GetSportsHallQuery = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6101,22 +6511,10 @@ export type GetHallQuery = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -6145,16 +6543,12 @@ export type GetHallQuery = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -6177,16 +6571,12 @@ export type GetHallQuery = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -6326,7 +6716,6 @@ export type ListHallsQuery = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6334,7 +6723,6 @@ export type ListHallsQuery = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6386,6 +6774,40 @@ export type ListHallsQuery = {
   } | null,
 };
 
+export type ListLeagueInfosQueryVariables = {
+  filter?: ModelLeagueInfoFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLeagueInfosQuery = {
+  listLeagueInfos:  {
+    __typename: "ModelLeagueInfoConnection",
+    items:  Array< {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetLeagueInfoQueryVariables = {
+  id: string,
+};
+
+export type GetLeagueInfoQuery = {
+  getLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
 export type GetLeagueQueryVariables = {
   id: string,
 };
@@ -6394,24 +6816,55 @@ export type GetLeagueQuery = {
   getLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -6430,8 +6883,7 @@ export type GetLeagueQuery = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -6465,8 +6917,6 @@ export type GetLeagueQuery = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -6476,7 +6926,6 @@ export type GetLeagueQuery = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6516,20 +6965,29 @@ export type ListLeaguesQuery = {
     items:  Array< {
       __typename: "League",
       id: string,
-      name: string,
-      ranking: number,
       owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
+        },
       } | null,
       club:  {
         __typename: "Club",
@@ -6565,33 +7023,175 @@ export type ListLeaguesQuery = {
   } | null,
 };
 
-export type GetTeamQueryVariables = {
+export type ListLeagueTeamsQueryVariables = {
+  filter?: ModelLeagueTeamFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLeagueTeamsQuery = {
+  listLeagueTeams:  {
+    __typename: "ModelLeagueTeamConnection",
+    items:  Array< {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        } | null,
+      },
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetLeagueTeamQueryVariables = {
   id: string,
 };
 
-export type GetTeamQuery = {
-  getTeam:  {
-    __typename: "Team",
+export type GetLeagueTeamQuery = {
+  getLeagueTeam:  {
+    __typename: "LeagueTeam",
     id: string,
-    leagueId: string,
-    name: string,
-    contact: string,
-    owner: string | null,
     league:  {
       __typename: "League",
       id: string,
-      name: string,
-      ranking: number,
       owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -6623,6 +7223,81 @@ export type GetTeamQuery = {
           __typename: "ModelRefereeConnection",
           nextToken: string | null,
         } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type GetTeamQueryVariables = {
+  id: string,
+};
+
+export type GetTeamQuery = {
+  getTeam:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    contact: string,
+    owner: string | null,
+    teamLeague:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        } | null,
       },
     } | null,
     athletes:  {
@@ -6636,7 +7311,6 @@ export type GetTeamQuery = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6676,8 +7350,6 @@ export type GetTeamQuery = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -6687,7 +7359,6 @@ export type GetTeamQuery = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -6727,32 +7398,23 @@ export type ListTeamsQuery = {
     items:  Array< {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -6814,32 +7476,23 @@ export type GetAthleteQuery = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -6904,16 +7557,12 @@ export type ListAthletesQuery = {
       teams:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -6967,22 +7616,10 @@ export type GetRefereeQuery = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -7011,16 +7648,12 @@ export type GetRefereeQuery = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -7043,16 +7676,12 @@ export type GetRefereeQuery = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -7138,8 +7767,6 @@ export type GetRefereeQuery = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -7149,7 +7776,6 @@ export type GetRefereeQuery = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7219,7 +7845,6 @@ export type ListRefereesQuery = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7227,7 +7852,6 @@ export type ListRefereesQuery = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7321,8 +7945,6 @@ export type ListClubsQuery = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -7332,7 +7954,6 @@ export type ListClubsQuery = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7415,12 +8036,17 @@ export type GetClubQuery = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -7443,16 +8069,12 @@ export type GetClubQuery = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -7521,340 +8143,32 @@ export type OnCreateSeasonSubscription = {
     title: string,
     beginDate: string,
     endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
         id: string,
         name: string,
         ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
-        },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
-          id: string,
-          leagueId: string,
-          name: string,
-          contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type OnUpdateSeasonSubscription = {
-  onUpdateSeason:  {
-    __typename: "Season",
-    id: string,
-    title: string,
-    beginDate: string,
-    endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
-        },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
+        league:  {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type OnDeleteSeasonSubscription = {
-  onDeleteSeason:  {
-    __typename: "Season",
-    id: string,
-    title: string,
-    beginDate: string,
-    endDate: string,
-    leagues:  {
-      __typename: "ModelLeagueConnection",
-      items:  Array< {
-        __typename: "League",
-        id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
-          id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
         },
-      } | null > | null,
-      nextToken: string | null,
-    } | null,
-    club:  {
-      __typename: "Club",
-      id: string,
-      name: string,
-      street: string | null,
-      streetNumber: string | null,
-      streetNumberAddition: string | null,
-      zipCode: string | null,
-      country: string,
-      contact: string,
-      email: string | null,
-      phone: string | null,
-      sportsHalls:  {
-        __typename: "ModelSportsHallConnection",
-        items:  Array< {
-          __typename: "SportsHall",
-          id: string,
-          name: string,
-          street: string,
-          streetNumber: number,
-          streetNumberAddition: string | null,
-          zipCode: string,
-          city: string,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
-          id: string,
-          leagueId: string,
-          name: string,
-          contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      referees:  {
-        __typename: "ModelRefereeConnection",
-        items:  Array< {
-          __typename: "Referee",
-          id: string,
-          firstName: string,
-          lastName: string,
-          street: string | null,
-          streetNumber: number | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          city: string,
-          email: string | null,
-          phone: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-    },
-  } | null,
-};
-
-export type OnCreateGameSubscription = {
-  onCreateGame:  {
-    __typename: "Game",
-    id: string,
-    gameDay: string,
-    scoreHome: number | null,
-    scoreAway: number | null,
-    season:  {
-      __typename: "Season",
-      id: string,
-      title: string,
-      beginDate: string,
-      endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
-          id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
       } | null,
       club:  {
         __typename: "Club",
@@ -7886,6 +8200,186 @@ export type OnCreateGameSubscription = {
         } | null,
       },
     },
+  } | null,
+};
+
+export type OnUpdateSeasonSubscription = {
+  onUpdateSeason:  {
+    __typename: "Season",
+    id: string,
+    title: string,
+    beginDate: string,
+    endDate: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+  } | null,
+};
+
+export type OnDeleteSeasonSubscription = {
+  onDeleteSeason:  {
+    __typename: "Season",
+    id: string,
+    title: string,
+    beginDate: string,
+    endDate: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+  } | null,
+};
+
+export type OnCreateGameSubscription = {
+  onCreateGame:  {
+    __typename: "Game",
+    id: string,
+    gameDay: string,
+    scoreHome: number | null,
+    scoreAway: number | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
     hall:  {
       __typename: "Hall",
       id: string,
@@ -7911,7 +8405,6 @@ export type OnCreateGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7919,7 +8412,6 @@ export type OnCreateGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -7970,32 +8462,23 @@ export type OnCreateGameSubscription = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8042,32 +8525,23 @@ export type OnCreateGameSubscription = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8144,7 +8618,6 @@ export type OnCreateGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8152,7 +8625,6 @@ export type OnCreateGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8217,45 +8689,34 @@ export type OnUpdateGameSubscription = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
-        id: string,
-        name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
-        contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
-          nextToken: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
-        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
       },
     },
     hall:  {
@@ -8283,7 +8744,6 @@ export type OnUpdateGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8291,7 +8751,6 @@ export type OnUpdateGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8342,32 +8801,23 @@ export type OnUpdateGameSubscription = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8414,32 +8864,23 @@ export type OnUpdateGameSubscription = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8516,7 +8957,6 @@ export type OnUpdateGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8524,7 +8964,6 @@ export type OnUpdateGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8589,45 +9028,34 @@ export type OnDeleteGameSubscription = {
       title: string,
       beginDate: string,
       endDate: string,
-      leagues:  {
-        __typename: "ModelLeagueConnection",
-        items:  Array< {
-          __typename: "League",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
-        id: string,
-        name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
-        contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
-          nextToken: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
-        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
       },
     },
     hall:  {
@@ -8655,7 +9083,6 @@ export type OnDeleteGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8663,7 +9090,6 @@ export type OnDeleteGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8714,32 +9140,23 @@ export type OnDeleteGameSubscription = {
     homeTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8786,32 +9203,23 @@ export type OnDeleteGameSubscription = {
     awayTeam:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -8888,7 +9296,6 @@ export type OnDeleteGameSubscription = {
         homeTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8896,7 +9303,6 @@ export type OnDeleteGameSubscription = {
         awayTeam:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -8962,6 +9368,42 @@ export type OnCreateStandingSubscription = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -8979,6 +9421,42 @@ export type OnUpdateStandingSubscription = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -8996,6 +9474,42 @@ export type OnDeleteStandingSubscription = {
     goalDifference: number | null,
     points: number | null,
     lastResults: string | null,
+    season:  {
+      __typename: "Season",
+      id: string,
+      title: string,
+      beginDate: string,
+      endDate: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+    },
   } | null,
 };
 
@@ -9069,8 +9583,6 @@ export type OnCreateSportsHallSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -9080,7 +9592,6 @@ export type OnCreateSportsHallSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -9178,8 +9689,6 @@ export type OnUpdateSportsHallSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -9189,7 +9698,6 @@ export type OnUpdateSportsHallSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -9287,8 +9795,6 @@ export type OnDeleteSportsHallSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -9298,7 +9804,6 @@ export type OnDeleteSportsHallSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -9343,22 +9848,10 @@ export type OnCreateHallSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -9387,16 +9880,12 @@ export type OnCreateHallSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9419,16 +9908,12 @@ export type OnCreateHallSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9551,22 +10036,10 @@ export type OnUpdateHallSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -9595,16 +10068,12 @@ export type OnUpdateHallSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9627,16 +10096,12 @@ export type OnUpdateHallSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9759,22 +10224,10 @@ export type OnDeleteHallSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -9803,16 +10256,12 @@ export type OnDeleteHallSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9835,16 +10284,12 @@ export type OnDeleteHallSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9950,28 +10395,89 @@ export type OnDeleteHallSubscription = {
   } | null,
 };
 
+export type OnCreateLeagueInfoSubscription = {
+  onCreateLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
+export type OnUpdateLeagueInfoSubscription = {
+  onUpdateLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
+export type OnDeleteLeagueInfoSubscription = {
+  onDeleteLeagueInfo:  {
+    __typename: "LeagueInfo",
+    id: string,
+    name: string,
+    ranking: number,
+    maxTeams: number | null,
+  } | null,
+};
+
 export type OnCreateLeagueSubscription = {
   onCreateLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -9990,8 +10496,7 @@ export type OnCreateLeagueSubscription = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -10025,8 +10530,6 @@ export type OnCreateLeagueSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10036,7 +10539,6 @@ export type OnCreateLeagueSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10068,24 +10570,55 @@ export type OnUpdateLeagueSubscription = {
   onUpdateLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -10104,8 +10637,7 @@ export type OnUpdateLeagueSubscription = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -10139,8 +10671,6 @@ export type OnUpdateLeagueSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10150,7 +10680,6 @@ export type OnUpdateLeagueSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10182,24 +10711,55 @@ export type OnDeleteLeagueSubscription = {
   onDeleteLeague:  {
     __typename: "League",
     id: string,
-    name: string,
-    ranking: number,
     owner: string | null,
-    teams:  {
-      __typename: "ModelTeamConnection",
-      items:  Array< {
-        __typename: "Team",
+    leagueInfo:  {
+      __typename: "LeagueInfo",
+      id: string,
+      name: string,
+      ranking: number,
+      maxTeams: number | null,
+    },
+    leagueTeams:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
         id: string,
-        leagueId: string,
-        name: string,
-        contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
           name: string,
           ranking: number,
-          owner: string | null,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -10218,8 +10778,7 @@ export type OnDeleteLeagueSubscription = {
           email: string | null,
           phone: string | null,
         } | null,
-      } | null > | null,
-      nextToken: string | null,
+      },
     } | null,
     club:  {
       __typename: "Club",
@@ -10253,8 +10812,6 @@ export type OnDeleteLeagueSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10264,7 +10821,6 @@ export type OnDeleteLeagueSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10292,29 +10848,97 @@ export type OnDeleteLeagueSubscription = {
   } | null,
 };
 
-export type OnCreateTeamSubscription = {
-  onCreateTeam:  {
-    __typename: "Team",
+export type OnCreateLeagueTeamSubscription = {
+  onCreateLeagueTeam:  {
+    __typename: "LeagueTeam",
     id: string,
-    leagueId: string,
-    name: string,
-    contact: string,
-    owner: string | null,
     league:  {
       __typename: "League",
       id: string,
-      name: string,
-      ranking: number,
       owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
         } | null > | null,
         nextToken: string | null,
       } | null,
@@ -10346,6 +10970,331 @@ export type OnCreateTeamSubscription = {
           __typename: "ModelRefereeConnection",
           nextToken: string | null,
         } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type OnUpdateLeagueTeamSubscription = {
+  onUpdateLeagueTeam:  {
+    __typename: "LeagueTeam",
+    id: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type OnDeleteLeagueTeamSubscription = {
+  onDeleteLeagueTeam:  {
+    __typename: "LeagueTeam",
+    id: string,
+    league:  {
+      __typename: "League",
+      id: string,
+      owner: string | null,
+      leagueInfo:  {
+        __typename: "LeagueInfo",
+        id: string,
+        name: string,
+        ranking: number,
+        maxTeams: number | null,
+      },
+      leagueTeams:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      },
+    },
+    team:  {
+      __typename: "Team",
+      id: string,
+      name: string,
+      contact: string,
+      owner: string | null,
+      teamLeague:  {
+        __typename: "LeagueTeam",
+        id: string,
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
+          id: string,
+          name: string,
+          contact: string,
+          owner: string | null,
+        },
+      } | null,
+      athletes:  {
+        __typename: "ModelAthleteConnection",
+        items:  Array< {
+          __typename: "Athlete",
+          id: string,
+          name: string,
+          email: string | null,
+          phone: string | null,
+        } | null > | null,
+        nextToken: string | null,
+      } | null,
+      club:  {
+        __typename: "Club",
+        id: string,
+        name: string,
+        street: string | null,
+        streetNumber: string | null,
+        streetNumberAddition: string | null,
+        zipCode: string | null,
+        country: string,
+        contact: string,
+        email: string | null,
+        phone: string | null,
+        sportsHalls:  {
+          __typename: "ModelSportsHallConnection",
+          nextToken: string | null,
+        } | null,
+        leagues:  {
+          __typename: "ModelLeagueConnection",
+          nextToken: string | null,
+        } | null,
+        teams:  {
+          __typename: "ModelTeamConnection",
+          nextToken: string | null,
+        } | null,
+        referees:  {
+          __typename: "ModelRefereeConnection",
+          nextToken: string | null,
+        } | null,
+      } | null,
+    },
+  } | null,
+};
+
+export type OnCreateTeamSubscription = {
+  onCreateTeam:  {
+    __typename: "Team",
+    id: string,
+    name: string,
+    contact: string,
+    owner: string | null,
+    teamLeague:  {
+      __typename: "LeagueTeam",
+      id: string,
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
+        id: string,
+        name: string,
+        contact: string,
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
+          nextToken: string | null,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
+        } | null,
       },
     } | null,
     athletes:  {
@@ -10359,7 +11308,6 @@ export type OnCreateTeamSubscription = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10399,8 +11347,6 @@ export type OnCreateTeamSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10410,7 +11356,6 @@ export type OnCreateTeamSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10442,55 +11387,67 @@ export type OnUpdateTeamSubscription = {
   onUpdateTeam:  {
     __typename: "Team",
     id: string,
-    leagueId: string,
     name: string,
     contact: string,
     owner: string | null,
-    league:  {
-      __typename: "League",
+    teamLeague:  {
+      __typename: "LeagueTeam",
       id: string,
-      name: string,
-      ranking: number,
-      owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
-          leagueId: string,
           name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
           contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
         id: string,
         name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
         contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
           nextToken: string | null,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
         } | null,
       },
     } | null,
@@ -10505,7 +11462,6 @@ export type OnUpdateTeamSubscription = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10545,8 +11501,6 @@ export type OnUpdateTeamSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10556,7 +11510,6 @@ export type OnUpdateTeamSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10588,55 +11541,67 @@ export type OnDeleteTeamSubscription = {
   onDeleteTeam:  {
     __typename: "Team",
     id: string,
-    leagueId: string,
     name: string,
     contact: string,
     owner: string | null,
-    league:  {
-      __typename: "League",
+    teamLeague:  {
+      __typename: "LeagueTeam",
       id: string,
-      name: string,
-      ranking: number,
-      owner: string | null,
-      teams:  {
-        __typename: "ModelTeamConnection",
-        items:  Array< {
-          __typename: "Team",
+      league:  {
+        __typename: "League",
+        id: string,
+        owner: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
           id: string,
-          leagueId: string,
           name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
           contact: string,
-          owner: string | null,
-        } | null > | null,
-        nextToken: string | null,
-      } | null,
-      club:  {
-        __typename: "Club",
+          email: string | null,
+          phone: string | null,
+        },
+      },
+      team:  {
+        __typename: "Team",
         id: string,
         name: string,
-        street: string | null,
-        streetNumber: string | null,
-        streetNumberAddition: string | null,
-        zipCode: string | null,
-        country: string,
         contact: string,
-        email: string | null,
-        phone: string | null,
-        sportsHalls:  {
-          __typename: "ModelSportsHallConnection",
+        owner: string | null,
+        teamLeague:  {
+          __typename: "LeagueTeam",
+          id: string,
+        } | null,
+        athletes:  {
+          __typename: "ModelAthleteConnection",
           nextToken: string | null,
         } | null,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        referees:  {
-          __typename: "ModelRefereeConnection",
-          nextToken: string | null,
+        club:  {
+          __typename: "Club",
+          id: string,
+          name: string,
+          street: string | null,
+          streetNumber: string | null,
+          streetNumberAddition: string | null,
+          zipCode: string | null,
+          country: string,
+          contact: string,
+          email: string | null,
+          phone: string | null,
         } | null,
       },
     } | null,
@@ -10651,7 +11616,6 @@ export type OnDeleteTeamSubscription = {
         teams:  {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10691,8 +11655,6 @@ export type OnDeleteTeamSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -10702,7 +11664,6 @@ export type OnDeleteTeamSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -10740,32 +11701,23 @@ export type OnCreateAthleteSubscription = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -10822,32 +11774,23 @@ export type OnUpdateAthleteSubscription = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -10904,32 +11847,23 @@ export type OnDeleteAthleteSubscription = {
     teams:  {
       __typename: "Team",
       id: string,
-      leagueId: string,
       name: string,
       contact: string,
       owner: string | null,
-      league:  {
-        __typename: "League",
+      teamLeague:  {
+        __typename: "LeagueTeam",
         id: string,
-        name: string,
-        ranking: number,
-        owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
+          id: string,
+          owner: string | null,
+        },
+        team:  {
+          __typename: "Team",
           id: string,
           name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
           contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       } | null,
       athletes:  {
@@ -11001,22 +11935,10 @@ export type OnCreateRefereeSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -11045,16 +11967,12 @@ export type OnCreateRefereeSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11077,16 +11995,12 @@ export type OnCreateRefereeSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11172,8 +12086,6 @@ export type OnCreateRefereeSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -11183,7 +12095,6 @@ export type OnCreateRefereeSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -11236,22 +12147,10 @@ export type OnUpdateRefereeSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -11280,16 +12179,12 @@ export type OnUpdateRefereeSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11312,16 +12207,12 @@ export type OnUpdateRefereeSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11407,8 +12298,6 @@ export type OnUpdateRefereeSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -11418,7 +12307,6 @@ export type OnUpdateRefereeSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -11471,22 +12359,10 @@ export type OnDeleteRefereeSubscription = {
         title: string,
         beginDate: string,
         endDate: string,
-        leagues:  {
-          __typename: "ModelLeagueConnection",
-          nextToken: string | null,
-        } | null,
-        club:  {
-          __typename: "Club",
+        league:  {
+          __typename: "League",
           id: string,
-          name: string,
-          street: string | null,
-          streetNumber: string | null,
-          streetNumberAddition: string | null,
-          zipCode: string | null,
-          country: string,
-          contact: string,
-          email: string | null,
-          phone: string | null,
+          owner: string | null,
         },
       },
       hall:  {
@@ -11515,16 +12391,12 @@ export type OnDeleteRefereeSubscription = {
       homeTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11547,16 +12419,12 @@ export type OnDeleteRefereeSubscription = {
       awayTeam:  {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11642,8 +12510,6 @@ export type OnDeleteRefereeSubscription = {
         items:  Array< {
           __typename: "League",
           id: string,
-          name: string,
-          ranking: number,
           owner: string | null,
         } | null > | null,
         nextToken: string | null,
@@ -11653,7 +12519,6 @@ export type OnDeleteRefereeSubscription = {
         items:  Array< {
           __typename: "Team",
           id: string,
-          leagueId: string,
           name: string,
           contact: string,
           owner: string | null,
@@ -11731,12 +12596,17 @@ export type OnCreateClubSubscription = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -11759,16 +12629,12 @@ export type OnCreateClubSubscription = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -11880,12 +12746,17 @@ export type OnUpdateClubSubscription = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -11908,16 +12779,12 @@ export type OnUpdateClubSubscription = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",
@@ -12029,12 +12896,17 @@ export type OnDeleteClubSubscription = {
       items:  Array< {
         __typename: "League",
         id: string,
-        name: string,
-        ranking: number,
         owner: string | null,
-        teams:  {
-          __typename: "ModelTeamConnection",
-          nextToken: string | null,
+        leagueInfo:  {
+          __typename: "LeagueInfo",
+          id: string,
+          name: string,
+          ranking: number,
+          maxTeams: number | null,
+        },
+        leagueTeams:  {
+          __typename: "LeagueTeam",
+          id: string,
         } | null,
         club:  {
           __typename: "Club",
@@ -12057,16 +12929,12 @@ export type OnDeleteClubSubscription = {
       items:  Array< {
         __typename: "Team",
         id: string,
-        leagueId: string,
         name: string,
         contact: string,
         owner: string | null,
-        league:  {
-          __typename: "League",
+        teamLeague:  {
+          __typename: "LeagueTeam",
           id: string,
-          name: string,
-          ranking: number,
-          owner: string | null,
         } | null,
         athletes:  {
           __typename: "ModelAthleteConnection",

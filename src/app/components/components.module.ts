@@ -13,11 +13,13 @@ import { CreateGameFormComponent } from './match-schedule/create-game-form/creat
 import { DeleteButtonComponent } from './forms/delete-button/delete-button.component';
 import { SubmitButtonComponent } from './forms/submit-button/submit-button.component';
 import { TextAvatarModule } from './text-avatar';
+import { SeasonFormComponent } from './admin/season-form/season-form.component';
 
 @NgModule({
   declarations: [
     MenuHeaderComponent, RefereeFormComponent, BackHeaderComponent, LeagueHeaderComponent,
-    TeamListComponent, InputErrorComponent, CreateGameFormComponent, DeleteButtonComponent, SubmitButtonComponent
+    TeamListComponent, InputErrorComponent, CreateGameFormComponent, DeleteButtonComponent, SubmitButtonComponent,
+    SeasonFormComponent
   ],
   imports: [
     IonicModule,
@@ -28,7 +30,8 @@ import { TextAvatarModule } from './text-avatar';
   ],
   exports: [
     MenuHeaderComponent, RefereeFormComponent, BackHeaderComponent, LeagueHeaderComponent,
-    TeamListComponent, InputErrorComponent, CreateGameFormComponent, DeleteButtonComponent, SubmitButtonComponent
+    TeamListComponent, InputErrorComponent, CreateGameFormComponent, DeleteButtonComponent, SubmitButtonComponent,
+    SeasonFormComponent
   ]
 })
 export class ComponentsModule { }

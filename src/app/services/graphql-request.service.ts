@@ -40,6 +40,19 @@ export class GraphqlRequestService {
     this.handleResponse(response, queryName);
   }
 
+  public doSPrivateMutation(mutationName, variables) {
+
+    this.response = API.graphql({
+      query: mutations[mutationName],
+      variables,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+    });
+
+    console.log(this.response);
+
+    this.handleResponse(this.response, mutationName);
+  }
+
   public async doPrivateMutation(mutationName, variables) {
 
     this.response = await API.graphql({
@@ -67,6 +80,8 @@ export class GraphqlRequestService {
         this.nextToken = null;
       }
     } else {
+      console.log('Is dit nu een promise?');
+      console.log(response);
       this.isSuccessfull = false;
     }
   }

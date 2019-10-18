@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as mutations from '../../../../../graphql/mutations';
-import { CreateLeagueInput } from 'src/API';
+import { CreateLeagueInput, CreateLeagueInfoInput } from 'src/API';
 import { environment } from '../../../../../environments/environment';
 import { GraphqlRequestService } from '../../../../services/graphql-request.service';
+import { LeagueDataService } from 'src/app/services/league-data.service';
 
 @Component({
   selector: 'app-league-create',
@@ -13,10 +14,10 @@ import { GraphqlRequestService } from '../../../../services/graphql-request.serv
 })
 export class LeagueCreatePage implements OnInit {
 
-  public league: { name: string, ranking: number };
-  private initialLeagueState = { name: null, ranking: null };
+  public league: { name: string, ranking: number, maxTeams: number };
+  private initialLeagueState = { name: null, ranking: null, maxTeams: 5 };
 
-  constructor(private router: Router, private graphqlRequestService: GraphqlRequestService) {
+  constructor(private router: Router, private leagueDataService: LeagueDataService) {
     this.league = this.initialLeagueState;
   }
 
@@ -26,13 +27,18 @@ export class LeagueCreatePage implements OnInit {
   async processForm() {
 
     try {
-      const createLeagueInput: CreateLeagueInput = {
-        name: this.league.name, leagueClubId: environment.clubId, ranking: this.league.ranking
+
+      const createLeagueInfoInput: CreateLeagueInfoInput = {
+        name: this.league.name, ranking: this.league.ranking, maxTeams: this.league.maxTeams
       };
 
-      await this.graphqlRequestService.doPrivateMutation('createLeague', { input: createLeagueInput });
+      // leagueLeagueInfoId will be set in the function createCompletelyNewLeague because there we will save the leagueinfo.
+      const createLeagueInput: CreateLeagueInput = {
+        leagueLeagueInfoId: null, leagueClubId: environment.clubId
+      };
 
-      if (this.graphqlRequestService.isSuccessfull) {
+      const league = this.leagueDataService.createCompletelyNewLeague(createLeagueInfoInput, createLeagueInput);
+      if (league !== null) {
         return this.router.navigate(['/admin/league']);
       } else {
 
@@ -41,4 +47,5 @@ export class LeagueCreatePage implements OnInit {
       console.log(err);
     }
   }
+
 }
