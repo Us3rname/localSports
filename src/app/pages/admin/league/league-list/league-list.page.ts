@@ -72,9 +72,9 @@ export class LeagueListPage implements OnInit {
 
   updateLocalLeagues(leagueData) {
     const leagueInfo = leagueData.value.data.onUpdateLeagueInfo;
-    for (let i = 0; i < this.allLeagues.length; i++) {
-      if (this.allLeagues[i].leagueInfo.id === leagueInfo.id) {
-        this.allLeagues[i].leagueInfo = leagueInfo;
+    for (const league of this.allLeagues) {
+      if (league.leagueInfo.id === leagueInfo.id) {
+        league.leagueInfo = leagueInfo;
         this.toastService.presentToast('Divisie is bijgewerkt');
         return;
       }
