@@ -3,7 +3,8 @@ type Season @model @auth(rules: [{allow: public, operations: [read]}, { allow: g
   title: String!
   beginDate: AWSDateTime!
   endDate: AWSDateTime!
-  league: League! @connection
+  club: Club! @connection
+  clubId: ID!
 }
 
 type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
@@ -64,24 +65,34 @@ type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: g
   id: ID!
   leagueInfo: LeagueInfo! @connection
   club: Club! @connection(name: "ClubLeagues")
-  leagueTeams: LeagueTeam @connection(name: "LeagueTeams")
+  leagueTeams: [LeagueTeam] @connection(name: "LeagueTeams")
   owner: String
 }
 
 type LeagueTeam @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
   id: ID!
   league: League! @connection(name: "LeagueTeams")
+  leagueId: ID!
   team: Team! @connection(name: "TeamLeagues")
+  teamId: ID!
 }
 
 type Team @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
   id: ID!
-  teamLeague: LeagueTeam @connection(name: "TeamLeagues")
+  teamLeague: [LeagueTeam] @connection(name: "TeamLeagues")
   name: String!
   contact: String!
   athletes: [Athlete] @connection(name: "TeamMembers")
-  club: Club @connection(name: "ClubMembers")
+  club: Club! @connection(name: "ClubMembers")
   owner: String
+}
+
+type TeamMembers @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {
+ id: ID!
+ team: Team! @connection
+ teamId: ID!
+ athlete: Athlete! @connection
+ athleteId: ID!
 }
 
 type Athlete @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }])  {

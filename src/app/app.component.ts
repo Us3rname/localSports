@@ -52,6 +52,10 @@ export class AppComponent {
 
   public clubPages = [
     {
+      title: 'Seizoenen',
+      url: '/admin/season',
+      icon: 'calendar'
+    }, {
       title: 'Divisies',
       url: '/admin/league',
       icon: 'rocket'

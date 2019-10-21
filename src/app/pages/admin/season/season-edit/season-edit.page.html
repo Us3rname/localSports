@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>season-edit</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seizoen bewerken</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <app-season-form action='edit' [seasonId]=seasonId (seasonMutated)="onSeasonMutated()"></app-season-form>
 </ion-content>

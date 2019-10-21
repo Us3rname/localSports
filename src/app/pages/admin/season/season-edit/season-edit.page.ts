@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SeasonDataService } from 'src/app/services/season-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Season } from 'src/app/interfaces/season';
 
 @Component({
   selector: 'app-season-edit',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeasonEditPage implements OnInit {
 
-  constructor() { }
+  seasonId: string;
 
-  ngOnInit() {
+  constructor(private seasonDataService: SeasonDataService, private route: ActivatedRoute, private router: Router) {
+    this.seasonId = this.route.snapshot.paramMap.get('seasonId');
   }
 
+  ngOnInit() {
+
+  }
+
+  onSeasonMutated() {
+    this.router.navigate(['/admin/season']);
+  }
 }

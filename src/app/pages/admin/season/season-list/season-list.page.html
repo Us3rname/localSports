@@ -1,9 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>season-list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<menu-header headerTitle="Seizoenen"></menu-header>
 
 <ion-content>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='goToSeasonCreatePage($event)'>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list [hidden]="isLoading">
+    <div *ngFor="let season of seasons;" (click)="onSeasonSelected(season)">
+      <ion-item>
+        <ion-label>
+          <h2><b>Titel: </b>{{ season.title }}</h2>
+          <h2>Loopt van {{ season.beginDate | date:'dd-MM-yyyy' }} tot {{ season.endDate | date: 'dd-MM-yyyy'}} </h2>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>

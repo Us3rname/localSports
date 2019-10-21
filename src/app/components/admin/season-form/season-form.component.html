@@ -1,0 +1,54 @@
+<form [formGroup]="seasonForm" (ngSubmit)="processForm(seasonForm.value)">
+
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="stacked">Titel <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="title" name="title"></ion-input>
+    </ion-item>
+    <app-input-error [formToValidate]=seasonForm [validationMessages]=validationMessages.title inputFieldName="title"
+      [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Start seizoen <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-datetime displayFormat="D-MM-YYYY" max="2999" formControlName="beginDate" name="beginDate">
+      </ion-datetime>
+    </ion-item>
+    <app-input-error [formToValidate]=seasonForm [validationMessages]=validationMessages.beginDate
+      inputFieldName="beginDate" [formSubmitted]=submitted>
+    </app-input-error>
+
+    <ion-item>
+      <ion-label position="stacked">Einde seizoen <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-datetime displayFormat="D-MM-YYYY" max="2999" formControlName="endDate" name="endDate">
+      </ion-datetime>
+    </ion-item>
+    <app-input-error [formToValidate]=seasonForm [validationMessages]=validationMessages.endDate
+      inputFieldName="endDate" [formSubmitted]=submitted>
+    </app-input-error>
+
+  </ion-list>
+
+  <div class="ion-padding" [hidden]="action !== 'create'">
+    <ion-button expand="block" type="submit" class="ion-no-margin">Seizoen toevoegen</ion-button>
+  </div>
+
+  <ion-grid [hidden]="action !== 'edit'">
+    <ion-row>
+      <ion-col>
+        <app-delete-button btnLabel="Verwijder" (click)="presentDeleteAlert()"></app-delete-button>
+      </ion-col>
+
+      <ion-col>
+      </ion-col>
+
+      <ion-col>
+        <app-submit-button btnLabel="Bijwerken"></app-submit-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</form>

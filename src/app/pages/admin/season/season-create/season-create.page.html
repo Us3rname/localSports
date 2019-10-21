@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>season-create</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Seizoen toevoegen</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <app-season-form action='create' (seasonMutated)="onSeasonMutated()"></app-season-form>
 </ion-content>

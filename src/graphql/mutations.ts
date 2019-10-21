@@ -12,56 +12,22 @@ export const createCompleteNewLeague = `mutation CreateCompleteNewLeague($input:
       maxTeams
     }
     leagueTeams {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     club {
       id
@@ -128,51 +94,61 @@ export const createSeason = `mutation CreateSeason($input: CreateSeasonInput!) {
     title
     beginDate
     endDate
-    league {
+    clubId
+    club {
       id
-      owner
-      leagueInfo {
-        id
-        name
-        ranking
-        maxTeams
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        items {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          phone
+        }
+        nextToken
       }
-      leagueTeams {
-        id
-        league {
+      leagues {
+        items {
           id
           owner
         }
-        team {
+        nextToken
+      }
+      teams {
+        items {
           id
           name
           contact
           owner
         }
+        nextToken
       }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        sportsHalls {
-          nextToken
+      referees {
+        items {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
         }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
+        nextToken
       }
     }
   }
@@ -184,51 +160,61 @@ export const updateSeason = `mutation UpdateSeason($input: UpdateSeasonInput!) {
     title
     beginDate
     endDate
-    league {
+    clubId
+    club {
       id
-      owner
-      leagueInfo {
-        id
-        name
-        ranking
-        maxTeams
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        items {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          phone
+        }
+        nextToken
       }
-      leagueTeams {
-        id
-        league {
+      leagues {
+        items {
           id
           owner
         }
-        team {
+        nextToken
+      }
+      teams {
+        items {
           id
           name
           contact
           owner
         }
+        nextToken
       }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        sportsHalls {
-          nextToken
+      referees {
+        items {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
         }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
+        nextToken
       }
     }
   }
@@ -240,51 +226,61 @@ export const deleteSeason = `mutation DeleteSeason($input: DeleteSeasonInput!) {
     title
     beginDate
     endDate
-    league {
+    clubId
+    club {
       id
-      owner
-      leagueInfo {
-        id
-        name
-        ranking
-        maxTeams
+      name
+      street
+      streetNumber
+      streetNumberAddition
+      zipCode
+      country
+      contact
+      email
+      phone
+      sportsHalls {
+        items {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          phone
+        }
+        nextToken
       }
-      leagueTeams {
-        id
-        league {
+      leagues {
+        items {
           id
           owner
         }
-        team {
+        nextToken
+      }
+      teams {
+        items {
           id
           name
           contact
           owner
         }
+        nextToken
       }
-      club {
-        id
-        name
-        street
-        streetNumber
-        streetNumberAddition
-        zipCode
-        country
-        contact
-        email
-        phone
-        sportsHalls {
-          nextToken
+      referees {
+        items {
+          id
+          firstName
+          lastName
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          city
+          email
+          phone
         }
-        leagues {
-          nextToken
-        }
-        teams {
-          nextToken
-        }
-        referees {
-          nextToken
-        }
+        nextToken
       }
     }
   }
@@ -301,29 +297,29 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -340,6 +336,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -402,17 +399,12 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -454,17 +446,12 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -521,6 +508,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -590,29 +578,29 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -629,6 +617,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -691,17 +680,12 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -743,17 +727,12 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -810,6 +789,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -879,29 +859,29 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -918,6 +898,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -980,17 +961,12 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -1032,17 +1008,12 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -1099,6 +1070,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
           title
           beginDate
           endDate
+          clubId
         }
         hall {
           id
@@ -1175,29 +1147,29 @@ export const createStanding = `mutation CreateStanding($input: CreateStandingInp
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -1222,29 +1194,29 @@ export const updateStanding = `mutation UpdateStanding($input: UpdateStandingInp
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -1269,29 +1241,29 @@ export const deleteStanding = `mutation DeleteStanding($input: DeleteStandingInp
       title
       beginDate
       endDate
-      league {
+      clubId
+      club {
         id
-        owner
-        leagueInfo {
-          id
-          name
-          ranking
-          maxTeams
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
         }
-        leagueTeams {
-          id
+        leagues {
+          nextToken
         }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
         }
       }
     }
@@ -1588,9 +1560,18 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -1619,7 +1600,7 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -1643,7 +1624,7 @@ export const createHall = `mutation CreateHall($input: CreateHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -1750,9 +1731,18 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -1781,7 +1771,7 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -1805,7 +1795,7 @@ export const updateHall = `mutation UpdateHall($input: UpdateHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -1912,9 +1902,18 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -1943,7 +1942,7 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -1967,7 +1966,7 @@ export const deleteHall = `mutation DeleteHall($input: DeleteHallInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -2098,56 +2097,22 @@ export const createLeague = `mutation CreateLeague($input: CreateLeagueInput!) {
       maxTeams
     }
     leagueTeams {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     club {
       id
@@ -2219,56 +2184,22 @@ export const updateLeague = `mutation UpdateLeague($input: UpdateLeagueInput!) {
       maxTeams
     }
     leagueTeams {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     club {
       id
@@ -2340,56 +2271,22 @@ export const deleteLeague = `mutation DeleteLeague($input: DeleteLeagueInput!) {
       maxTeams
     }
     leagueTeams {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     club {
       id
@@ -2453,6 +2350,8 @@ export const deleteLeague = `mutation DeleteLeague($input: DeleteLeagueInput!) {
 export const createLeagueTeam = `mutation CreateLeagueTeam($input: CreateLeagueTeamInput!) {
   createLeagueTeam(input: $input) {
     id
+    leagueId
+    teamId
     league {
       id
       owner
@@ -2463,17 +2362,12 @@ export const createLeagueTeam = `mutation CreateLeagueTeam($input: CreateLeagueT
         maxTeams
       }
       leagueTeams {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       club {
         id
@@ -2506,17 +2400,12 @@ export const createLeagueTeam = `mutation CreateLeagueTeam($input: CreateLeagueT
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -2558,6 +2447,8 @@ export const createLeagueTeam = `mutation CreateLeagueTeam($input: CreateLeagueT
 export const updateLeagueTeam = `mutation UpdateLeagueTeam($input: UpdateLeagueTeamInput!) {
   updateLeagueTeam(input: $input) {
     id
+    leagueId
+    teamId
     league {
       id
       owner
@@ -2568,17 +2459,12 @@ export const updateLeagueTeam = `mutation UpdateLeagueTeam($input: UpdateLeagueT
         maxTeams
       }
       leagueTeams {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       club {
         id
@@ -2611,17 +2497,12 @@ export const updateLeagueTeam = `mutation UpdateLeagueTeam($input: UpdateLeagueT
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -2663,6 +2544,8 @@ export const updateLeagueTeam = `mutation UpdateLeagueTeam($input: UpdateLeagueT
 export const deleteLeagueTeam = `mutation DeleteLeagueTeam($input: DeleteLeagueTeamInput!) {
   deleteLeagueTeam(input: $input) {
     id
+    leagueId
+    teamId
     league {
       id
       owner
@@ -2673,17 +2556,12 @@ export const deleteLeagueTeam = `mutation DeleteLeagueTeam($input: DeleteLeagueT
         maxTeams
       }
       leagueTeams {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       club {
         id
@@ -2716,17 +2594,12 @@ export const deleteLeagueTeam = `mutation DeleteLeagueTeam($input: DeleteLeagueT
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -2772,56 +2645,22 @@ export const createTeam = `mutation CreateTeam($input: CreateTeamInput!) {
     contact
     owner
     teamLeague {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     athletes {
       items {
@@ -2904,56 +2743,22 @@ export const updateTeam = `mutation UpdateTeam($input: UpdateTeamInput!) {
     contact
     owner
     teamLeague {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     athletes {
       items {
@@ -3036,56 +2841,22 @@ export const deleteTeam = `mutation DeleteTeam($input: DeleteTeamInput!) {
     contact
     owner
     teamLeague {
-      id
-      league {
+      items {
         id
-        owner
-        leagueInfo {
+        leagueId
+        teamId
+        league {
+          id
+          owner
+        }
+        team {
           id
           name
-          ranking
-          maxTeams
-        }
-        leagueTeams {
-          id
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
           contact
-          email
-          phone
+          owner
         }
       }
-      team {
-        id
-        name
-        contact
-        owner
-        teamLeague {
-          id
-        }
-        athletes {
-          nextToken
-        }
-        club {
-          id
-          name
-          street
-          streetNumber
-          streetNumberAddition
-          zipCode
-          country
-          contact
-          email
-          phone
-        }
-      }
+      nextToken
     }
     athletes {
       items {
@@ -3161,6 +2932,261 @@ export const deleteTeam = `mutation DeleteTeam($input: DeleteTeamInput!) {
   }
 }
 `;
+export const createTeamMembers = `mutation CreateTeamMembers($input: CreateTeamMembersInput!) {
+  createTeamMembers(input: $input) {
+    id
+    teamId
+    athleteId
+    team {
+      id
+      name
+      contact
+      owner
+      teamLeague {
+        items {
+          id
+          leagueId
+          teamId
+        }
+        nextToken
+      }
+      athletes {
+        items {
+          id
+          name
+          email
+          phone
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    athlete {
+      id
+      name
+      email
+      phone
+      teams {
+        id
+        name
+        contact
+        owner
+        teamLeague {
+          nextToken
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+    }
+  }
+}
+`;
+export const updateTeamMembers = `mutation UpdateTeamMembers($input: UpdateTeamMembersInput!) {
+  updateTeamMembers(input: $input) {
+    id
+    teamId
+    athleteId
+    team {
+      id
+      name
+      contact
+      owner
+      teamLeague {
+        items {
+          id
+          leagueId
+          teamId
+        }
+        nextToken
+      }
+      athletes {
+        items {
+          id
+          name
+          email
+          phone
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    athlete {
+      id
+      name
+      email
+      phone
+      teams {
+        id
+        name
+        contact
+        owner
+        teamLeague {
+          nextToken
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+    }
+  }
+}
+`;
+export const deleteTeamMembers = `mutation DeleteTeamMembers($input: DeleteTeamMembersInput!) {
+  deleteTeamMembers(input: $input) {
+    id
+    teamId
+    athleteId
+    team {
+      id
+      name
+      contact
+      owner
+      teamLeague {
+        items {
+          id
+          leagueId
+          teamId
+        }
+        nextToken
+      }
+      athletes {
+        items {
+          id
+          name
+          email
+          phone
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
+    athlete {
+      id
+      name
+      email
+      phone
+      teams {
+        id
+        name
+        contact
+        owner
+        teamLeague {
+          nextToken
+        }
+        athletes {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+    }
+  }
+}
+`;
 export const createAthlete = `mutation CreateAthlete($input: CreateAthleteInput!) {
   createAthlete(input: $input) {
     id
@@ -3173,17 +3199,12 @@ export const createAthlete = `mutation CreateAthlete($input: CreateAthleteInput!
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -3234,17 +3255,12 @@ export const updateAthlete = `mutation UpdateAthlete($input: UpdateAthleteInput!
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -3295,17 +3311,12 @@ export const deleteAthlete = `mutation DeleteAthlete($input: DeleteAthleteInput!
       contact
       owner
       teamLeague {
-        id
-        league {
+        items {
           id
-          owner
+          leagueId
+          teamId
         }
-        team {
-          id
-          name
-          contact
-          owner
-        }
+        nextToken
       }
       athletes {
         items {
@@ -3366,9 +3377,18 @@ export const createReferee = `mutation CreateReferee($input: CreateRefereeInput!
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -3397,7 +3417,7 @@ export const createReferee = `mutation CreateReferee($input: CreateRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3421,7 +3441,7 @@ export const createReferee = `mutation CreateReferee($input: CreateRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3551,9 +3571,18 @@ export const updateReferee = `mutation UpdateReferee($input: UpdateRefereeInput!
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -3582,7 +3611,7 @@ export const updateReferee = `mutation UpdateReferee($input: UpdateRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3606,7 +3635,7 @@ export const updateReferee = `mutation UpdateReferee($input: UpdateRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3736,9 +3765,18 @@ export const deleteReferee = `mutation DeleteReferee($input: DeleteRefereeInput!
         title
         beginDate
         endDate
-        league {
+        clubId
+        club {
           id
-          owner
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
         }
       }
       hall {
@@ -3767,7 +3805,7 @@ export const deleteReferee = `mutation DeleteReferee($input: DeleteRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3791,7 +3829,7 @@ export const deleteReferee = `mutation DeleteReferee($input: DeleteRefereeInput!
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -3950,7 +3988,7 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
           maxTeams
         }
         leagueTeams {
-          id
+          nextToken
         }
         club {
           id
@@ -3974,7 +4012,7 @@ export const createClub = `mutation CreateClub($input: CreateClubInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -4081,7 +4119,7 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
           maxTeams
         }
         leagueTeams {
-          id
+          nextToken
         }
         club {
           id
@@ -4105,7 +4143,7 @@ export const updateClub = `mutation UpdateClub($input: UpdateClubInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
@@ -4212,7 +4250,7 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
           maxTeams
         }
         leagueTeams {
-          id
+          nextToken
         }
         club {
           id
@@ -4236,7 +4274,7 @@ export const deleteClub = `mutation DeleteClub($input: DeleteClubInput!) {
         contact
         owner
         teamLeague {
-          id
+          nextToken
         }
         athletes {
           nextToken
