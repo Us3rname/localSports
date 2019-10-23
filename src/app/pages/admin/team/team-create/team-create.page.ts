@@ -3,7 +3,7 @@ import { environment } from '../../../../../environments/environment';
 import { LeagueDataService } from '../../../../services/league-data.service';
 import { GraphqlRequestService } from '../../../../services/graphql-request.service';
 import { Router } from '@angular/router';
-import { CreateTeamInput } from '../../../../../API';
+import { CreateTeamInput, CreateLeagueTeamInput } from '../../../../../API';
 
 @Component({
   selector: 'app-team-create',
@@ -15,8 +15,9 @@ export class TeamCreatePage implements OnInit {
   i = 2;
   defaultHref: '';
   team: CreateTeamInput;
+  leagueId;
   initialTeamState = {
-    name: 'Team ' + this.i++, contact: 'Henkie', teamLeagueId: null, leagueId: null, teamClubId: environment.clubId
+    name: 'Team ' + this.i++, contact: 'Henkie', teamClubId: environment.clubId
   };
   leagues = new Array();
 
@@ -40,8 +41,17 @@ export class TeamCreatePage implements OnInit {
 
     try {
       // General workaround to be able to filter the teams per league.
-      this.team.leagueId = this.team.teamLeagueId;
       await this.graphqlRequestService.doPrivateMutation('createTeam', { input: this.team });
+      let team;
+      if (this.graphqlRequestService.isSuccessfull) {
+        team = this.graphqlRequestService.data;
+      }
+
+      const createTeamLeagueInput: CreateLeagueTeamInput = {
+        leagueTeamTeamId: team.id, leagueTeamLeagueId: this.leagueId, leagueId: this.leagueId, teamId: team.id
+      };
+
+      const leagueTeam = await this.graphqlRequestService.doPrivateMutation('createLeagueTeam', { input: createTeamLeagueInput });
 
       if (this.graphqlRequestService.isSuccessfull) {
         return this.router.navigate(['/admin/team']);

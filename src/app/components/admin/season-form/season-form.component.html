@@ -1,6 +1,11 @@
 <form [formGroup]="seasonForm" (ngSubmit)="processForm(seasonForm.value)">
 
   <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+    <ion-list-header>
+      <ion-label>Seizoen</ion-label>
+    </ion-list-header>
+
     <ion-item>
       <ion-label position="stacked">Titel <ion-text color="danger">*</ion-text>
       </ion-label>
@@ -29,6 +34,33 @@
     <app-input-error [formToValidate]=seasonForm [validationMessages]=validationMessages.endDate
       inputFieldName="endDate" [formSubmitted]=submitted>
     </app-input-error>
+
+    <ion-list-header>
+      <ion-label>Divisie</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">Selecteer de divisies voor dit seizoen</ion-label>
+      <ion-select multiple="true" formControlName="leagues" name="leagues" (ionChange)="onLeaguesSelected($event)">
+        <ion-select-option *ngFor="let league of leagues" value="{{league.id}}">{{ league.leagueInfo.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-list-header>
+      <ion-label>Koppel teams aan de divisies</ion-label>
+    </ion-list-header>
+    <div formArrayName="leagueTeams">
+      <ion-item *ngFor="let leagueTeam of leagueTeams.controls; let i = index" [formGroupName]="i">
+        <ion-label position="stacked">Selecteer de teams voor {{ leagueTeam.value.league.leagueInfo.name }} </ion-label>
+        <ion-select multiple="true" formControlName="teams"
+          (ionChange)="onTeamsSelected($event, leagueTeam.value.league.id)" id="{{ leagueTeam.value.league.id}}">
+          <ion-select-option *ngFor="let team of availableTeams[leagueTeam.value.league.id]" id="{{ team.id }}"
+            value="{{team.id}}">
+            {{ team.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
 
   </ion-list>
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GraphqlRequestService } from './graphql-request.service';
-import { CreateLeagueInfoInput, CreateLeagueInput } from 'src/API';
+import { CreateLeagueInfoInput, CreateLeagueInput, UpdateLeagueInput, CreateLeagueTeamInput } from 'src/API';
+import { TeamLeague } from '../components/admin/season-form/season-form.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +11,28 @@ export class LeagueDataService {
     private graphqlRequestService: GraphqlRequestService
   ) { }
 
+
+  async assignSeasonToLeague(leagueId, seasonId) {
+
+    const updateLeagueInput: UpdateLeagueInput = {
+      id: leagueId, leagueSeasonId: seasonId
+    };
+
+    await this.graphqlRequestService.doPrivateMutation('updateLeague', { input: updateLeagueInput });
+    return this.graphqlRequestService.data;
+  }
+
+  async createTeamLeague(teamLeague: TeamLeague) {
+
+    for (const teamId of teamLeague.teams) {
+      const createTeamLeagueInput: CreateLeagueTeamInput = {
+        leagueId: teamLeague.league.id, leagueTeamLeagueId: teamLeague.league.id, leagueTeamTeamId: teamId, teamId
+      };
+
+      await this.graphqlRequestService.doPrivateMutation('createLeagueTeam', { input: createTeamLeagueInput });
+    }
+
+  }
 
   async createCompletelyNewLeague(createLeagueInfo: CreateLeagueInfoInput, createLeagueInput: CreateLeagueInput) {
     const leagueInfo = await this.createLeagueInfo(createLeagueInfo);
@@ -50,6 +73,7 @@ export class LeagueDataService {
 
     if (this.graphqlRequestService.isSuccessfull) {
       leagues = this.graphqlRequestService.data.items;
+      console.log(leagues);
       leagues.sort(this.sortByRanking);
     }
 
@@ -58,7 +82,7 @@ export class LeagueDataService {
 
   private sortByRanking(a, b) {
     if (a.leagueInfo.ranking === b.leagueInfo.ranking) {
-      console.log('Rankings should be unique');
+      console.log('Error: Sorting is not correct, some rankings are equal.');
       return 0;
     }
 

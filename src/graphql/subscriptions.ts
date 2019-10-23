@@ -8,6 +8,41 @@ export const onCreateSeason = `subscription OnCreateSeason {
     beginDate
     endDate
     clubId
+    leagues {
+      items {
+        id
+        owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
+        leagueInfo {
+          id
+          name
+          ranking
+          maxTeams
+        }
+        teamsInLeague {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -74,6 +109,41 @@ export const onUpdateSeason = `subscription OnUpdateSeason {
     beginDate
     endDate
     clubId
+    leagues {
+      items {
+        id
+        owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
+        leagueInfo {
+          id
+          name
+          ranking
+          maxTeams
+        }
+        teamsInLeague {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -140,6 +210,41 @@ export const onDeleteSeason = `subscription OnDeleteSeason {
     beginDate
     endDate
     clubId
+    leagues {
+      items {
+        id
+        owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
+        leagueInfo {
+          id
+          name
+          ranking
+          maxTeams
+        }
+        teamsInLeague {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -211,6 +316,13 @@ export const onCreateGame = `subscription OnCreateGame {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -492,6 +604,13 @@ export const onUpdateGame = `subscription OnUpdateGame {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -773,6 +892,13 @@ export const onDeleteGame = `subscription OnDeleteGame {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -1061,6 +1187,13 @@ export const onCreateStanding = `subscription OnCreateStanding {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -1108,6 +1241,13 @@ export const onUpdateStanding = `subscription OnUpdateStanding {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -1155,6 +1295,13 @@ export const onDeleteStanding = `subscription OnDeleteStanding {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -1474,6 +1621,9 @@ export const onCreateHall = `subscription OnCreateHall {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -1645,6 +1795,9 @@ export const onUpdateHall = `subscription OnUpdateHall {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -1816,6 +1969,9 @@ export const onDeleteHall = `subscription OnDeleteHall {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -2003,13 +2159,51 @@ export const onCreateLeague = `subscription OnCreateLeague {
   onCreateLeague {
     id
     owner
+    season {
+      id
+      title
+      beginDate
+      endDate
+      clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     leagueInfo {
       id
       name
       ranking
       maxTeams
     }
-    leagueTeams {
+    teamsInLeague {
       items {
         id
         leagueId
@@ -2090,13 +2284,51 @@ export const onUpdateLeague = `subscription OnUpdateLeague {
   onUpdateLeague {
     id
     owner
+    season {
+      id
+      title
+      beginDate
+      endDate
+      clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     leagueInfo {
       id
       name
       ranking
       maxTeams
     }
-    leagueTeams {
+    teamsInLeague {
       items {
         id
         leagueId
@@ -2177,13 +2409,51 @@ export const onDeleteLeague = `subscription OnDeleteLeague {
   onDeleteLeague {
     id
     owner
+    season {
+      id
+      title
+      beginDate
+      endDate
+      clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     leagueInfo {
       id
       name
       ranking
       maxTeams
     }
-    leagueTeams {
+    teamsInLeague {
       items {
         id
         leagueId
@@ -2268,13 +2538,35 @@ export const onCreateLeagueTeam = `subscription OnCreateLeagueTeam {
     league {
       id
       owner
+      season {
+        id
+        title
+        beginDate
+        endDate
+        clubId
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       leagueInfo {
         id
         name
         ranking
         maxTeams
       }
-      leagueTeams {
+      teamsInLeague {
         items {
           id
           leagueId
@@ -2365,13 +2657,35 @@ export const onUpdateLeagueTeam = `subscription OnUpdateLeagueTeam {
     league {
       id
       owner
+      season {
+        id
+        title
+        beginDate
+        endDate
+        clubId
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       leagueInfo {
         id
         name
         ranking
         maxTeams
       }
-      leagueTeams {
+      teamsInLeague {
         items {
           id
           leagueId
@@ -2462,13 +2776,35 @@ export const onDeleteLeagueTeam = `subscription OnDeleteLeagueTeam {
     league {
       id
       owner
+      season {
+        id
+        title
+        beginDate
+        endDate
+        clubId
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       leagueInfo {
         id
         name
         ranking
         maxTeams
       }
-      leagueTeams {
+      teamsInLeague {
         items {
           id
           leagueId
@@ -3291,6 +3627,9 @@ export const onCreateReferee = `subscription OnCreateReferee {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -3485,6 +3824,9 @@ export const onUpdateReferee = `subscription OnUpdateReferee {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -3679,6 +4021,9 @@ export const onDeleteReferee = `subscription OnDeleteReferee {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -3894,13 +4239,20 @@ export const onCreateClub = `subscription OnCreateClub {
       items {
         id
         owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
         leagueInfo {
           id
           name
           ranking
           maxTeams
         }
-        leagueTeams {
+        teamsInLeague {
           nextToken
         }
         club {
@@ -4025,13 +4377,20 @@ export const onUpdateClub = `subscription OnUpdateClub {
       items {
         id
         owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
         leagueInfo {
           id
           name
           ranking
           maxTeams
         }
-        leagueTeams {
+        teamsInLeague {
           nextToken
         }
         club {
@@ -4156,13 +4515,20 @@ export const onDeleteClub = `subscription OnDeleteClub {
       items {
         id
         owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
         leagueInfo {
           id
           name
           ranking
           maxTeams
         }
-        leagueTeams {
+        teamsInLeague {
           nextToken
         }
         club {

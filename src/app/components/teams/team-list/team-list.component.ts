@@ -37,7 +37,7 @@ export class TeamListComponent implements OnInit {
     // To prevent that we do a new call each time when we switch league keep track of the teams per league.
     if (this.allTeams[this.leagueId] == null) {
 
-      await this.graphqlRequestService.doPublicQuery('listTeams',
+      await this.graphqlRequestService.doPublicQuery('listLeagueTeams',
         { filter: { leagueId: { eq: this.leagueId } } });
 
       if (this.graphqlRequestService.isSuccessfull) {
@@ -52,12 +52,17 @@ export class TeamListComponent implements OnInit {
 
   private updateAllTeamsData(leagueId, data) {
 
+    // Get the teams from the teamPerLeague entity
+    const teamsPerLeague = new Array();
+    for (const teamLeague of data.items) {
+      teamsPerLeague.push(teamLeague.team);
+    }
+
     // Sort the teams by name
-    data.items.sort(this.sortByTeamName);
+    teamsPerLeague.sort(this.sortByTeamName);
 
     this.allTeams[leagueId] = {
-      items: data.items,
-      nextTeamToken: data.nextToken
+      items: teamsPerLeague,
     };
   }
 
@@ -89,6 +94,7 @@ export class TeamListComponent implements OnInit {
   }
 
   updateTeamsAfterCreate(team) {
+    console.log(team);
     this.allTeams[team.leagueId].items.push(team);
     this.shownTeams = this.allTeams[this.leagueId].items;
     this.toastService.presentToast('Team is aangemaakt.');

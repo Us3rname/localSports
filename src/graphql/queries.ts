@@ -13,6 +13,13 @@ export const listSeasons = `query ListSeasons(
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -49,6 +56,41 @@ export const getSeason = `query GetSeason($id: ID!) {
     beginDate
     endDate
     clubId
+    leagues {
+      items {
+        id
+        owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
+        leagueInfo {
+          id
+          name
+          ranking
+          maxTeams
+        }
+        teamsInLeague {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
+      nextToken
+    }
     club {
       id
       name
@@ -120,6 +162,13 @@ export const getGame = `query GetGame($id: ID!) {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -406,6 +455,9 @@ export const listGames = `query ListGames(
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -541,6 +593,13 @@ export const getStanding = `query GetStanding($id: ID!) {
       beginDate
       endDate
       clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
       club {
         id
         name
@@ -593,6 +652,9 @@ export const listStandings = `query ListStandings(
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -769,6 +831,9 @@ export const getHall = `query GetHall($id: ID!) {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -1034,13 +1099,51 @@ export const getLeague = `query GetLeague($id: ID!) {
   getLeague(id: $id) {
     id
     owner
+    season {
+      id
+      title
+      beginDate
+      endDate
+      clubId
+      leagues {
+        items {
+          id
+          owner
+        }
+        nextToken
+      }
+      club {
+        id
+        name
+        street
+        streetNumber
+        streetNumberAddition
+        zipCode
+        country
+        contact
+        email
+        phone
+        sportsHalls {
+          nextToken
+        }
+        leagues {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+        referees {
+          nextToken
+        }
+      }
+    }
     leagueInfo {
       id
       name
       ranking
       maxTeams
     }
-    leagueTeams {
+    teamsInLeague {
       items {
         id
         leagueId
@@ -1126,13 +1229,35 @@ export const listLeagues = `query ListLeagues(
     items {
       id
       owner
+      season {
+        id
+        title
+        beginDate
+        endDate
+        clubId
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       leagueInfo {
         id
         name
         ranking
         maxTeams
       }
-      leagueTeams {
+      teamsInLeague {
         items {
           id
           leagueId
@@ -1177,13 +1302,35 @@ export const getLeagueTeam = `query GetLeagueTeam($id: ID!) {
     league {
       id
       owner
+      season {
+        id
+        title
+        beginDate
+        endDate
+        clubId
+        leagues {
+          nextToken
+        }
+        club {
+          id
+          name
+          street
+          streetNumber
+          streetNumberAddition
+          zipCode
+          country
+          contact
+          email
+          phone
+        }
+      }
       leagueInfo {
         id
         name
         ranking
         maxTeams
       }
-      leagueTeams {
+      teamsInLeague {
         items {
           id
           leagueId
@@ -1279,13 +1426,20 @@ export const listLeagueTeams = `query ListLeagueTeams(
       league {
         id
         owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
         leagueInfo {
           id
           name
           ranking
           maxTeams
         }
-        leagueTeams {
+        teamsInLeague {
           nextToken
         }
         club {
@@ -1740,6 +1894,9 @@ export const getReferee = `query GetReferee($id: ID!) {
         beginDate
         endDate
         clubId
+        leagues {
+          nextToken
+        }
         club {
           id
           name
@@ -2108,13 +2265,20 @@ export const getClub = `query GetClub($id: ID!) {
       items {
         id
         owner
+        season {
+          id
+          title
+          beginDate
+          endDate
+          clubId
+        }
         leagueInfo {
           id
           name
           ranking
           maxTeams
         }
-        leagueTeams {
+        teamsInLeague {
           nextToken
         }
         club {

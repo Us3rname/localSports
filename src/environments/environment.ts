@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // clubId: '834f8ff0-79ab-4eda-bd17-75d0094f3973'
-  clubId: 'a2e8f6f8-d90f-47ae-9202-150869810b54' // For mock
+  clubId: '8e8ad3f9-5d08-4bca-ad55-eaac4664c6c0' // For mock
 };
 
 /*

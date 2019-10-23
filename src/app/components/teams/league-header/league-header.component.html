@@ -1,6 +1,6 @@
 <ion-segment (ionChange)="changeLeague($event)">
   <ion-segment-button *ngFor="let league of leagues;" value="{{league.id}}"
     checked="{{ selectedLeagueId == league.id }}">
-    <ion-label>{{ league.name }}</ion-label>
+    <ion-label>{{ league.leagueInfo.name }}</ion-label>
   </ion-segment-button>
 </ion-segment>

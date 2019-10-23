@@ -5,6 +5,7 @@ type Season @model @auth(rules: [{allow: public, operations: [read]}, { allow: g
   endDate: AWSDateTime!
   club: Club! @connection
   clubId: ID!
+  leagues: [League!] @connection(name: "SeasonLeagues")
 }
 
 type Game @model @auth(rules: [{allow: public, operations: [read]}, { allow: groups, groups: ["admin"] }]) {
@@ -65,7 +66,8 @@ type League @model @auth(rules: [{allow: public, operations: [read]}, { allow: g
   id: ID!
   leagueInfo: LeagueInfo! @connection
   club: Club! @connection(name: "ClubLeagues")
-  leagueTeams: [LeagueTeam] @connection(name: "LeagueTeams")
+  teamsInLeague: [LeagueTeam] @connection(name: "LeagueTeams")
+  season: Season @connection(name: "SeasonLeagues")
   owner: String
 }
 
