@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { CreateSeasonInput, UpdateSeasonInput } from 'src/API';
 import { SeasonDataService } from 'src/app/services/season-data.service';
 import { environment } from 'src/environments/environment';
@@ -22,8 +22,11 @@ export class SeasonFormComponent implements OnInit {
   selectedLeagues: League[] = new Array();
   seasonForm: FormGroup;
   submitted = false;
-  allTeams: Team[];
-  availableTeams = new Array();
+  availableTeams: Team[];
+
+  sharedAvailableTeams = new Array();
+  selectedTeamsPerLeague = new Array();
+  availableTeamsPerLeague = new Array();
 
   @Input() action;
   @Input() seasonId: string;
@@ -79,10 +82,10 @@ export class SeasonFormComponent implements OnInit {
   }
 
   async loadTeams() {
-    this.allTeams = await this.teamService.getAllTeams();
+    this.sharedAvailableTeams = await this.teamService.getAllTeams();
 
     for (const league of this.leagues) {
-      this.availableTeams[league.id] = Object.assign([], this.allTeams);
+      this.availableTeamsPerLeague[league.id] = Object.assign([], this.sharedAvailableTeams);
     }
   }
 
@@ -171,35 +174,110 @@ export class SeasonFormComponent implements OnInit {
   }
 
   onLeaguesSelected(event) {
-    const selectedLeagueIds: string[] = event.detail.value;
+    const selectedLeagueIdsInput: string[] = event.detail.value;
 
+    // Loop through all the leagues, to add the league object to the formgroup
     for (const league of this.leagues) {
-      // When the selected league id is the same, store the league object in the selectedLeagues array.
-      if (selectedLeagueIds.includes(league.id)) {
+
+      // When the selected league id is the same, store the league object (when it's not already in there)
+      // in the selectedLeagues array.
+      if (selectedLeagueIdsInput.includes(league.id) && !this.selectedLeagues.includes(league)) {
         this.selectedLeagues.push(league);
         this.addTeamLeague(league);
+      } else if (this.selectedLeagues.includes(league) && !selectedLeagueIdsInput.includes(league.id)) {
+        this.removeLeagueFromDropdown(league);
+        this.removeTeamLeagueFormControl(league);
+
+        // If there were teams selected for this league, make them available again.
+        this.makeSelectedTeamsAvailableAgain(league.id);
+        this.updateTeamsForAllLeagues();
+      }
+    }
+  }
+
+  private removeLeagueFromDropdown(league) {
+
+    for (let i = 0; i < this.selectedLeagues.length; i++) {
+      if (this.selectedLeagues[i] === league) {
+        this.selectedLeagues.splice(i, 1);
+        return;
+      }
+    }
+  }
+
+  private removeTeamLeagueFormControl(league) {
+
+    for (let i = 0; this.leagueTeams.controls.length; i++) {
+      if (this.leagueTeams.controls[i].value.league.id === league.id) {
+        this.leagueTeams.controls.splice(i, 1);
+        return;
       }
     }
   }
 
   onTeamsSelected(event, selectedLeagueId) {
-    const selectedTeamIds = event.detail.value;
+    this.makeSelectedTeamsAvailableAgain(selectedLeagueId);
+    this.setSelectedTeamsForLeague(event.detail.value, selectedLeagueId);
+    this.updateTeamsForAllLeagues();
+  }
+
+  /**
+   * Mark the selected teams as selected so that they can't be selected on another league.
+   *
+   * @param selectedTeamIds The team ids that are selected by the user.
+   * It's just the team ids that are being send, not the team object.
+   * @param selectedLeagueId The league id from where the selectedTeamIds correspond to.
+   */
+  private setSelectedTeamsForLeague(selectedTeamIds, selectedLeagueId) {
+
+    // When the user hasn't selected any teams from the dropdown.
+    if (selectedTeamIds === undefined) {
+      return;
+    }
 
     // Remove the selected teams from this league from the other dropdowns, so that a team can't be chosen twice.
     for (const teamId of selectedTeamIds) {
 
-      const loop = this.availableTeams;
-      // Loop through the available teams, to check that we don't remove the teams from the selected dropdown
-      for (const leagueId in loop) {
-
-        if (leagueId !== selectedLeagueId) {
-          // For the other leagues, remove the selected teams.
-          for (let i = 0; i < loop[leagueId].length; i++) {
-            if (this.availableTeams[leagueId][i].id === teamId) {
-              this.availableTeams[leagueId].splice(i, 1);
-            }
+      for (let i = 0; i < this.sharedAvailableTeams.length; i++) {
+        const team = this.sharedAvailableTeams[i];
+        if (team.id === teamId) {
+          if (this.selectedTeamsPerLeague[selectedLeagueId] !== undefined) {
+            this.selectedTeamsPerLeague[selectedLeagueId].push(team);
+          } else {
+            this.selectedTeamsPerLeague[selectedLeagueId] = [team];
           }
+
+          this.sharedAvailableTeams.splice(i, 1);
         }
+      }
+    }
+  }
+
+  /**
+   * Make all the selected teams for the league available again.
+   *
+   * @param selectedLeagueId The league id of which teams needs to become available
+   */
+  private makeSelectedTeamsAvailableAgain(selectedLeagueId) {
+
+    // If there are any teams selected make them available again.
+    if (this.selectedTeamsPerLeague[selectedLeagueId] !== undefined) {
+      for (const selectedTeam of this.selectedTeamsPerLeague[selectedLeagueId]) {
+        this.sharedAvailableTeams.push(selectedTeam);
+      }
+    }
+  }
+
+  /**
+   * When there's a change on the teams dropdown. We need to update the teams that are available for the other leagues.
+   */
+  private updateTeamsForAllLeagues() {
+
+    for (const leagueId in this.availableTeamsPerLeague) {
+
+      if (this.availableTeamsPerLeague.hasOwnProperty(leagueId)) {
+        const selectedTeams = (this.selectedTeamsPerLeague[leagueId] === undefined) ? [] : this.selectedTeamsPerLeague[leagueId];
+        this.availableTeamsPerLeague[leagueId] = selectedTeams.concat(this.sharedAvailableTeams);
       }
     }
   }

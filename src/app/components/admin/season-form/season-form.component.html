@@ -54,7 +54,7 @@
         <ion-label position="stacked">Selecteer de teams voor {{ leagueTeam.value.league.leagueInfo.name }} </ion-label>
         <ion-select multiple="true" formControlName="teams"
           (ionChange)="onTeamsSelected($event, leagueTeam.value.league.id)" id="{{ leagueTeam.value.league.id}}">
-          <ion-select-option *ngFor="let team of availableTeams[leagueTeam.value.league.id]" id="{{ team.id }}"
+          <ion-select-option *ngFor="let team of availableTeamsPerLeague[leagueTeam.value.league.id]" id="{{ team.id }}"
             value="{{team.id}}">
             {{ team.name}}
           </ion-select-option>
